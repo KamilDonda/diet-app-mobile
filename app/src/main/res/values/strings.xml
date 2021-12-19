@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Diet App</string>
+    <string name="proteins">Białko</string>
+    <string name="carbs">Węglowodany</string>
+    <string name="fats">Tłuszcze</string>
 </resources>
