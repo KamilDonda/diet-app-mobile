@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.dietapp.R
 
-class IngredientOfMealFragment : Fragment() {
+class IngredientsOfMealFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_ingredient_of_meal, container, false)
+        return inflater.inflate(R.layout.fragment_ingredients_of_meal, container, false)
     }
 }
