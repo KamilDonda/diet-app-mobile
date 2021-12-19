@@ -3,6 +3,7 @@ package com.example.dietapp.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietapp.R
 import com.example.dietapp.models.Meal
@@ -48,6 +49,7 @@ class MealsAdapter() : RecyclerView.Adapter<MealsAdapter.Holder>() {
         fats.text = FloatConverter.floatToString(item.fats, "g")
 
         root.setOnClickListener {
+            it.findNavController().navigate(R.id.action_mealsFragment_to_mealFragment)
         }
     }
 }

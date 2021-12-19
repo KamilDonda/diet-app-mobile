@@ -3,4 +3,6 @@
     <string name="proteins">Białko</string>
     <string name="carbs">Węglowodany</string>
     <string name="fats">Tłuszcze</string>
+    <string name="ingredients">Składniki</string>
+    <string name="preparation">Przygotowanie</string>
 </resources>
