@@ -33,5 +33,9 @@
         android:id="@+id/mealFragment"
         android:name="com.example.dietapp.ui.meals.MealFragment"
         android:label="fragment_meal"
-        tools:layout="@layout/fragment_meal" />
+        tools:layout="@layout/fragment_meal">
+        <action
+            android:id="@+id/action_mealFragment_to_mealsFragment"
+            app:popUpTo="@+id/mealsFragment" />
+    </fragment>
 </navigation>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.dietapp.R
 import com.example.dietapp.adapters.MealPagerAdapter
@@ -32,6 +33,10 @@ class MealFragment : Fragment(), TabLayout.OnTabSelectedListener {
         one_meal_name.text = viewModel.currentMeal?.name
 
         setupTab(view)
+
+        one_meal_back_button.setOnClickListener {
+            it.findNavController().navigate(R.id.action_mealFragment_to_mealsFragment)
+        }
     }
 
     private fun setupTab(view: View) {
