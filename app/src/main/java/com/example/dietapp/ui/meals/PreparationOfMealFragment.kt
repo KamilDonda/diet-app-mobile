@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.dietapp.R
-import com.example.dietapp.adapters.MealsAdapter
-import kotlinx.android.synthetic.main.fragment_meals.*
+import kotlinx.android.synthetic.main.fragment_preparation_of_meal.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class MealsFragment : Fragment() {
+class PreparationOfMealFragment : Fragment() {
+
     private val viewModel: MealViewModel by sharedViewModel()
 
     override fun onCreateView(
@@ -18,17 +18,12 @@ class MealsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_meals, container, false)
+        return inflater.inflate(R.layout.fragment_preparation_of_meal, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mealsAdapter = MealsAdapter(viewModel)
-        meals_rv.adapter = mealsAdapter
-
-        viewModel.meals.observe(viewLifecycleOwner, {
-            mealsAdapter.setList(it)
-        })
+        preparation_tv.text = viewModel.currentMeal!!.description
     }
 }

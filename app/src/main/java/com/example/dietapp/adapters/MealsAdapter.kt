@@ -3,14 +3,17 @@ package com.example.dietapp.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietapp.R
 import com.example.dietapp.models.Meal
+import com.example.dietapp.ui.meals.MealViewModel
 import com.example.dietapp.utils.FloatConverter
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 
-class MealsAdapter() : RecyclerView.Adapter<MealsAdapter.Holder>() {
+class MealsAdapter(private val viewModel: MealViewModel) :
+    RecyclerView.Adapter<MealsAdapter.Holder>() {
     inner class Holder(view: View) : RecyclerView.ViewHolder(view)
 
     private val _list = ArrayList<Meal>()
@@ -48,6 +51,8 @@ class MealsAdapter() : RecyclerView.Adapter<MealsAdapter.Holder>() {
         fats.text = FloatConverter.floatToString(item.fats, "g")
 
         root.setOnClickListener {
+            viewModel.setCurrentMeal(position)
+            it.findNavController().navigate(R.id.action_mealsFragment_to_mealFragment)
         }
     }
 }
