@@ -13,7 +13,7 @@
 
     <color name="transparentBlack">#40000000</color>
 
-    <color name="colorProteins">#FDD835</color>
-    <color name="colorCarbs">#4CAF50</color>
-    <color name="colorFats">#673AB7</color>
+    <color name="colorProteins">#64DD17</color>
+    <color name="colorCarbs">#0091EA</color>
+    <color name="colorFats">#FF9100</color>
 </resources>
