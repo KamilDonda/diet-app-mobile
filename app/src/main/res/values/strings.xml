@@ -7,4 +7,6 @@
     <string name="preparation">Przygotowanie</string>
     <string name="macronutrients">Makroskładniki</string>
     <string name="calories">Kalorie</string>
+    <string name="my_data">Moje dane</string>
+    <string name="account_settings">Ustawienia konta</string>
 </resources>
