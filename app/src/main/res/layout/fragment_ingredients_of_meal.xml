@@ -27,6 +27,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
+                android:id="@+id/macronutrients_line"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/secondaryColorDark"
@@ -34,6 +35,84 @@
                 app:layout_constraintBottom_toBottomOf="@+id/macronutrients"
                 app:layout_constraintEnd_toEndOf="@+id/macronutrients"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/macronutrients_line">
+
+                <org.eazegraph.lib.charts.PieChart
+                    android:id="@+id/macronutrients_pieChart"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    app:egAnimationTime="400"
+                    app:egInnerPadding="55"
+                    app:egInnerPaddingColor="#ffffff"
+                    app:egInnerPaddingOutline="0"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/macronutrients_vertical_line"
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:background="@color/secondaryColor"
+                    app:layout_constrainedHeight="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/macronutrients_pieChart"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    app:layout_constrainedHeight="true"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/macronutrients_vertical_line"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/macronutrients_rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintBottom_toTopOf="@+id/macronutrients_kcal"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/macronutrient_item" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/macronutrients_kcal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/calories"
+                        android:textColor="@color/primaryColor"
+                        android:textFontWeight="600"
+                        android:textSize="18sp"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/macronutrient_kcal_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3200 kcal"
+                        android:textColor="@color/black"
+                        android:textFontWeight="500"
+                        app:layout_constraintBottom_toBottomOf="@+id/macronutrients_kcal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/macronutrients_kcal" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
