@@ -8,5 +8,6 @@ data class Meal(
     val kcal: Float,
     val proteins: Float,
     val carbs: Float,
-    val fats: Float
+    val fats: Float,
+    val ingredients: ArrayList<String> = ArrayList()
 )

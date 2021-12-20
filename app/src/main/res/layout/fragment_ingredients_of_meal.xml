@@ -81,6 +81,7 @@
                         android:id="@+id/macronutrients_rv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:overScrollMode="never"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintBottom_toTopOf="@+id/macronutrients_kcal"
                         app:layout_constraintTop_toTopOf="parent"
@@ -133,6 +134,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
+                android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/secondaryColorDark"
@@ -140,6 +142,17 @@
                 app:layout_constraintBottom_toBottomOf="@+id/ingredients"
                 app:layout_constraintEnd_toEndOf="@+id/ingredients"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ingredients_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:paddingHorizontal="15dp"
+                android:paddingTop="5dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/ingredients"
+                tools:listitem="@layout/ingredient_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
