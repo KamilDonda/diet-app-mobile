@@ -10,11 +10,14 @@ import com.example.dietapp.R
 import com.example.dietapp.adapters.IngredientsAdapter
 import com.example.dietapp.adapters.MacronutrientsAdapter
 import com.example.dietapp.models.Meal
+import com.example.dietapp.utils.FloatConverter
 import kotlinx.android.synthetic.main.fragment_ingredients_of_meal.*
 import org.eazegraph.lib.models.PieModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class IngredientsOfMealFragment : Fragment() {
 
+    private val viewModel: MealViewModel by sharedViewModel()
     private val macronutrientsAdapter = MacronutrientsAdapter()
     private val ingredientsAdapter = IngredientsAdapter()
 
@@ -32,24 +35,13 @@ class IngredientsOfMealFragment : Fragment() {
         macronutrients_rv.adapter = macronutrientsAdapter
         ingredients_rv.adapter = ingredientsAdapter
 
-        val meal = Meal(
-            1,
-            "Name1",
-            "",
-            "",
-            3200f,
-            30f,
-            64.5f,
-            42.536f,
-            arrayListOf(
-                "600 g mielonej łopatki wieprzowej",
-                "5 pieczarek",
-                "3 ząbki czosnku",
-                "łyżeczka słodkiej papryki"
+        setMacronutrientsData(viewModel.currentMeal!!)
+        setIngredientsData(viewModel.currentMeal!!)
+        macronutrient_kcal_value.text =
+            FloatConverter.floatToString(
+                viewModel.currentMeal!!.kcal,
+                "kcal"
             )
-        )
-
-        setMacronutrientsData(meal)
     }
 
     private fun setMacronutrientsData(meal: Meal) {
@@ -71,12 +63,15 @@ class IngredientsOfMealFragment : Fragment() {
             )
         )
         macronutrientsAdapter.setList(macronutrients)
-        ingredientsAdapter.setList(meal.ingredients)
 
         macronutrients.forEach {
             macronutrients_pieChart.addPieSlice(PieModel(it.third, it.first))
         }
 
         macronutrients_pieChart.startAnimation()
+    }
+
+    private fun setIngredientsData(meal: Meal) {
+        ingredientsAdapter.setList(meal.ingredients)
     }
 }
