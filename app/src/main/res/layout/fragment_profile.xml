@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:id="@+id/profile_root"
+    android:focusableInTouchMode="true"
     tools:context=".ui.profile.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,9 +35,12 @@
         <ImageView
             android:id="@+id/profile_iv"
             style="@style/CircleButton"
-            android:layout_margin="20dp"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_margin="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:src="@drawable/example_photo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

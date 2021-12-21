@@ -9,4 +9,8 @@
     <string name="calories">Kalorie</string>
     <string name="my_data">Moje dane</string>
     <string name="account_settings">Ustawienia konta</string>
+    <string name="change_password">Zmiana hasła</string>
+    <string name="old_password">Stare hasło</string>
+    <string name="new_password">Nowe hasło</string>
+    <string name="repeat_password">Powtórz nowe hasło</string>
 </resources>

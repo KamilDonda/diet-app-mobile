@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.dietapp.R
 import com.example.dietapp.adapters.AppPagerAdapter
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
@@ -55,5 +56,7 @@ class ProfileFragment : Fragment(), TabLayout.OnTabSelectedListener {
     }
 
     override fun onTabUnselected(tab: TabLayout.Tab?) {}
-    override fun onTabReselected(tab: TabLayout.Tab?) {}
+    override fun onTabReselected(tab: TabLayout.Tab?) {
+        profile_root.requestFocus()
+    }
 }
