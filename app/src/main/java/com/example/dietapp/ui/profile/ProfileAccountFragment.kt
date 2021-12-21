@@ -53,7 +53,7 @@ class ProfileAccountFragment : Fragment() {
 
         new_password_input.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModel.setNewPassword(s.toString())
+                linearProgressIndicator.progress = viewModel.setNewPassword(s.toString())
             }
 
             override fun afterTextChanged(s: Editable?) {}

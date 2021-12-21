@@ -2,6 +2,7 @@ package com.example.dietapp.ui.profile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.dietapp.utils.PasswordUtil
 
 class ProfileViewModel : ViewModel() {
 
@@ -17,8 +18,9 @@ class ProfileViewModel : ViewModel() {
     var newPassword: String = ""
         private set
 
-    fun setNewPassword(password: String) {
+    fun setNewPassword(password: String): Int {
         newPassword = password
+        return PasswordUtil.securityLevel(newPassword)
     }
 
     var repeatedPassword: String = ""
