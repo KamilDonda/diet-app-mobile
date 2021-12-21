@@ -32,6 +32,12 @@ class ProfileAccountFragment : Fragment() {
 
         change_password_button.setOnClickListener {
         }
+
+        viewModel.hasInputFocus.observe(viewLifecycleOwner, {
+            if (it == false) {
+                hideKeyboard()
+            }
+        })
     }
 
     private fun setupTextFields() {
@@ -67,10 +73,9 @@ class ProfileAccountFragment : Fragment() {
 
         val fields = arrayOf(old_password_input, new_password_input, repeat_password_input)
         fields.forEachIndexed { index, it ->
-            it.setOnFocusChangeListener { _, hasFocus ->
-                if (!hasFocus) {
-                    hideKeyboard()
-                }
+            it.setOnFocusChangeListener { _, _ ->
+                viewModel.hasInputFocus.value = fields.any { field -> field.hasFocus() }
+
                 if (index == fields.size - 1) {
                     if (viewModel.newPassword != viewModel.repeatedPassword && !repeat_password_input.isFocused) {
                         repeat_password_field.error = "Hasła nie są takie same!"

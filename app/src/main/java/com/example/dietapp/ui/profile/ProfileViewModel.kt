@@ -1,8 +1,11 @@
 package com.example.dietapp.ui.profile
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ProfileViewModel : ViewModel() {
+
+    val hasInputFocus = MutableLiveData<Boolean?>(null)
 
     var oldPassword: String = ""
         private set
