@@ -1,8 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileDataFragment">
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout style="@style/ProfileRowOdd">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/ProfileTextView"
+                android:text="@string/gender" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/gender"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:endIconTint="@color/black"
+                tools:ignore="RtlSymmetry">
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:padding="0dp"
+                    android:paddingStart="10dp"
+                    android:text="Mężczyzna"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/ProfileRowEven">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/ProfileTextView"
+                android:text="@string/age" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/age"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                android:text="27 lat"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:icon="@drawable/dropdown_arrow"
+                app:iconGravity="end"
+                app:iconTint="@color/black"
+                tools:ignore="RtlSymmetry" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/ProfileRowOdd">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/ProfileTextView"
+                android:text="@string/weight" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/weight"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                android:text="75 kg"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:icon="@drawable/dropdown_arrow"
+                app:iconGravity="end"
+                app:iconTint="@color/black"
+                tools:ignore="RtlSymmetry" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/ProfileRowEven">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/ProfileTextView"
+                android:text="@string/height" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/height"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="10dp"
+                android:text="175 cm"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:icon="@drawable/dropdown_arrow"
+                app:iconGravity="end"
+                app:iconTint="@color/black"
+                tools:ignore="RtlSymmetry" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/ProfileRowOdd">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/ProfileTextView"
+                android:text="@string/activity" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/activity_level"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                tools:ignore="RtlSymmetry">
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:padding="0dp"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/ProfileRowEven">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/ProfileTextView"
+                android:text="@string/goal" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/goal"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                tools:ignore="RtlSymmetry">
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:padding="0dp"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/ProfileRowOdd">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/ProfileTextView"
+                android:text="@string/preferences" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/preferences"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                tools:ignore="RtlSymmetry">
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:padding="0dp"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/ProfileRowEven">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/ProfileTextView"
+                android:text="@string/bmi" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/bmi"
+                style="@style/ProfileTextView"
+                android:paddingStart="10dp"
+                android:text="25" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

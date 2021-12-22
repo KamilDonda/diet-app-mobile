@@ -13,4 +13,15 @@
     <string name="old_password">Stare hasło</string>
     <string name="new_password">Nowe hasło</string>
     <string name="repeat_password">Powtórz nowe hasło</string>
+    <string name="gender">Płeć</string>
+    <string name="age">Wiek</string>
+    <string name="weight">Waga</string>
+    <string name="height">Wzrost</string>
+    <string name="activity">Aktywność fizyczna</string>
+    <string name="goal">Cel</string>
+    <string name="preferences">Preferencje</string>
+    <string name="bmi">BMI</string>
+    <string name="setup_activity_level">Wybierz poziom aktywności</string>
+    <string name="cancel">Anuluj</string>
+    <string name="ok">Ok</string>
 </resources>
