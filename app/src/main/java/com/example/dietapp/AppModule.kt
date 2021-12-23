@@ -1,13 +1,58 @@
 package com.example.dietapp
 
-import com.example.dietapp.ui.mainactivity.meals.MealViewModel
+import com.example.dietapp.database.sharedpreferences.Preferences
+import com.example.dietapp.ui.loginactivity.login.LoginFragment
+import com.example.dietapp.ui.loginactivity.register.RegisterFragment
+import com.example.dietapp.ui.loginactivity.start.StartFragment
+import com.example.dietapp.ui.mainactivity.home.HomeFragment
+import com.example.dietapp.ui.mainactivity.ingredients.IngredientsFragment
+import com.example.dietapp.ui.mainactivity.meals.*
+import com.example.dietapp.ui.mainactivity.profile.ProfileAccountFragment
+import com.example.dietapp.ui.mainactivity.profile.ProfileDataFragment
+import com.example.dietapp.ui.mainactivity.profile.ProfileFragment
 import com.example.dietapp.ui.mainactivity.profile.ProfileViewModel
+import com.example.dietapp.utils.AgeConverter
+import com.example.dietapp.utils.FloatConverter
+import com.example.dietapp.utils.HideKeyboard
+import com.example.dietapp.utils.PasswordUtil
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 @JvmField
 val appModule = module {
 
+// ViewModel
     viewModel { MealViewModel() }
     viewModel { ProfileViewModel() }
+
+// SharedPreferences
+    single { Preferences(get()) }
+
+// Utils
+    single { AgeConverter() }
+    single { FloatConverter() }
+    single { HideKeyboard }
+    single { PasswordUtil }
+
+//Fragments
+    // Start
+    single { StartFragment() }
+    // Login
+    single { LoginFragment() }
+    // Register
+    single { RegisterFragment() }
+
+    // Home
+    single { HomeFragment() }
+    // Ingredients
+    single { IngredientsFragment() }
+    // Meals
+    single { MealsFragment() }
+    single { MealFragment() }
+    single { IngredientsOfMealFragment() }
+    single { PreparationOfMealFragment() }
+    // Profile
+    single { ProfileFragment() }
+    single { ProfileDataFragment() }
+    single { ProfileAccountFragment() }
 }

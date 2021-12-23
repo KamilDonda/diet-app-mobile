@@ -8,10 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
+import com.example.dietapp.database.sharedpreferences.Preferences
 import com.example.dietapp.ui.mainactivity.MainActivity
 import kotlinx.android.synthetic.main.fragment_login.*
+import org.koin.android.ext.android.inject
 
 class LoginFragment : Fragment() {
+
+    private val sharedPreferences: Preferences by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +30,7 @@ class LoginFragment : Fragment() {
 
         login_button.setOnClickListener {
             val intent = Intent(requireContext(), MainActivity::class.java)
+            sharedPreferences.setIsLogged(true)
             startActivity(intent)
         }
 
