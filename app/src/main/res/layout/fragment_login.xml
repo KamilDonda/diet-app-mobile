@@ -50,9 +50,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
-        android:layout_width="380dp"
-        android:layout_height="260dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
@@ -64,8 +64,6 @@
             android:layout_height="wrap_content"
             app:boxBackgroundColor="#F4F4F4"
             app:errorEnabled="true"
-            app:hintAnimationEnabled="false"
-            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -73,10 +71,9 @@
             <com.example.dietapp.utils.CustomTextInputEditText
                 android:id="@+id/email_input"
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
+                android:layout_height="wrap_content"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:padding="0dp"
                 android:textColor="@color/primaryColor" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -90,8 +87,6 @@
             app:endIconMode="password_toggle"
             app:endIconTint="@color/primaryColor"
             app:errorEnabled="true"
-            app:hintAnimationEnabled="false"
-            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/email_field">
@@ -102,7 +97,6 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:padding="0dp"
                 android:textColor="@color/primaryColor" />
 
         </com.google.android.material.textfield.TextInputLayout>
