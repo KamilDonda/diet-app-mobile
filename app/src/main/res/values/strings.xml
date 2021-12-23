@@ -9,7 +9,6 @@
     <string name="preparation">Przygotowanie</string>
     <string name="macronutrients">Makroskładniki</string>
     <string name="calories">Kalorie</string>
-
     <string name="my_data">Moje dane</string>
     <string name="account_settings">Ustawienia konta</string>
 
@@ -42,4 +41,5 @@
     <string name="register_btn">Rejestracja</string>
     <string name="sign_up">Dołącz</string>
     <string name="sign_in">Zaloguj się</string>
+    <string name="desc">Dieta idealnie dopasowana do twojego podniebienia!</string>
 </resources>
