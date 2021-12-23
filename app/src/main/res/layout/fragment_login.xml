@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.9"
-        android:background="@drawable/loginImage"
+        android:background="@drawable/loginimage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -119,7 +119,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/butt"
+        android:id="@+id/login_button"
         style="@style/Button"
         android:text="Zaloguj sie"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -129,7 +129,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/butt"
+        app:layout_constraintBottom_toTopOf="@+id/login_button"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
         <TextView
