@@ -37,4 +37,9 @@
     <string name="error_heavy_weight">Zbyt wysoka waga! Dopuszczalny zakres to 40 kg - 150 kg</string>
     <string name="error_small_height">Zbyt niski wzrost! Dopuszczalny zakres to 140 cm - 220 cm</string>
     <string name="error_high_height">Zbyt wysoki wzrost! Dopuszczalny zakres to 140 cm - 220 cm</string>
+
+    <string name="login_btn">Logowanie</string>
+    <string name="register_btn">Rejestracja</string>
+    <string name="sign_up">Dołącz</string>
+    <string name="sign_in">Zaloguj się</string>
 </resources>
