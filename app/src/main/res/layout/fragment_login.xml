@@ -6,7 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ui.loginactivity.login.LoginFragment">
 
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.9"
+        android:background="@drawable/loginImage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </FrameLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/primaryColor"
@@ -35,17 +48,101 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/login_button"
-        android:layout_width="250dp"
-        android:layout_height="70dp"
-        android:text="@string/sign_in"
-        android:textAllCaps="false"
-        android:textFontWeight="500"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="380dp"
+        android:layout_height="260dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_field"
+            style="@style/OutlinedRoundedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxBackgroundColor="#F4F4F4"
+            app:errorEnabled="true"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.example.dietapp.utils.CustomTextInputEditText
+                android:id="@+id/email_input"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:padding="0dp"
+                android:textColor="@color/primaryColor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/new_password_field"
+            style="@style/OutlinedRoundedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxBackgroundColor="#F4F4F4"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/primaryColor"
+            app:errorEnabled="true"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email_field">
+
+            <com.example.dietapp.utils.CustomTextInputEditText
+                android:id="@+id/new_password_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:padding="0dp"
+                android:textColor="@color/primaryColor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/start_login_button"
+            style="@style/Button"
+            android:text="@string/login_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/new_password_field" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/butt"
+        style="@style/Button"
+        android:text="Zaloguj sie"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/butt"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/desc2"
+            android:textColor="@color/primaryColorDark"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
