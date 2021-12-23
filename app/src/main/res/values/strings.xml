@@ -9,7 +9,6 @@
     <string name="preparation">Przygotowanie</string>
     <string name="macronutrients">Makroskładniki</string>
     <string name="calories">Kalorie</string>
-
     <string name="my_data">Moje dane</string>
     <string name="account_settings">Ustawienia konta</string>
 
@@ -37,4 +36,8 @@
     <string name="error_heavy_weight">Zbyt wysoka waga! Dopuszczalny zakres to 40 kg - 150 kg</string>
     <string name="error_small_height">Zbyt niski wzrost! Dopuszczalny zakres to 140 cm - 220 cm</string>
     <string name="error_high_height">Zbyt wysoki wzrost! Dopuszczalny zakres to 140 cm - 220 cm</string>
+
+    <string name="desc">Dieta idealnie dopasowana do twojego podniebienia!</string>
+    <string name="logged">Logowanie</string>
+    <string name="regist">Rejestracja</string>
 </resources>
