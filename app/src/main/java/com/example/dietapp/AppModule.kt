@@ -1,6 +1,7 @@
 package com.example.dietapp
 
 import com.example.dietapp.database.sharedpreferences.Preferences
+import com.example.dietapp.services.LogoutService
 import com.example.dietapp.ui.loginactivity.login.LoginFragment
 import com.example.dietapp.ui.loginactivity.register.RegisterFragment
 import com.example.dietapp.ui.loginactivity.start.StartFragment
@@ -24,6 +25,9 @@ val appModule = module {
 // ViewModel
     viewModel { MealViewModel() }
     viewModel { ProfileViewModel() }
+
+// Services
+    single { LogoutService(get()) }
 
 // SharedPreferences
     single { Preferences(get()) }

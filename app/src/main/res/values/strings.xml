@@ -28,9 +28,6 @@
     <string name="bmi">BMI</string>
     <string name="setup_activity_level">Wybierz poziom aktywności</string>
 
-    <string name="cancel">Anuluj</string>
-    <string name="ok">Ok</string>
-
     <string name="error_empty_field">To pole nie może być puste!</string>
     <string name="error_format">Niepoprawne dane!</string>
     <string name="error_light_weight">Zbyt niska waga! Dopuszczalny zakres to 40 kg - 150 kg</string>
@@ -38,8 +35,11 @@
     <string name="error_small_height">Zbyt niski wzrost! Dopuszczalny zakres to 140 cm - 220 cm</string>
     <string name="error_high_height">Zbyt wysoki wzrost! Dopuszczalny zakres to 140 cm - 220 cm</string>
 
+    <string name="cancel">Anuluj</string>
+    <string name="ok">Ok</string>
     <string name="login_btn">Logowanie</string>
     <string name="register_btn">Rejestracja</string>
     <string name="sign_up">Dołącz</string>
     <string name="sign_in">Zaloguj się</string>
+    <string name="logout">Wyloguj</string>
 </resources>

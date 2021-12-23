@@ -5,20 +5,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.dietapp.R
 import com.example.dietapp.adapters.AppPagerAdapter
+import com.example.dietapp.services.LogoutService
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_profile.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class ProfileFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
     private val viewModel: ProfileViewModel by sharedViewModel()
+    private val logoutService: LogoutService by inject()
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager2: ViewPager2
 
@@ -71,6 +75,10 @@ class ProfileFragment : Fragment(), TabLayout.OnTabSelectedListener {
                     }
                 }
             })
+        }
+
+        logout_button.setOnClickListener {
+            logoutService.logout(activity as AppCompatActivity)
         }
     }
 
