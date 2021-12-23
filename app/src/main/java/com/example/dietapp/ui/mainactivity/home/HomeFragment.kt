@@ -1,4 +1,4 @@
-package com.example.dietapp.ui.home
+package com.example.dietapp.ui.mainactivity.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

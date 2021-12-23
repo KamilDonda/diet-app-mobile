@@ -1,4 +1,4 @@
-package com.example.dietapp.ui.profile
+package com.example.dietapp.ui.mainactivity.profile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

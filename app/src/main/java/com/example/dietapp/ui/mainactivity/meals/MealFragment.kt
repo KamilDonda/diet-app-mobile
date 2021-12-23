@@ -1,4 +1,4 @@
-package com.example.dietapp.ui.meals
+package com.example.dietapp.ui.mainactivity.meals
 
 import android.os.Bundle
 import android.view.LayoutInflater

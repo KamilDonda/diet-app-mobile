@@ -1,4 +1,4 @@
-package com.example.dietapp.ui
+package com.example.dietapp.ui.mainactivity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

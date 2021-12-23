@@ -11,7 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DietApp">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.mainactivity.MainActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+
+            android:name=".ui.loginactivity.LoginActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

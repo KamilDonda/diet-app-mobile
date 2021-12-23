@@ -1,4 +1,4 @@
-package com.example.dietapp.ui.profile
+package com.example.dietapp.ui.mainactivity.profile
 
 import android.os.Bundle
 import android.text.Editable

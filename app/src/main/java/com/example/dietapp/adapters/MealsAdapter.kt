@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietapp.R
 import com.example.dietapp.models.Meal
-import com.example.dietapp.ui.meals.MealViewModel
+import com.example.dietapp.ui.mainactivity.meals.MealViewModel
 import com.example.dietapp.utils.FloatConverter
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView

@@ -1,4 +1,4 @@
-package com.example.dietapp.ui.ingredients
+package com.example.dietapp.ui.mainactivity.ingredients
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
