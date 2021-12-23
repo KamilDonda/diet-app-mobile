@@ -7,4 +7,7 @@
     <string name="preparation">Przygotowanie</string>
     <string name="macronutrients">Makroskładniki</string>
     <string name="calories">Kalorie</string>
+    <string name="desc">Dieta idealnie dopasowana do twojego podniebienia!</string>
+    <string name="logged">Logowanie</string>
+    <string name="regist">Rejestracja</string>
 </resources>
