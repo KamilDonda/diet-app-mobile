@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.dietapp.R
-import com.example.dietapp.adapters.MealPagerAdapter
+import com.example.dietapp.adapters.AppPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_meal.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -40,13 +40,17 @@ class MealFragment : Fragment(), TabLayout.OnTabSelectedListener {
     }
 
     private fun setupTab(view: View) {
-        tabLayout = view.findViewById(R.id.tabLayout)
+        tabLayout = view.findViewById(R.id.tabLayout_one_meal)
         tabLayout.addOnTabSelectedListener(this)
 
         val manager = childFragmentManager
-        val adapter = MealPagerAdapter(manager, lifecycle)
+        val adapter = AppPagerAdapter(
+            manager,
+            lifecycle,
+            arrayOf(IngredientsOfMealFragment(), PreparationOfMealFragment())
+        )
 
-        viewPager2 = view.findViewById(R.id.viewPager2)
+        viewPager2 = view.findViewById(R.id.viewPager2_one_meal)
         viewPager2.adapter = adapter
         viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {

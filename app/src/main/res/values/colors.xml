@@ -16,4 +16,6 @@
     <color name="colorProteins">#64DD17</color>
     <color name="colorCarbs">#0091EA</color>
     <color name="colorFats">#FF9100</color>
+
+    <color name="lightGrey">#F8F8F8</color>
 </resources>
