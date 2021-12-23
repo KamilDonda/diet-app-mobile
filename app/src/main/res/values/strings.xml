@@ -12,6 +12,8 @@
 
     <string name="my_data">Moje dane</string>
     <string name="account_settings">Ustawienia konta</string>
+    <string name="desc">Dieta idealnie dopasowana do twojego podniebienia!</string>
+    <string name="desc2">Inny sposób logowania</string>
 
     <string name="change_password">Zmiana hasła</string>
     <string name="old_password">Stare hasło</string>
@@ -39,6 +41,8 @@
     <string name="ok">Ok</string>
     <string name="login_btn">Logowanie</string>
     <string name="register_btn">Rejestracja</string>
+    <string name="email">Wpisz email</string>
+    <string name="password">Wpisz hasło</string>
     <string name="sign_up">Dołącz</string>
     <string name="sign_in">Zaloguj się</string>
     <string name="logout">Wyloguj</string>
