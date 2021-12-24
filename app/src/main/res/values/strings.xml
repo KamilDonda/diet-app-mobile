@@ -43,7 +43,7 @@
     <string name="register_btn">Rejestracja</string>
     <string name="email">Wpisz email</string>
     <string name="password">Wpisz hasło</string>
-    <string name="sign_up">Dołącz</string>
     <string name="sign_in">Zaloguj się</string>
+    <string name="sign_up">Zarejestruj się</string>
     <string name="logout">Wyloguj</string>
 </resources>

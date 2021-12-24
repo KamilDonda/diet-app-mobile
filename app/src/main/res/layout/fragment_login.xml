@@ -7,19 +7,20 @@
     tools:context=".ui.loginactivity.login.LoginFragment">
 
     <ImageView
-        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="-2dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginBottom="-5dp"
         android:adjustViewBounds="true"
         android:alpha="0.9"
+        android:contentDescription="@null"
         android:scaleType="centerCrop"
         android:src="@drawable/loginimage"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -117,7 +118,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="140dp"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
@@ -127,11 +128,27 @@
             android:layout_height="wrap_content"
             android:text="@string/desc2"
             android:textColor="@color/primaryColorDark"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/login_button2"
+            android:layout_width="220dp"
+            android:layout_height="60dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/roundcorner"
+            android:contentDescription="@null"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_google_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
