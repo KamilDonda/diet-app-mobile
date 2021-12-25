@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
-import com.example.dietapp.database.sharedpreferences.Preferences
+import com.example.dietapp.sharedpreferences.Preferences
 import com.example.dietapp.ui.mainactivity.MainActivity
 import kotlinx.android.synthetic.main.fragment_start.*
 import org.koin.android.ext.android.inject

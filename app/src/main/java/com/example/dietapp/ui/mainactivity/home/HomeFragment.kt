@@ -38,5 +38,13 @@ class HomeFragment : Fragment() {
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {}
             })
+//
+//        CoroutineScope(Dispatchers.IO).launch {
+//            RetrofitBuilder.instance.getIngredientsAsync()
+//                .await()
+//                .body()!!.forEach {
+//                    Log.v("ttt", it.toString())
+//                }
+//        }
     }
 }

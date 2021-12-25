@@ -1,7 +1,8 @@
 package com.example.dietapp
 
-import com.example.dietapp.database.sharedpreferences.Preferences
+import com.example.dietapp.database.RetrofitBuilder
 import com.example.dietapp.services.LogoutService
+import com.example.dietapp.sharedpreferences.Preferences
 import com.example.dietapp.ui.loginactivity.login.LoginFragment
 import com.example.dietapp.ui.loginactivity.register.RegisterFragment
 import com.example.dietapp.ui.loginactivity.start.StartFragment
@@ -22,6 +23,9 @@ import org.koin.dsl.module
 
 @JvmField
 val appModule = module {
+
+// Retrofit
+    single { RetrofitBuilder }
 
 // ViewModel
     viewModel { MealViewModel() }
