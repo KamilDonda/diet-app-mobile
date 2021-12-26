@@ -164,7 +164,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/login_google"
+            android:id="@+id/register_google"
             android:layout_width="220dp"
             android:layout_height="60dp"
             android:adjustViewBounds="true"
