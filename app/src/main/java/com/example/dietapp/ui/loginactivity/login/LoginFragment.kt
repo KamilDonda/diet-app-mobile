@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
+import com.example.dietapp.services.FirebaseRepository
 import com.example.dietapp.services.LoginService
+import com.example.dietapp.services.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -22,6 +24,7 @@ import org.koin.android.ext.android.inject
 
 class LoginFragment : Fragment() {
 
+    private val repository = FirebaseRepository()
     private val loginService: LoginService by inject()
     private val auth = FirebaseAuth.getInstance()
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -96,8 +99,10 @@ class LoginFragment : Fragment() {
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             if (it.result!!.user != null) {
-                                loginService.login(this, requireContext())
+                                val user = User(it.result!!.user!!.uid)
+                                repository.createUserWithGoogle(user)
                             }
+                            loginService.login(this, requireContext())
                         } else {
                             showSnackbar(it.exception?.message.toString())
                         }

@@ -2,12 +2,15 @@ package com.example.dietapp.ui.loginactivity.register
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
+import com.example.dietapp.services.FirebaseRepository
+import com.example.dietapp.services.User
 import com.example.dietapp.ui.mainactivity.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -20,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_register.*
 
 class RegisterFragment : Fragment() {
 
+    private val repository = FirebaseRepository()
     private val auth = FirebaseAuth.getInstance()
     private lateinit var googleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 123
@@ -61,6 +65,8 @@ class RegisterFragment : Fragment() {
                         .addOnSuccessListener {
                             if (it.user != null) {
                                 val intent = Intent(requireContext(), MainActivity::class.java)
+                                val user = User(it.user!!.uid)
+                                repository.createUser(user)
                                 startActivity(intent)
                             }
                         }
@@ -95,6 +101,8 @@ class RegisterFragment : Fragment() {
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             if (it.result!!.user != null) {
+                                val user = User(it.result!!.user!!.uid)
+                                repository.createUserWithGoogle(user)
                             }
                             val intent = Intent(requireContext(), MainActivity::class.java)
                             startActivity(intent)
