@@ -1,7 +1,7 @@
 package com.example.dietapp.services
 
 import androidx.appcompat.app.AppCompatActivity
-import com.example.dietapp.database.sharedpreferences.Preferences
+import com.example.dietapp.sharedpreferences.Preferences
 
 class LogoutService(private val sharedPreferences: Preferences) {
 

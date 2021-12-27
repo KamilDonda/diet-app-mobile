@@ -1,4 +1,4 @@
-package com.example.dietapp.database.sharedpreferences
+package com.example.dietapp.sharedpreferences
 
 import android.content.Context
 
