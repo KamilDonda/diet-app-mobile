@@ -48,4 +48,10 @@
     <string name="sign_in">Zaloguj się</string>
     <string name="sign_up">Zarejestruj się</string>
     <string name="logout">Wyloguj</string>
+
+    <string name="sign_up_successfufly">Konto utworzone pomyślnie!</string>
+    <string name="sign_in_successfufly">Zalogowano pomyślnie!</string>
+    <string name="email_is_empty">Pole E-mail jest puste!</string>
+    <string name="password_is_empty">Pole hasło jest puste!</string>
+    <string name="different_passwords">Hasła są różne!</string>
 </resources>
