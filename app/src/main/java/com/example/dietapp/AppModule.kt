@@ -1,6 +1,7 @@
 package com.example.dietapp
 
-import com.example.dietapp.database.RetrofitBuilder
+import com.example.dietapp.database.retrofit.RetrofitBuilder
+import com.example.dietapp.services.ConnectionService
 import com.example.dietapp.services.LogoutService
 import com.example.dietapp.sharedpreferences.Preferences
 import com.example.dietapp.ui.loginactivity.login.LoginFragment
@@ -33,6 +34,7 @@ val appModule = module {
     viewModel { HomeViewModel() }
 
 // Services
+    single { ConnectionService() }
     single { LogoutService(get()) }
 
 // SharedPreferences
