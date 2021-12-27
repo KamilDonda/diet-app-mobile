@@ -95,9 +95,9 @@ class RegisterFragment : Fragment() {
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             if (it.result!!.user != null) {
-                                val intent = Intent(requireContext(), MainActivity::class.java)
-                                startActivity(intent)
                             }
+                            val intent = Intent(requireContext(), MainActivity::class.java)
+                            startActivity(intent)
                         } else {
                             showSnackbar(it.exception?.message.toString())
                         }

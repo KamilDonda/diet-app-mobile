@@ -19,7 +19,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.email_input
-import kotlinx.android.synthetic.main.fragment_register.*
 import org.koin.android.ext.android.inject
 
 class LoginFragment : Fragment() {
@@ -101,10 +100,10 @@ class LoginFragment : Fragment() {
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             if (it.result!!.user != null) {
-                                val intent = Intent(requireContext(), MainActivity::class.java)
-                                sharedPreferences.setIsLogged(true)
-                                startActivity(intent)
                             }
+                            val intent = Intent(requireContext(), MainActivity::class.java)
+                            sharedPreferences.setIsLogged(true)
+                            startActivity(intent)
                         } else {
                             showSnackbar(it.exception?.message.toString())
                         }
