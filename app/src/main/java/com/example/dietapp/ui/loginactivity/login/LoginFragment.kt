@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
-import com.example.dietapp.sharedpreferences.Preferences
-import com.example.dietapp.ui.mainactivity.MainActivity
+import com.example.dietapp.services.LoginService
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -18,13 +17,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.android.synthetic.main.fragment_login.email_input
-import kotlinx.android.synthetic.main.fragment_register.*
 import org.koin.android.ext.android.inject
 
 class LoginFragment : Fragment() {
 
-    private val sharedPreferences: Preferences by inject()
+    private val loginService: LoginService by inject()
     private val auth = FirebaseAuth.getInstance()
     private lateinit var googleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 123
@@ -62,11 +59,8 @@ class LoginFragment : Fragment() {
                 else -> {
                     auth.signInWithEmailAndPassword(email, password)
                         .addOnSuccessListener {
-                            if (it.user != null)
-                            {
-                                val intent = Intent(requireContext(), MainActivity::class.java)
-                                sharedPreferences.setIsLogged(true)
-                                startActivity(intent)
+                            if (it.user != null) {
+                                loginService.login(this, requireContext())
                             }
                         }
                         .addOnFailureListener {
@@ -101,9 +95,7 @@ class LoginFragment : Fragment() {
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             if (it.result!!.user != null) {
-                                val intent = Intent(requireContext(), MainActivity::class.java)
-                                sharedPreferences.setIsLogged(true)
-                                startActivity(intent)
+                                loginService.login(this, requireContext())
                             }
                         } else {
                             showSnackbar(it.exception?.message.toString())
