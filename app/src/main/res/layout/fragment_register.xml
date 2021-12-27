@@ -131,15 +131,35 @@
                 android:textColor="@color/primaryColor" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/linearProgressIndicatorRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            app:layout_constraintTop_toBottomOf="@+id/repeat_password_field"
+            app:trackThickness="10dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/password_strength2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Silne hasło"
+            android:textColor="@color/primaryColor"
+            android:textFontWeight="500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearProgressIndicatorRegister" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/register_button"
             style="@style/Button"
             android:layout_width="240dp"
+            android:layout_marginTop="10dp"
             android:text="@string/sign_up"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/repeat_password_field" />
+            app:layout_constraintTop_toBottomOf="@+id/password_strength2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

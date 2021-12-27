@@ -2,7 +2,8 @@ package com.example.dietapp.ui.loginactivity.register
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.example.dietapp.R
 import com.example.dietapp.services.FirebaseRepository
 import com.example.dietapp.services.User
 import com.example.dietapp.ui.mainactivity.MainActivity
+import com.example.dietapp.utils.PasswordUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -20,6 +22,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.fragment_register.*
+import kotlinx.android.synthetic.main.fragment_register.new_password_input
+import kotlinx.android.synthetic.main.fragment_register.repeat_password_input
 
 class RegisterFragment : Fragment() {
 
@@ -45,11 +49,13 @@ class RegisterFragment : Fragment() {
 
         setupSignUpClick()
         setupSignInWithGoogleClick()
+        setupTextFields()
         register_back_button.setOnClickListener {
             it.findNavController().navigate(R.id.action_registerFragment_to_startFragment)
         }
     }
 
+    //Logowanie przy pomocy email i hasła
     private fun setupSignUpClick() {
         register_button.setOnClickListener {
             val email = email_input.text?.trim().toString()
@@ -78,6 +84,28 @@ class RegisterFragment : Fragment() {
         }
     }
 
+    //Pasek siły hasła
+    var newPassword: String = ""
+        private set
+
+    fun setNewPassword(password: String): Int {
+        this.newPassword = password
+        return PasswordUtil.securityLevel(newPassword)
+    }
+
+    private fun setupTextFields() {
+        new_password_input.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                linearProgressIndicatorRegister.progress = setNewPassword(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        })
+    }
+
+    //Uwierzytelnianie przy pomocy konta google
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
