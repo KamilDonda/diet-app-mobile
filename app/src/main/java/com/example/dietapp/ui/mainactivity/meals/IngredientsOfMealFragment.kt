@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.dietapp.R
-import com.example.dietapp.adapters.IngredientsAdapter
+import com.example.dietapp.adapters.IngredientsOfMealAdapter
 import com.example.dietapp.adapters.MacronutrientsAdapter
 import com.example.dietapp.models.Meal
 import com.example.dietapp.utils.FloatConverter
@@ -19,7 +19,7 @@ class IngredientsOfMealFragment : Fragment() {
 
     private val viewModel: MealViewModel by sharedViewModel()
     private val macronutrientsAdapter = MacronutrientsAdapter()
-    private val ingredientsAdapter = IngredientsAdapter()
+    private val ingredientsAdapter = IngredientsOfMealAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +33,7 @@ class IngredientsOfMealFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         macronutrients_rv.adapter = macronutrientsAdapter
-        ingredients_rv.adapter = ingredientsAdapter
+        meal_ingredients_rv.adapter = ingredientsAdapter
 
         setMacronutrientsData(viewModel.currentMeal!!)
         setIngredientsData(viewModel.currentMeal!!)

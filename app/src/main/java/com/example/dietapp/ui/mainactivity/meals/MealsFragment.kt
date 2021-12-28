@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.fragment_meals.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MealsFragment : Fragment() {
+
     private val viewModel: MealViewModel by sharedViewModel()
 
     override fun onCreateView(

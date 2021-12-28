@@ -5,14 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietapp.R
+import com.example.dietapp.database.models.ingredient.IngredientEntity
+import com.example.dietapp.ui.mainactivity.ingredients.IngredientViewModel
+import com.example.dietapp.utils.FloatConverter
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 
-class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.Holder>() {
+class IngredientsAdapter(private val viewModel: IngredientViewModel) :
+    RecyclerView.Adapter<IngredientsAdapter.Holder>() {
     inner class Holder(view: View) : RecyclerView.ViewHolder(view)
 
-    private val _list = ArrayList<String>()
+    private val _list = ArrayList<IngredientEntity>()
 
-    fun setList(list: ArrayList<String>) {
+    fun setList(list: ArrayList<IngredientEntity>) {
         _list.clear()
         _list.addAll(list)
         notifyDataSetChanged()
@@ -22,12 +27,31 @@ class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = Holder(
         LayoutInflater.from(parent.context).inflate(
-            R.layout.ingredient_item, parent, false
+            R.layout.item, parent, false
         )
     )
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val value = holder.itemView.findViewById<MaterialTextView>(R.id.ingredient_item_value)
-        value.text = _list[position]
+        val root = holder.itemView.rootView
+        val number = holder.itemView.findViewById<MaterialButton>(R.id.meal_number)
+        val name = holder.itemView.findViewById<MaterialTextView>(R.id.meal_name)
+        val kcal = holder.itemView.findViewById<MaterialButton>(R.id.meal_kcal)
+        val proteins = holder.itemView.findViewById<MaterialTextView>(R.id.meal_proteins)
+        val carbs = holder.itemView.findViewById<MaterialTextView>(R.id.meal_carbs)
+        val fats = holder.itemView.findViewById<MaterialTextView>(R.id.meal_fats)
+
+        val item = _list[position]
+
+        number.text = (position + 1).toString()
+        name.text = item.name
+        kcal.text = FloatConverter.floatToString(item.kcal.toFloat(), "kcal")
+        proteins.text = FloatConverter.floatToString(item.proteins.toFloat(), "g")
+        carbs.text = FloatConverter.floatToString(item.carbohydrates.toFloat(), "g")
+        fats.text = FloatConverter.floatToString(item.fats.toFloat(), "g")
+
+        root.setOnClickListener {
+            viewModel.setCurrentIngredient(position)
+//            it.findNavController().navigate(R.id.)
+        }
     }
 }
