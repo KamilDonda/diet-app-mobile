@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.example.dietapp.R
 import com.example.dietapp.adapters.IngredientsAdapter
@@ -31,5 +32,22 @@ class IngredientsFragment : Fragment() {
         viewModel.ingredients.observe(viewLifecycleOwner, {
             ingredientsAdapter.setList(it)
         })
+
+        setupSearch()
+    }
+
+    private fun setupSearch() {
+        searchInput.doOnTextChanged { text, _, _, _ ->
+            viewModel.setSearchText(text.toString())
+        }
+
+        searchField.setStartIconOnClickListener {
+            viewModel.search()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        searchInput.setText(viewModel.searchText)
     }
 }
