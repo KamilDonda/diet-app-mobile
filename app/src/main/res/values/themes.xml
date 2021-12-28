@@ -18,6 +18,11 @@
         <item name="android:navigationBarColor">@color/primaryColor</item>
     </style>
 
+    <style name="DialogStyle" parent="Base.Theme.AppCompat.Dialog">
+        <item name="android:windowMinWidthMajor">97%</item>
+        <item name="android:windowMinWidthMinor">97%</item>
+    </style>
+
     <style name="ShapeAppearanceOverlay.MyApp.Button.Circle" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
@@ -63,6 +68,16 @@
         <item name="android:textFontWeight" tools:targetApi="p">600</item>
     </style>
 
+    <style name="SubHeader" parent="Header">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:textFontWeight" tools:targetApi="p">500</item>
+    </style>
+
     <style name="OutlinedRoundedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="shapeAppearanceOverlay">
             @style/ShapeAppearanceOverlay.MyApp.TextInputLayout.Rounded
@@ -74,7 +89,7 @@
         <item name="cornerSize">12dp</item>
     </style>
 
-    <style name="ProfileRowOdd">
+    <style name="Row_A">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">80dp</item>
@@ -83,11 +98,11 @@
         <item name="android:padding">20dp</item>
     </style>
 
-    <style name="ProfileRowEven" parent="ProfileRowOdd">
+    <style name="Row_B" parent="Row_A">
         <item name="android:background">@color/lightGrey</item>
     </style>
 
-    <style name="ProfileTextView">
+    <style name="RowTextView">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>

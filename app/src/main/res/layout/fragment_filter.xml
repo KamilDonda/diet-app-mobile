@@ -1,46 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primaryColor"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:orientation="vertical">
 
-        <com.google.android.material.textview.MaterialTextView
+        <LinearLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/filters"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="24sp" />
+            android:background="@color/primaryColor"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-    </LinearLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/filters"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:orientation="horizontal">
+        </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/dialog_cancel"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/SubHeader"
+                    android:text="@string/sorting" />
+
+                <LinearLayout style="@style/Row_B">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/RowTextView"
+                        android:text="@string/order" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/order"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:endIconTint="@color/black">
+
+                        <AutoCompleteTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none"
+                            android:padding="0dp"
+                            android:paddingStart="10dp"
+                            android:text="Od A do Z"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            tools:ignore="RtlSymmetry" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/SubHeader"
+                    android:text="@string/filtering" />
+
+                <LinearLayout style="@style/Row_A">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/RowTextView"
+                        android:text="@string/calories" />
+
+                </LinearLayout>
+
+                <LinearLayout style="@style/Row_B">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/RowTextView"
+                        android:text="@string/proteins" />
+
+                </LinearLayout>
+
+                <LinearLayout style="@style/Row_A">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/RowTextView"
+                        android:text="@string/fats" />
+
+                </LinearLayout>
+
+                <LinearLayout style="@style/Row_B">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/RowTextView"
+                        android:text="@string/carbs" />
+
+                </LinearLayout>
+
+                <LinearLayout style="@style/Row_A">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/RowTextView"
+                        android:text="@string/preferences" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cancel" />
+            android:gravity="end"
+            android:orientation="horizontal">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/dialog_ok"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ok" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialog_cancel"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialog_ok"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ok" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

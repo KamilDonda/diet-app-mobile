@@ -54,6 +54,11 @@
     <string name="email_is_empty">Pole E-mail jest puste!</string>
     <string name="password_is_empty">Pole hasło jest puste!</string>
     <string name="different_passwords">Hasła są różne!</string>
+
     <string name="search">Wyszukaj...</string>
     <string name="filters">Filtry</string>
+    <string name="sorting">Sortowanie</string>
+    <string name="filtering">Filtrowanie</string>
+
+    <string name="order">Kolejność</string>
 </resources>
