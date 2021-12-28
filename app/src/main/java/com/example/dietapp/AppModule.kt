@@ -6,6 +6,7 @@ import com.example.dietapp.services.LoginService
 import com.example.dietapp.services.LogoutService
 import com.example.dietapp.sharedpreferences.Preferences
 import com.example.dietapp.ui.loginactivity.login.LoginFragment
+import com.example.dietapp.ui.loginactivity.login.LoginViewModel
 import com.example.dietapp.ui.loginactivity.register.RegisterFragment
 import com.example.dietapp.ui.loginactivity.register.RegisterViewModel
 import com.example.dietapp.ui.loginactivity.start.StartFragment
@@ -35,6 +36,7 @@ val appModule = module {
     viewModel { ProfileViewModel() }
     viewModel { HomeViewModel() }
     viewModel { RegisterViewModel(get()) }
+    viewModel { LoginViewModel(get()) }
 
 // Services
     single { ConnectionService() }

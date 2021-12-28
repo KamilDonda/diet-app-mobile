@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
 import com.example.dietapp.services.FirebaseRepository
-import com.example.dietapp.services.LoginService
 import com.example.dietapp.services.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -19,13 +19,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.android.synthetic.main.fragment_login.email_input
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class LoginFragment : Fragment() {
 
     private val repository = FirebaseRepository()
-    private val loginService: LoginService by inject()
+    private val viewModel: LoginViewModel by sharedViewModel()
     private val auth = FirebaseAuth.getInstance()
     private lateinit var googleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 123
@@ -46,6 +45,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupSignInClick()
+        setupTextFields()
         setupSignInWithGoogleClick()
         login_back_button.setOnClickListener {
             it.findNavController().navigate(R.id.action_loginFragment_to_startFragment)
@@ -64,7 +64,7 @@ class LoginFragment : Fragment() {
                     auth.signInWithEmailAndPassword(email, password)
                         .addOnSuccessListener {
                             if (it.user != null) {
-                                loginService.login(this, requireContext())
+                                viewModel.login(this, requireContext())
                             }
                         }
                         .addOnFailureListener {
@@ -73,6 +73,16 @@ class LoginFragment : Fragment() {
                 }
             }
 
+        }
+    }
+
+    private fun setupTextFields() {
+        email_input.doOnTextChanged { text, _, _, _ ->
+            viewModel.setEmail(text.toString())
+        }
+
+        password_input.doOnTextChanged { text, _, _, _ ->
+            viewModel.setPassword(text.toString())
         }
     }
 
@@ -101,8 +111,8 @@ class LoginFragment : Fragment() {
                             if (it.result!!.user != null) {
                                 val user = User(it.result!!.user!!.uid)
                                 repository.createUserWithGoogle(user)
+                                viewModel.login(this, requireContext())
                             }
-                            loginService.login(this, requireContext())
                         } else {
                             showSnackbar(it.exception?.message.toString())
                         }
@@ -121,5 +131,15 @@ class LoginFragment : Fragment() {
                 RC_SIGN_IN
             )
         }
+    }
+
+    private fun initData() {
+        email_input.setText(viewModel.email)
+        password_input.setText(viewModel.password)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initData()
     }
 }
