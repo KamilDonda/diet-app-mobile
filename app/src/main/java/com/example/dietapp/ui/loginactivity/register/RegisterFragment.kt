@@ -2,18 +2,15 @@ package com.example.dietapp.ui.loginactivity.register
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
 import com.example.dietapp.services.FirebaseRepository
 import com.example.dietapp.services.User
-import com.example.dietapp.ui.mainactivity.MainActivity
-import com.example.dietapp.utils.PasswordUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -22,17 +19,17 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.fragment_register.*
-import kotlinx.android.synthetic.main.fragment_register.new_password_input
-import kotlinx.android.synthetic.main.fragment_register.repeat_password_input
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class RegisterFragment : Fragment() {
 
+    private val viewModel: RegisterViewModel by sharedViewModel()
     private val repository = FirebaseRepository()
     private val auth = FirebaseAuth.getInstance()
     private lateinit var googleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 123
 
-    protected fun showSnackbar(message: String, length: Int = Snackbar.LENGTH_LONG) {
+    private fun showSnackbar(message: String, length: Int = Snackbar.LENGTH_LONG) {
         Snackbar.make(requireView(), message, length).show()
     }
 
@@ -70,10 +67,9 @@ class RegisterFragment : Fragment() {
                     auth.createUserWithEmailAndPassword(email, password)
                         .addOnSuccessListener {
                             if (it.user != null) {
-                                val intent = Intent(requireContext(), MainActivity::class.java)
                                 val user = User(it.user!!.uid)
                                 repository.createUser(user)
-                                startActivity(intent)
+                                viewModel.login(this, requireContext())
                             }
                         }
                         .addOnFailureListener {
@@ -84,25 +80,18 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    //Pasek siły hasła
-    var newPassword: String = ""
-        private set
-
-    fun setNewPassword(password: String): Int {
-        this.newPassword = password
-        return PasswordUtil.securityLevel(newPassword)
-    }
-
     private fun setupTextFields() {
-        new_password_input.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                linearProgressIndicatorRegister.progress = setNewPassword(s.toString())
-            }
+        email_input.doOnTextChanged { text, _, _, _ ->
+            viewModel.setEmail(text.toString())
+        }
 
-            override fun afterTextChanged(s: Editable?) {}
+        new_password_input.doOnTextChanged { text, _, _, _ ->
+            linearProgressIndicatorRegister.progress = viewModel.setNewPassword(text.toString())
+        }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        })
+        repeat_password_input.doOnTextChanged { text, _, _, _ ->
+            viewModel.setRepeatedPassword(text.toString())
+        }
     }
 
     //Uwierzytelnianie przy pomocy konta google
@@ -131,9 +120,8 @@ class RegisterFragment : Fragment() {
                             if (it.result!!.user != null) {
                                 val user = User(it.result!!.user!!.uid)
                                 repository.createUserWithGoogle(user)
+                                viewModel.login(this, requireContext())
                             }
-                            val intent = Intent(requireContext(), MainActivity::class.java)
-                            startActivity(intent)
                         } else {
                             showSnackbar(it.exception?.message.toString())
                         }
@@ -152,5 +140,16 @@ class RegisterFragment : Fragment() {
                 RC_SIGN_IN
             )
         }
+    }
+
+    private fun initData() {
+        email_input.setText(viewModel.email)
+        new_password_input.setText(viewModel.newPassword)
+        repeat_password_input.setText(viewModel.repeatedPassword)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initData()
     }
 }
