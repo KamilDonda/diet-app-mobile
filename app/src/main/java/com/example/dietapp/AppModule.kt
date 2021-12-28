@@ -1,11 +1,17 @@
 package com.example.dietapp
 
-import com.example.dietapp.database.sharedpreferences.Preferences
+import com.example.dietapp.database.retrofit.RetrofitBuilder
+import com.example.dietapp.services.ConnectionService
+import com.example.dietapp.services.LoginService
 import com.example.dietapp.services.LogoutService
+import com.example.dietapp.sharedpreferences.Preferences
 import com.example.dietapp.ui.loginactivity.login.LoginFragment
+import com.example.dietapp.ui.loginactivity.login.LoginViewModel
 import com.example.dietapp.ui.loginactivity.register.RegisterFragment
+import com.example.dietapp.ui.loginactivity.register.RegisterViewModel
 import com.example.dietapp.ui.loginactivity.start.StartFragment
 import com.example.dietapp.ui.mainactivity.home.HomeFragment
+import com.example.dietapp.ui.mainactivity.home.HomeViewModel
 import com.example.dietapp.ui.mainactivity.ingredients.IngredientsFragment
 import com.example.dietapp.ui.mainactivity.meals.*
 import com.example.dietapp.ui.mainactivity.profile.ProfileAccountFragment
@@ -22,11 +28,19 @@ import org.koin.dsl.module
 @JvmField
 val appModule = module {
 
+// Retrofit
+    single { RetrofitBuilder }
+
 // ViewModel
     viewModel { MealViewModel() }
     viewModel { ProfileViewModel() }
+    viewModel { HomeViewModel() }
+    viewModel { RegisterViewModel(get()) }
+    viewModel { LoginViewModel(get()) }
 
 // Services
+    single { ConnectionService() }
+    single { LoginService(get(), get()) }
     single { LogoutService(get()) }
 
 // SharedPreferences

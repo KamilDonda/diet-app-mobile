@@ -1,6 +1,5 @@
 package com.example.dietapp.ui.loginactivity.start
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,14 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
-import com.example.dietapp.database.sharedpreferences.Preferences
-import com.example.dietapp.ui.mainactivity.MainActivity
+import com.example.dietapp.services.LoginService
+import com.example.dietapp.sharedpreferences.Preferences
 import kotlinx.android.synthetic.main.fragment_start.*
 import org.koin.android.ext.android.inject
 
 class StartFragment : Fragment() {
 
     private val sharedPreferences: Preferences by inject()
+    private val loginService: LoginService by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,8 +41,7 @@ class StartFragment : Fragment() {
         super.onStart()
 
         if (sharedPreferences.getIsLogged()) {
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            startActivity(intent)
+            loginService.navigateToHome(this, requireContext())
         }
     }
 }
