@@ -55,4 +55,5 @@
     <string name="password_is_empty">Pole hasło jest puste!</string>
     <string name="different_passwords">Hasła są różne!</string>
     <string name="search">Wyszukaj...</string>
+    <string name="filters">Filtry</string>
 </resources>
