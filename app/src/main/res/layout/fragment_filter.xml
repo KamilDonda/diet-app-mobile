@@ -76,9 +76,26 @@
 
                 </LinearLayout>
 
-                <com.google.android.material.textview.MaterialTextView
-                    style="@style/SubHeader"
-                    android:text="@string/filtering" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/SubHeader"
+                        android:layout_weight="1"
+                        android:text="@string/filtering" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:text="W przeliczeniu na 100 g"
+                        android:textColor="@color/black"
+                        app:buttonTint="@color/primaryColor"
+                        app:useMaterialThemeColors="true" />
+
+                </LinearLayout>
 
                 <LinearLayout style="@style/Row_A">
 
