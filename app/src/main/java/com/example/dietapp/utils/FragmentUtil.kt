@@ -11,3 +11,9 @@ fun Fragment.setupDropdownMenu(items: List<String>, view: EditText?) {
         ArrayAdapter(requireContext(), R.layout.spinner_item, items)
     (view as? AutoCompleteTextView)?.setAdapter(adapter)
 }
+
+fun Array<String>.getAsArrayList(): ArrayList<String> {
+    val list = ArrayList<String>()
+    this.forEach { list.add(it) }
+    return list
+}

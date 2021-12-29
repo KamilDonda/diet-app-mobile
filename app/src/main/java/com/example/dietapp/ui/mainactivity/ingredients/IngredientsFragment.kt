@@ -8,7 +8,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.example.dietapp.R
 import com.example.dietapp.adapters.IngredientsAdapter
-import com.example.dietapp.utils.FilterFragment
+import com.example.dietapp.ui.filter.FilterFragment
 import kotlinx.android.synthetic.main.fragment_ingredients.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -40,7 +40,7 @@ class IngredientsFragment : Fragment() {
 
     private fun setupDialog() {
         filter_button.setOnClickListener {
-            val dialog = FilterFragment()
+            val dialog = FilterFragment(viewModel)
 
             dialog.show(requireActivity().supportFragmentManager, "FILTER_INGREDIENTS")
         }

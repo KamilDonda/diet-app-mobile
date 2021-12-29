@@ -61,4 +61,17 @@
     <string name="filtering">Filtrowanie</string>
 
     <string name="order">Kolejność</string>
+
+    <string-array name="filter_order">
+        <item>Nazwa: A - Z</item>
+        <item>Nazwa: Z - A</item>
+        <item>Kalorie: rosnąco</item>
+        <item>Kalorie: malejąco</item>
+        <item>Białko: rosnąco</item>
+        <item>Białko: malejąco</item>
+        <item>Węglowodany:\nrosnąco</item>
+        <item>Węglowodany:\nmalejąco</item>
+        <item>Tłuszcze: rosnąco</item>
+        <item>Tłuszcze: malejąco</item>
+    </string-array>
 </resources>

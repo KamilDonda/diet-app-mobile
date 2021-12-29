@@ -1,10 +1,11 @@
 package com.example.dietapp.ui.mainactivity.ingredients
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.dietapp.database.models.ingredient.IngredientEntity
+import com.example.dietapp.ui.filter.FilterViewModel
 
-class IngredientViewModel : ViewModel() {
+class IngredientViewModel : FilterViewModel() {
 
     private val _ingredients = prepareIngredients()
 
@@ -50,5 +51,7 @@ class IngredientViewModel : ViewModel() {
                 true
             )
         } as ArrayList)
+
+        Log.v("ttt", "filters: $filter")
     }
 }
