@@ -185,7 +185,7 @@ class DayFragment : Fragment() {
         legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
         legend.textSize = 14f
         legend.xEntrySpace = 22f
-        legend.xOffset = 24f
+        legend.xOffset = 14f
         legend.yOffset = 12f
 
         xAxis.position = XAxis.XAxisPosition.BOTTOM
@@ -198,7 +198,7 @@ class DayFragment : Fragment() {
         xAxis.setAxisMaximum(data.getXMax() + 0.74f)
         xAxis.valueFormatter = IndexAxisValueFormatter(days)
         xAxis.isGranularityEnabled = true
-        xAxis.yOffset = -1.6f
+        xAxis.yOffset = -1.2f
 
         val barSpace = 0.2f
         val groupSpace = 0.12f
