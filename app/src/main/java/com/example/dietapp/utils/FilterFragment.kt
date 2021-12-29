@@ -33,5 +33,26 @@ class FilterFragment : DialogFragment() {
         dialog_cancel.setOnClickListener {
             dismiss()
         }
+
+        initData()
+
+        setupDropdownMenu(
+            listOf(
+                "Nazwa: A - Z",
+                "Nazwa: Z - A",
+                "Kalorie: rosnąco",
+                "Kalorie: malejąco",
+                "Białko: rosnąco",
+                "Białko: malejąco",
+                "Węglowodany:\nrosnąco",
+                "Węglowodany:\nmalejąco",
+                "Tłuszcze: rosnąco",
+                "Tłuszcze: malejąco",
+            ), order.editText
+        )
+    }
+
+    private fun initData() {
+        order.editText?.setText("Nazwa: A - Z")
     }
 }

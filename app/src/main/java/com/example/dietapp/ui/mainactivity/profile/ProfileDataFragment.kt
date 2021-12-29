@@ -2,19 +2,15 @@ package com.example.dietapp.ui.mainactivity.profile
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.EditText
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.example.dietapp.R
 import com.example.dietapp.utils.AgeConverter
 import com.example.dietapp.utils.FloatConverter
+import com.example.dietapp.utils.setupDropdownMenu
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
@@ -83,12 +79,6 @@ class ProfileDataFragment : Fragment() {
         viewModel.setBMI()
     }
 
-    private fun setupDropdownMenu(items: List<String>, view: EditText?) {
-        val adapter =
-            ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, items)
-        (view as? AutoCompleteTextView)?.setAdapter(adapter)
-    }
-
     private fun setupDatePicker() {
         val constraintsBuilder = CalendarConstraints.Builder()
             .setValidator(DateValidatorPointBackward.now())
@@ -132,21 +122,9 @@ class ProfileDataFragment : Fragment() {
             }
             view.dialog_input.setText(data)
 
-            view.dialog_input.addTextChangedListener(object : TextWatcher {
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    view.dialog_textLayout.error = null
-                }
-
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
-
-                override fun afterTextChanged(s: Editable?) {}
-            })
+            view.dialog_input.doOnTextChanged { text, _, _, _ ->
+                view.dialog_textLayout.error = null
+            }
 
             view.dialog_cancel.setOnClickListener {
                 alert.dismiss()

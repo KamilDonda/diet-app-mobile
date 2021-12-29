@@ -89,6 +89,17 @@
         <item name="cornerSize">12dp</item>
     </style>
 
+    <style name="OutlinedRoundedBoxSmall" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="shapeAppearanceOverlay">
+            @style/ShapeAppearanceOverlay.MyApp.TextInputLayout.Rounded.Small
+        </item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MyApp.TextInputLayout.Rounded.Small" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">25dp</item>
+    </style>
+
     <style name="Row_A">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -96,6 +107,7 @@
         <item name="android:gravity">center</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:padding">20dp</item>
+        <item name="android:paddingEnd">10dp</item>
     </style>
 
     <style name="Row_B" parent="Row_A">
@@ -108,5 +120,37 @@
         <item name="android:layout_weight">1</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="RowTextView2" parent="RowTextView">
+        <item name="android:layout_weight">4</item>
+    </style>
+
+    <style name="FilterField">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="boxBackgroundColor">@android:color/transparent</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+        <item name="expandedHintEnabled">false</item>
+        <item name="hintAnimationEnabled">false</item>
+        <item name="hintEnabled">false</item>
+        <item name="suffixText">g</item>
+    </style>
+
+    <style name="FilterInput">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">5</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:paddingStart">3dp</item>
+        <item name="android:paddingEnd">3dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColorHint">@color/transparentBlack</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 </resources>
