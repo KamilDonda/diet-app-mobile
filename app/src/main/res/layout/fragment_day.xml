@@ -84,13 +84,12 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/calories_rv"
                     android:layout_width="228dp"
-                    android:layout_height="120dp"
+                    android:layout_height="100dp"
                     android:overScrollMode="never"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="@+id/calories_pieChart"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/calories_pieChart"
-                    app:layout_constraintVertical_bias="0.0"
                     tools:itemCount="3"
                     tools:listitem="@layout/static_day_item" />
 
@@ -140,13 +139,12 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/macro_rv"
                     android:layout_width="228dp"
-                    android:layout_height="120dp"
+                    android:layout_height="100dp"
                     android:overScrollMode="never"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="@+id/macro_pieChart"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/macro_pieChart"
-                    app:layout_constraintVertical_bias="0.0"
                     tools:itemCount="3"
                     tools:listitem="@layout/static_day_item" />
 
