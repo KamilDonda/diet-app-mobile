@@ -56,8 +56,9 @@
         android:layout_width="match_parent"
         android:layout_height="184dp"
         android:layout_margin="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/day_content"
-        tools:layout_editor_absoluteX="20dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/day_content">
 
         <TextView
             android:id="@+id/title1"
@@ -70,7 +71,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout5"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_marginTop="20dp"
@@ -80,7 +80,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/calories_rv"
-                android:layout_width="220dp"
+                android:layout_width="228dp"
                 android:layout_height="120dp"
                 android:overScrollMode="never"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -93,6 +93,63 @@
 
             <org.eazegraph.lib.charts.PieChart
                 android:id="@+id/calories_pieChart"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:egAnimationTime="400"
+                app:egInnerPadding="55"
+                app:egInnerPaddingColor="#ffffff"
+                app:egInnerPaddingOutline="0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </org.eazegraph.lib.charts.PieChart>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/macro"
+        android:layout_width="match_parent"
+        android:layout_height="184dp"
+        android:layout_margin="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calories">
+
+        <TextView
+            android:id="@+id/title2"
+            style="@style/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Makroskładniki"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title2">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/macro_rv"
+                android:layout_width="228dp"
+                android:layout_height="120dp"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="@+id/macro_pieChart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/macro_pieChart"
+                app:layout_constraintVertical_bias="0.0"
+                tools:itemCount="3"
+                tools:listitem="@layout/static_day_item" />
+
+            <org.eazegraph.lib.charts.PieChart
+                android:id="@+id/macro_pieChart"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 app:egAnimationTime="400"
