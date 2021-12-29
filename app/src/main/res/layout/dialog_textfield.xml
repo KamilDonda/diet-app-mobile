@@ -26,6 +26,7 @@
             android:layout_marginHorizontal="20dp"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeWidth="1dp"
+            app:errorEnabled="true"
             app:boxStrokeWidthFocused="1dp"
             app:expandedHintEnabled="false"
             tools:ignore="RtlSymmetry">

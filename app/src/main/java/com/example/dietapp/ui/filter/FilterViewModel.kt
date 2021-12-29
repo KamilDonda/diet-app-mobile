@@ -11,4 +11,11 @@ abstract class FilterViewModel : ViewModel() {
     fun setFilterOptions(filter: Filter) {
         this.filter = filter
     }
+
+    fun intOrNullToString(value: Int?): String {
+        return when (value) {
+            null, 0 -> return ""
+            else -> value.toString()
+        }
+    }
 }

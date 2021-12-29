@@ -126,7 +126,7 @@
         <item name="android:layout_weight">4</item>
     </style>
 
-    <style name="FilterField">
+    <style name="FilterField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
@@ -136,6 +136,10 @@
         <item name="expandedHintEnabled">false</item>
         <item name="hintAnimationEnabled">false</item>
         <item name="hintEnabled">false</item>
+        <!--        <item name="errorIconDrawable">@null</item>-->
+        <!--        <item name="errorTextColor">@color/error</item>-->
+        <!--        <item name="boxStrokeErrorColor">@color/error</item>-->
+        <!--        <item name="errorEnabled">true</item>-->
         <item name="suffixText">g</item>
     </style>
 
@@ -152,5 +156,10 @@
         <item name="android:textAlignment">center</item>
         <item name="android:textColorHint">@color/transparentBlack</item>
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="ErrorTextView" parent="RowTextView">
+        <item name="android:textColor">@color/error</item>
+        <item name="android:textSize">10sp</item>
     </style>
 </resources>
