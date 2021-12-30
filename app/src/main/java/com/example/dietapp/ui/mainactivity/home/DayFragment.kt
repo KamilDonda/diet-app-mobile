@@ -141,9 +141,6 @@ class DayFragment : Fragment() {
     {
         //Tworzenie zmiennych do wykresu
         val barChart = idBarChart
-        val barDataSet1: BarDataSet
-        val barDataSet2: BarDataSet
-        val barDataSet3: BarDataSet
         val days = arrayOf(
             getString(R.string.breakfast),
             getString(R.string.lunch),
@@ -151,16 +148,16 @@ class DayFragment : Fragment() {
         )
 
         //Inicjacja danych, kolorów, wartości nad wykresami
-        barDataSet1 = BarDataSet(getBarProteins(), getString(R.string.proteins))
-        barDataSet1.setColor(getResources().getColor(R.color.colorProteins))
+        val barDataSet1 = BarDataSet(getBarProteins(), getString(R.string.proteins))
+        barDataSet1.setColors(resources.getColor(R.color.colorProteins))
         barDataSet1.setDrawValues(true)
         barDataSet1.valueTextSize = 12f
-        barDataSet2 = BarDataSet(getBarCarbs(), getString(R.string.carbs))
-        barDataSet2.setColor(getResources().getColor(R.color.colorCarbs))
+        val barDataSet2 = BarDataSet(getBarCarbs(), getString(R.string.carbs))
+        barDataSet2.setColors(resources.getColor(R.color.colorCarbs))
         barDataSet2.setDrawValues(true)
         barDataSet2.valueTextSize = 12f
-        barDataSet3 = BarDataSet(getBarFats(), getString(R.string.fats))
-        barDataSet3.setColor(getResources().getColor(R.color.colorFats))
+        val barDataSet3 = BarDataSet(getBarFats(), getString(R.string.fats))
+        barDataSet3.setColors(resources.getColor(R.color.colorFats))
         barDataSet3.setDrawValues(true)
         barDataSet3.valueTextSize = 12f
 
@@ -169,7 +166,7 @@ class DayFragment : Fragment() {
 
         //Stworzenie zmiennej dla opisu osi X i legendy
         val xAxis = barChart.xAxis
-        val legend: Legend = barChart.getLegend()
+        val legend = barChart.legend
 
         barChart.data = data
         barChart.description.isEnabled = false
@@ -194,8 +191,8 @@ class DayFragment : Fragment() {
         xAxis.setCenterAxisLabels(true)
         xAxis.axisMinimum = 0f
         xAxis.granularity = 1.245f  //Przesuwanie opisu osi X (śniadanie, obiad, kolacja)
-        xAxis.setTextSize(14f)
-        xAxis.setAxisMaximum(data.getXMax() + 0.74f)
+        xAxis.textSize = 14f
+        xAxis.axisMaximum = data.xMax + 0.74f
         xAxis.valueFormatter = IndexAxisValueFormatter(days)
         xAxis.isGranularityEnabled = true
         xAxis.yOffset = -1.2f
@@ -203,8 +200,6 @@ class DayFragment : Fragment() {
         val barSpace = 0.2f
         val groupSpace = 0.12f
         data.barWidth = 0.18f
-
-        barChart.animate()
 
         barChart.groupBars(0f, groupSpace, barSpace)
 
