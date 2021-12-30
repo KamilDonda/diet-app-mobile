@@ -104,9 +104,11 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">80dp</item>
-        <item name="android:gravity">center</item>
+        <item name="android:gravity">top</item>
         <item name="android:orientation">horizontal</item>
-        <item name="android:padding">20dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">0dp</item>
         <item name="android:paddingEnd">10dp</item>
     </style>
 
@@ -161,5 +163,8 @@
     <style name="ErrorTextView" parent="RowTextView">
         <item name="android:textColor">@color/error</item>
         <item name="android:textSize">10sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingTop">5dp</item>
     </style>
 </resources>

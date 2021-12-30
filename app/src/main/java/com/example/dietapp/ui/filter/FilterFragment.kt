@@ -9,6 +9,7 @@ import com.example.dietapp.R
 import com.example.dietapp.models.Filter
 import com.example.dietapp.utils.getAsArrayList
 import com.example.dietapp.utils.setupDropdownMenu
+import com.google.android.material.textview.MaterialTextView
 import kotlinx.android.synthetic.main.fragment_filter.*
 
 class FilterFragment(private val viewModel: FilterViewModel) : DialogFragment() {
@@ -34,16 +35,27 @@ class FilterFragment(private val viewModel: FilterViewModel) : DialogFragment() 
         filters = resources.getStringArray(R.array.filter_order).getAsArrayList()
 
         dialog_ok.setOnClickListener {
-            viewModel.setFilterOptions(getFilterOptions())
-            dismiss()
+            val f = getFilterOptions()
+            viewModel.setFilterOptions(f)
+
+            if (validateInputs(f)) {
+                dismiss()
+            }
         }
 
         dialog_cancel.setOnClickListener {
             dismiss()
         }
 
+        dialog_reset.setOnClickListener {
+            initData(Filter())
+        }
+
+        initData(viewModel.filter)
+    }
+
+    private fun initData(f: Filter) {
         filters.indexOf(order.editText?.text.toString())
-        val f = viewModel.filter
 
         order.editText?.setText(filters[f.order])
         calories_start_input.setText(viewModel.intOrNullToString(f.caloriesMin))
@@ -57,6 +69,26 @@ class FilterFragment(private val viewModel: FilterViewModel) : DialogFragment() 
         filter_checkBox.isChecked = f.isChecked
 
         setupDropdownMenu(filters, order.editText)
+    }
+
+    private fun validateInputs(f: Filter): Boolean {
+        val a = compareInputs(f.caloriesMin, f.caloriesMax, calories_error)
+        val b = compareInputs(f.proteinsMin, f.proteinsMax, proteins_error)
+        val c = compareInputs(f.fatsMin, f.fatsMax, fats_error)
+        val d = compareInputs(f.carbsMin, f.carbsMax, carbs_error)
+        return a && b && c && d
+    }
+
+    private fun compareInputs(min: Int, max: Int?, errorView: MaterialTextView): Boolean {
+        return if (max != null && max < min) {
+            errorView.text = "Wartość końcowa nie może być mniejsza od początkowej"
+            errorView.error = ""
+            false
+        } else {
+            errorView.text = null
+            errorView.error = null
+            true
+        }
     }
 
     private fun getFilterOptions(): Filter {

@@ -40,6 +40,7 @@
 
     <string name="cancel">Anuluj</string>
     <string name="ok">Ok</string>
+    <string name="reset">Resetuj</string>
     <string name="login_btn">Logowanie</string>
     <string name="register_btn">Rejestracja</string>
     <string name="email">Wpisz email</string>

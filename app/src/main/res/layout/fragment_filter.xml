@@ -45,8 +45,7 @@
 
                 <LinearLayout
                     style="@style/Row_B"
-                    android:paddingEnd="2dp"
-                    tools:ignore="RtlSymmetry">
+                    android:paddingEnd="2dp">
 
                     <com.google.android.material.textview.MaterialTextView
                         style="@style/RowTextView2"
@@ -108,38 +107,49 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="10"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/calories_start_field"
-                            style="@style/FilterField"
-                            app:suffixText="kcal">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/calories_start_input"
-                                style="@style/FilterInput"
-                                android:hint="od" />
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/calories_start_field"
+                                style="@style/FilterField"
+                                app:suffixText="kcal">
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/calories_start_input"
+                                    style="@style/FilterInput"
+                                    android:hint="od" />
 
-                        <View
-                            android:layout_width="10dp"
-                            android:layout_height="1dp"
-                            android:layout_gravity="center"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="@color/black" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/calories_end_field"
-                            style="@style/FilterField"
-                            app:suffixText="kcal">
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="1dp"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="10dp"
+                                android:background="@color/black" />
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/calories_end_input"
-                                style="@style/FilterInput"
-                                android:hint="do" />
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/calories_end_field"
+                                style="@style/FilterField"
+                                app:suffixText="kcal">
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/calories_end_input"
+                                    style="@style/FilterInput"
+                                    android:hint="do" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/calories_error"
+                            style="@style/ErrorTextView" />
 
                     </LinearLayout>
 
@@ -155,36 +165,47 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/proteins_start_field"
-                            style="@style/FilterField">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/proteins_start_input"
-                                style="@style/FilterInput"
-                                android:hint="od" />
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/proteins_start_field"
+                                style="@style/FilterField">
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/proteins_start_input"
+                                    style="@style/FilterInput"
+                                    android:hint="od" />
 
-                        <View
-                            android:layout_width="10dp"
-                            android:layout_height="1dp"
-                            android:layout_gravity="center"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="@color/black" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/proteins_end_field"
-                            style="@style/FilterField">
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="1dp"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="10dp"
+                                android:background="@color/black" />
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/proteins_end_input"
-                                style="@style/FilterInput"
-                                android:hint="do" />
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/proteins_end_field"
+                                style="@style/FilterField">
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/proteins_end_input"
+                                    style="@style/FilterInput"
+                                    android:hint="do" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/proteins_error"
+                            style="@style/ErrorTextView" />
 
                     </LinearLayout>
 
@@ -200,36 +221,47 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/fats_start_field"
-                            style="@style/FilterField">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/fats_start_input"
-                                style="@style/FilterInput"
-                                android:hint="od" />
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/fats_start_field"
+                                style="@style/FilterField">
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/fats_start_input"
+                                    style="@style/FilterInput"
+                                    android:hint="od" />
 
-                        <View
-                            android:layout_width="10dp"
-                            android:layout_height="1dp"
-                            android:layout_gravity="center"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="@color/black" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/fats_end_field"
-                            style="@style/FilterField">
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="1dp"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="10dp"
+                                android:background="@color/black" />
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/fats_end_input"
-                                style="@style/FilterInput"
-                                android:hint="do" />
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/fats_end_field"
+                                style="@style/FilterField">
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/fats_end_input"
+                                    style="@style/FilterInput"
+                                    android:hint="do" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/fats_error"
+                            style="@style/ErrorTextView" />
 
                     </LinearLayout>
 
@@ -245,36 +277,47 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/carbs_start_field"
-                            style="@style/FilterField">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/carbs_start_input"
-                                style="@style/FilterInput"
-                                android:hint="od" />
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/carbs_start_field"
+                                style="@style/FilterField">
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/carbs_start_input"
+                                    style="@style/FilterInput"
+                                    android:hint="od" />
 
-                        <View
-                            android:layout_width="10dp"
-                            android:layout_height="1dp"
-                            android:layout_gravity="center"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="@color/black" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/carbs_end_field"
-                            style="@style/FilterField">
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="1dp"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="10dp"
+                                android:background="@color/black" />
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/carbs_end_input"
-                                style="@style/FilterInput"
-                                android:hint="do" />
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/carbs_end_field"
+                                style="@style/FilterField">
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/carbs_end_input"
+                                    style="@style/FilterInput"
+                                    android:hint="do" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/carbs_error"
+                            style="@style/ErrorTextView" />
 
                     </LinearLayout>
 
@@ -297,6 +340,18 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/dialog_reset"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reset" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/dialog_cancel"
