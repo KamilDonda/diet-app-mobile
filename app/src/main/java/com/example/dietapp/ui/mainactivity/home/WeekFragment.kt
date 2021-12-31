@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
-import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -18,7 +17,6 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import kotlinx.android.synthetic.main.fragment_day.*
 import kotlinx.android.synthetic.main.fragment_week.*
 import java.util.*
 
@@ -48,6 +46,7 @@ class WeekFragment : Fragment(), OnChartValueSelectedListener {
 
         Calories()
         drawLineChart()
+        drawLineChartMacro()
 
         week_back_button.setOnClickListener {
             it.findNavController().navigate(R.id.action_weekFragment_to_homeFragment)
@@ -215,6 +214,111 @@ class WeekFragment : Fragment(), OnChartValueSelectedListener {
         lineEntries.add(Entry(4f, 750f))
         lineEntries.add(Entry(5f, 744f))
         lineEntries.add(Entry(6f, 801f))
+
+        return lineEntries
+    }
+
+    private fun drawLineChartMacro() {
+        val lineChart =  idlinechartmacro
+        val lineEntries1 = getDataSet4()
+        val lineEntries2 = getDataSet5()
+        val lineEntries3 = getDataSet6()
+        val lineDataSet1 = LineDataSet(lineEntries1, getString(R.string.proteins))
+        val lineDataSet2 = LineDataSet(lineEntries2, getString(R.string.carbs))
+        val lineDataSet3 = LineDataSet(lineEntries3, getString(R.string.fats))
+
+        lineDataSet1.axisDependency = YAxis.AxisDependency.RIGHT
+        lineDataSet1.isHighlightEnabled = true
+        lineDataSet1.lineWidth = 2f
+        lineDataSet1.setColors(resources.getColor(R.color.colorProteins))
+        lineDataSet1.setCircleColor(resources.getColor(R.color.colorProteinsDark))
+        lineDataSet1.circleRadius = 4f
+        lineDataSet1.setDrawHighlightIndicators(true)
+        lineDataSet1.highLightColor = Color.RED
+        lineDataSet1.valueTextSize = 10f
+        lineDataSet1.valueTextColor = Color.DKGRAY
+
+        lineDataSet2.axisDependency = YAxis.AxisDependency.RIGHT
+        lineDataSet2.isHighlightEnabled = true
+        lineDataSet2.lineWidth = 2f
+        lineDataSet2.setColors(resources.getColor(R.color.colorCarbs))
+        lineDataSet2.setCircleColor(resources.getColor(R.color.colorCarbsDark))
+        lineDataSet2.circleRadius = 4f
+        lineDataSet2.setDrawHighlightIndicators(true)
+        lineDataSet2.highLightColor = Color.RED
+        lineDataSet2.valueTextSize = 10f
+        lineDataSet2.valueTextColor = Color.DKGRAY
+
+        lineDataSet3.axisDependency = YAxis.AxisDependency.RIGHT
+        lineDataSet3.isHighlightEnabled = true
+        lineDataSet3.lineWidth = 2f
+        lineDataSet3.setColors(resources.getColor(R.color.colorFats))
+        lineDataSet3.setCircleColor(resources.getColor(R.color.colorFatsDark))
+        lineDataSet3.circleRadius = 4f
+        lineDataSet3.setDrawHighlightIndicators(true)
+        lineDataSet3.highLightColor = Color.RED
+        lineDataSet3.valueTextSize = 10f
+        lineDataSet3.valueTextColor = Color.DKGRAY
+
+        val dataSets = ArrayList<ILineDataSet>()
+        dataSets.add(lineDataSet1)
+        dataSets.add(lineDataSet2)
+        dataSets.add(lineDataSet3)
+        val lineData = LineData(dataSets)
+
+        val legend = lineChart.legend
+        legend.textSize = 12f
+        legend.xEntrySpace = 16f
+
+        lineChart.description.isEnabled = false
+        lineChart.setDrawMarkers(true)
+        lineChart.setOnChartValueSelectedListener(this)
+        lineChart.xAxis.position = XAxis.XAxisPosition.BOTH_SIDED
+        lineChart.animateY(1500)
+        lineChart.xAxis.isGranularityEnabled = true
+        lineChart.xAxis.granularity = 1.0f
+        lineChart.xAxis.textSize = 12f
+        lineChart.xAxis.yOffset = 0.6f
+        lineChart.xAxis.valueFormatter = IndexAxisValueFormatter(x)
+        lineChart.data = lineData
+        lineChart.invalidate()
+    }
+
+    private fun getDataSet4() :  ArrayList<Entry>{
+        val lineEntries = ArrayList<Entry>()
+        lineEntries.add(Entry(0f, 82.2f))
+        lineEntries.add(Entry(1f, 76.5f))
+        lineEntries.add(Entry(2f, 86.1f))
+        lineEntries.add(Entry(3f, 80.3f))
+        lineEntries.add(Entry(4f, 78.3f))
+        lineEntries.add(Entry(5f, 89.4f))
+        lineEntries.add(Entry(6f, 96.6f))
+
+        return lineEntries
+    }
+
+    private fun getDataSet5() :  ArrayList<Entry>{
+        val lineEntries = ArrayList<Entry>()
+        lineEntries.add(Entry(0f, 54.6f))
+        lineEntries.add(Entry(1f, 61.3f))
+        lineEntries.add(Entry(2f, 66.5f))
+        lineEntries.add(Entry(3f, 58.4f))
+        lineEntries.add(Entry(4f, 56.6f))
+        lineEntries.add(Entry(5f, 50.0f))
+        lineEntries.add(Entry(6f, 66.6f))
+
+        return lineEntries
+    }
+
+    private fun getDataSet6() :  ArrayList<Entry>{
+        val lineEntries = ArrayList<Entry>()
+        lineEntries.add(Entry(0f, 102.2f))
+        lineEntries.add(Entry(1f, 80.2f))
+        lineEntries.add(Entry(2f, 78.0f))
+        lineEntries.add(Entry(3f, 87.2f))
+        lineEntries.add(Entry(4f, 76.1f))
+        lineEntries.add(Entry(5f, 88.4f))
+        lineEntries.add(Entry(6f, 80.1f))
 
         return lineEntries
     }
