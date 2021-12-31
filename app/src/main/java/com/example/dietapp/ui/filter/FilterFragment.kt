@@ -39,6 +39,7 @@ class FilterFragment(private val viewModel: FilterViewModel) : DialogFragment() 
             viewModel.setFilterOptions(f)
 
             if (validateInputs(f)) {
+                viewModel.chips.value = f
                 dismiss()
             }
         }

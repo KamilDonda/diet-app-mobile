@@ -1,5 +1,6 @@
 package com.example.dietapp.ui.filter
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dietapp.models.Filter
 
@@ -18,4 +19,6 @@ abstract class FilterViewModel : ViewModel() {
             else -> value.toString()
         }
     }
+
+    val chips = MutableLiveData(Filter())
 }

@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import com.example.dietapp.R
 import com.example.dietapp.adapters.IngredientsAdapter
 import com.example.dietapp.ui.filter.FilterFragment
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
 import kotlinx.android.synthetic.main.fragment_ingredients.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -36,6 +38,28 @@ class IngredientsFragment : Fragment() {
 
         setupSearch()
         setupDialog()
+
+        viewModel.chips.observe(viewLifecycleOwner, {
+            ingredients_chipGroup.removeAllViewsInLayout()
+            val ranges = it.getRanges().filterNotNull()
+
+            ranges.forEach { option ->
+                val chip = Chip(context)
+                val drawable = ChipDrawable.createFromAttributes(
+                    requireContext(),
+                    null,
+                    0,
+                    R.style.FilterChip
+                )
+                chip.setChipDrawable(drawable)
+                chip.text = option
+                chip.isClickable = true
+                chip.isCheckable = false
+                chip.isCloseIconVisible = true
+
+                ingredients_chipGroup.addView(chip)
+            }
+        })
     }
 
     private fun setupDialog() {

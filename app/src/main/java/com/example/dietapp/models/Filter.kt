@@ -11,4 +11,20 @@ data class Filter(
     val carbsMin: Int = 0,
     val carbsMax: Int? = null,
     val isChecked: Boolean = false
-)
+) {
+    private fun getRange(min: Int, max: Int?, name: String, suffix: String): String? {
+        return when {
+            min == 0 && (max != 0 && max != null) -> "$name: do $max $suffix"
+            min != 0 && (max != 0 && max != null) -> "$name: od $min do $max $suffix"
+            min != 0 && (max == 0 || max == null) -> "$name: od $min $suffix"
+            else -> null
+        }
+    }
+
+    fun getRanges() = listOf(
+        getRange(caloriesMin, caloriesMax, "Kalorie", "kcal"),
+        getRange(proteinsMin, proteinsMax, "Białko", "g"),
+        getRange(fatsMin, fatsMax, "Tłuszcze", "g"),
+        getRange(carbsMin, carbsMax, "Węglowodany", "g")
+    )
+}
