@@ -1,6 +1,5 @@
 package com.example.dietapp.ui.mainactivity.ingredients
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.dietapp.database.models.ingredient.IngredientEntity
 import com.example.dietapp.ui.filter.FilterViewModel
@@ -45,13 +44,16 @@ class IngredientViewModel : FilterViewModel() {
     }
 
     fun search() {
-        ingredients.postValue(_ingredients.filter {
-            it.name.contains(
-                searchText,
-                true
-            )
-        } as ArrayList)
+//        val data = _ingredients.filter { it.name.contains(searchText, true) } as ArrayList
 
-        Log.v("ttt", "filters: $filter")
+        val data = _ingredients.filter {
+            it.name.contains(searchText, true) &&
+                    it.kcal.toFloat() > filter.caloriesMin &&
+                    it.proteins.toFloat() > filter.proteinsMin &&
+                    it.fats.toFloat() > filter.fatsMin &&
+                    it.carbohydrates.toFloat() > filter.carbsMin
+        } as ArrayList
+
+        ingredients.postValue(data)
     }
 }
