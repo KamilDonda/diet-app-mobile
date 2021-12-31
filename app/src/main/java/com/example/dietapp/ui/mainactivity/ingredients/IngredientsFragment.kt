@@ -41,7 +41,7 @@ class IngredientsFragment : Fragment() {
 
         viewModel.chips.observe(viewLifecycleOwner, {
             ingredients_chipGroup.removeAllViewsInLayout()
-            val ranges = it.getRanges().filterNotNull()
+            val ranges = it.getRanges(requireContext()).filterNotNull()
 
             ranges.forEach { option ->
                 val chip = Chip(context)
@@ -55,10 +55,39 @@ class IngredientsFragment : Fragment() {
                 chip.text = option
                 chip.isClickable = true
                 chip.isCheckable = false
-                chip.isCloseIconVisible = true
+                chip.isCloseIconVisible = false
+
+                chip.setOnClickListener {
+                    when {
+                        option.contains(getString(R.string.calories)) -> {
+                            viewModel.setFilterOptions(
+                                viewModel.filter.copy(caloriesMin = 0, caloriesMax = null)
+                            )
+                        }
+                        option.contains(getString(R.string.proteins)) -> {
+                            viewModel.setFilterOptions(
+                                viewModel.filter.copy(proteinsMin = 0, proteinsMax = null)
+                            )
+                        }
+                        option.contains(getString(R.string.fats)) -> {
+                            viewModel.setFilterOptions(
+                                viewModel.filter.copy(fatsMin = 0, fatsMax = null)
+                            )
+                        }
+                        option.contains(getString(R.string.carbs)) -> {
+                            viewModel.setFilterOptions(
+                                viewModel.filter.copy(carbsMin = 0, carbsMax = null)
+                            )
+                        }
+                    }
+                    ingredients_chipGroup.removeView(chip)
+                    viewModel.chips.postValue(viewModel.filter)
+                }
 
                 ingredients_chipGroup.addView(chip)
             }
+
+            viewModel.search()
         })
     }
 

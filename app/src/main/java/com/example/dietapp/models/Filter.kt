@@ -1,5 +1,8 @@
 package com.example.dietapp.models
 
+import android.content.Context
+import com.example.dietapp.R
+
 data class Filter(
     val order: Int = 0,
     val caloriesMin: Int = 0,
@@ -21,10 +24,10 @@ data class Filter(
         }
     }
 
-    fun getRanges() = listOf(
-        getRange(caloriesMin, caloriesMax, "Kalorie", "kcal"),
-        getRange(proteinsMin, proteinsMax, "Białko", "g"),
-        getRange(fatsMin, fatsMax, "Tłuszcze", "g"),
-        getRange(carbsMin, carbsMax, "Węglowodany", "g")
+    fun getRanges(context: Context) = listOf(
+        getRange(caloriesMin, caloriesMax, context.getString(R.string.calories), "kcal"),
+        getRange(proteinsMin, proteinsMax, context.getString(R.string.proteins), "g"),
+        getRange(fatsMin, fatsMax, context.getString(R.string.fats), "g"),
+        getRange(carbsMin, carbsMax, context.getString(R.string.carbs), "g")
     )
 }

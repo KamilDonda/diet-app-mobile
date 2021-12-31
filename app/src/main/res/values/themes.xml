@@ -168,7 +168,7 @@
         <item name="android:paddingTop">5dp</item>
     </style>
 
-    <style name="FilterChip" parent="Widget.MaterialComponents.Chip.Action">
+    <style name="FilterChip" parent="Widget.MaterialComponents.Chip.Entry">
         <item name="chipMinHeight">34dp</item>
         <item name="chipMinTouchTargetSize">0dp</item>
     </style>

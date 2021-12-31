@@ -46,13 +46,26 @@ class IngredientViewModel : FilterViewModel() {
     fun search() {
 //        val data = _ingredients.filter { it.name.contains(searchText, true) } as ArrayList
 
-        val data = _ingredients.filter {
+        var data = _ingredients.filter {
             it.name.contains(searchText, true) &&
                     it.kcal.toFloat() > filter.caloriesMin &&
                     it.proteins.toFloat() > filter.proteinsMin &&
                     it.fats.toFloat() > filter.fatsMin &&
                     it.carbohydrates.toFloat() > filter.carbsMin
         } as ArrayList
+
+        if (filter.caloriesMax != null && filter.caloriesMax != 0) {
+            data = data.filter { it.kcal.toFloat() < filter.caloriesMax!! } as ArrayList
+        }
+        if (filter.proteinsMax != null && filter.proteinsMax != 0) {
+            data = data.filter { it.proteins.toFloat() < filter.proteinsMax!! } as ArrayList
+        }
+        if (filter.fatsMax != null && filter.fatsMax != 0) {
+            data = data.filter { it.fats.toFloat() < filter.fatsMax!! } as ArrayList
+        }
+        if (filter.carbsMax != null && filter.carbsMax != 0) {
+            data = data.filter { it.carbohydrates.toFloat() < filter.carbsMax!! } as ArrayList
+        }
 
         ingredients.postValue(data)
     }
