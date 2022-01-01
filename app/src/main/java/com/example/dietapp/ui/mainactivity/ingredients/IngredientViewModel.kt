@@ -67,6 +67,19 @@ class IngredientViewModel : FilterViewModel() {
             data = data.filter { it.carbohydrates.toFloat() < filter.carbsMax!! } as ArrayList
         }
 
+        when (filter.order) {
+            0 -> data.sortBy { it.name }
+            1 -> data.sortByDescending { it.name }
+            2 -> data.sortBy { it.kcal }
+            3 -> data.sortByDescending { it.kcal }
+            4 -> data.sortBy { it.proteins }
+            5 -> data.sortByDescending { it.proteins }
+            6 -> data.sortBy { it.carbohydrates }
+            7 -> data.sortByDescending { it.carbohydrates }
+            8 -> data.sortBy { it.fats }
+            9 -> data.sortByDescending { it.fats }
+        }
+
         ingredients.postValue(data)
     }
 }
