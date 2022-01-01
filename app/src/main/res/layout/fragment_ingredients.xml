@@ -57,8 +57,8 @@
                 android:id="@+id/ingredients_chipGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:chipSpacingHorizontal="5dp"
-                android:paddingVertical="5dp" />
+                android:paddingVertical="5dp"
+                app:chipSpacingHorizontal="5dp" />
 
         </HorizontalScrollView>
 

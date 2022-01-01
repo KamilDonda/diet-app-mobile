@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import com.example.dietapp.R
 import com.example.dietapp.adapters.IngredientsAdapter
 import com.example.dietapp.ui.filter.FilterFragment
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipDrawable
 import kotlinx.android.synthetic.main.fragment_ingredients.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -42,51 +40,7 @@ class IngredientsFragment : Fragment() {
         viewModel.chips.observe(viewLifecycleOwner, {
             ingredients_chipGroup.removeAllViewsInLayout()
             val ranges = it.getRanges(requireContext()).filterNotNull()
-
-            ranges.forEach { option ->
-                val chip = Chip(context)
-                val drawable = ChipDrawable.createFromAttributes(
-                    requireContext(),
-                    null,
-                    0,
-                    R.style.FilterChip
-                )
-                chip.setChipDrawable(drawable)
-                chip.text = option
-                chip.isClickable = true
-                chip.isCheckable = false
-                chip.isCloseIconVisible = false
-
-                chip.setOnClickListener {
-                    when {
-                        option.contains(getString(R.string.calories)) -> {
-                            viewModel.setFilterOptions(
-                                viewModel.filter.copy(caloriesMin = 0, caloriesMax = null)
-                            )
-                        }
-                        option.contains(getString(R.string.proteins)) -> {
-                            viewModel.setFilterOptions(
-                                viewModel.filter.copy(proteinsMin = 0, proteinsMax = null)
-                            )
-                        }
-                        option.contains(getString(R.string.fats)) -> {
-                            viewModel.setFilterOptions(
-                                viewModel.filter.copy(fatsMin = 0, fatsMax = null)
-                            )
-                        }
-                        option.contains(getString(R.string.carbs)) -> {
-                            viewModel.setFilterOptions(
-                                viewModel.filter.copy(carbsMin = 0, carbsMax = null)
-                            )
-                        }
-                    }
-                    ingredients_chipGroup.removeView(chip)
-                    viewModel.chips.postValue(viewModel.filter)
-                }
-
-                ingredients_chipGroup.addView(chip)
-            }
-
+            viewModel.setupChips(ingredients_chipGroup, requireContext(), ranges)
             viewModel.search()
         })
     }

@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.example.dietapp.R
 import com.example.dietapp.adapters.MealsAdapter
+import com.example.dietapp.ui.filter.FilterFragment
 import kotlinx.android.synthetic.main.fragment_meals.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -31,5 +33,38 @@ class MealsFragment : Fragment() {
         viewModel.meals.observe(viewLifecycleOwner, {
             mealsAdapter.setList(it)
         })
+
+        setupSearch()
+        setupDialog()
+
+        viewModel.chips.observe(viewLifecycleOwner, {
+            meals_chipGroup.removeAllViewsInLayout()
+            val ranges = it.getRanges(requireContext()).filterNotNull()
+            viewModel.setupChips(meals_chipGroup, requireContext(), ranges)
+            viewModel.search()
+        })
+    }
+
+    private fun setupDialog() {
+        filter_button.setOnClickListener {
+            val dialog = FilterFragment(viewModel)
+
+            dialog.show(requireActivity().supportFragmentManager, "FILTER_INGREDIENTS")
+        }
+    }
+
+    private fun setupSearch() {
+        searchInput.doOnTextChanged { text, _, _, _ ->
+            viewModel.setSearchText(text.toString())
+        }
+
+        searchField.setStartIconOnClickListener {
+            viewModel.search()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        searchInput.setText(viewModel.searchText)
     }
 }
