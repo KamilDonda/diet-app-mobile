@@ -10,8 +10,11 @@ import com.example.dietapp.ui.loginactivity.login.LoginViewModel
 import com.example.dietapp.ui.loginactivity.register.RegisterFragment
 import com.example.dietapp.ui.loginactivity.register.RegisterViewModel
 import com.example.dietapp.ui.loginactivity.start.StartFragment
+import com.example.dietapp.ui.mainactivity.home.DayFragment
 import com.example.dietapp.ui.mainactivity.home.HomeFragment
 import com.example.dietapp.ui.mainactivity.home.HomeViewModel
+import com.example.dietapp.ui.mainactivity.home.WeekFragment
+import com.example.dietapp.ui.mainactivity.ingredients.IngredientViewModel
 import com.example.dietapp.ui.mainactivity.ingredients.IngredientsFragment
 import com.example.dietapp.ui.mainactivity.meals.*
 import com.example.dietapp.ui.mainactivity.profile.ProfileAccountFragment
@@ -33,6 +36,7 @@ val appModule = module {
 
 // ViewModel
     viewModel { MealViewModel() }
+    viewModel { IngredientViewModel() }
     viewModel { ProfileViewModel() }
     viewModel { HomeViewModel() }
     viewModel { RegisterViewModel(get()) }
@@ -62,6 +66,8 @@ val appModule = module {
 
     // Home
     single { HomeFragment() }
+    single { DayFragment() }
+    single { WeekFragment() }
     // Ingredients
     single { IngredientsFragment() }
     // Meals

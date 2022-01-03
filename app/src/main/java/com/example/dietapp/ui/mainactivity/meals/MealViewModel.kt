@@ -1,13 +1,15 @@
 package com.example.dietapp.ui.mainactivity.meals
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.dietapp.models.Meal
+import com.example.dietapp.ui.filter.FilterViewModel
 
-class MealViewModel : ViewModel() {
+class MealViewModel : FilterViewModel() {
+
+    private val _meals = prepareMeals()
 
     val meals = MutableLiveData(ArrayList<Meal>()).apply {
-        value = prepareMeals()
+        value = _meals
     }
 
     var currentMeal: Meal? = null
@@ -64,5 +66,50 @@ class MealViewModel : ViewModel() {
         meals.add(Meal(6, "Name6", "", "", 15f, 1f, 1f, 1f))
 
         return meals
+    }
+
+    var searchText: String = ""
+        private set
+
+    fun setSearchText(searchText: String) {
+        this.searchText = searchText
+    }
+
+    fun search() {
+        var data = _meals.filter {
+            it.name.contains(searchText, true) &&
+                    it.kcal.toFloat() > filter.caloriesMin &&
+                    it.proteins.toFloat() > filter.proteinsMin &&
+                    it.fats.toFloat() > filter.fatsMin &&
+                    it.carbs.toFloat() > filter.carbsMin
+        } as ArrayList
+
+        if (filter.caloriesMax != null && filter.caloriesMax != 0) {
+            data = data.filter { it.kcal.toFloat() < filter.caloriesMax!! } as ArrayList
+        }
+        if (filter.proteinsMax != null && filter.proteinsMax != 0) {
+            data = data.filter { it.proteins.toFloat() < filter.proteinsMax!! } as ArrayList
+        }
+        if (filter.fatsMax != null && filter.fatsMax != 0) {
+            data = data.filter { it.fats.toFloat() < filter.fatsMax!! } as ArrayList
+        }
+        if (filter.carbsMax != null && filter.carbsMax != 0) {
+            data = data.filter { it.carbs.toFloat() < filter.carbsMax!! } as ArrayList
+        }
+
+        when (filter.order) {
+            0 -> data.sortBy { it.name }
+            1 -> data.sortByDescending { it.name }
+            2 -> data.sortBy { it.kcal }
+            3 -> data.sortByDescending { it.kcal }
+            4 -> data.sortBy { it.proteins }
+            5 -> data.sortByDescending { it.proteins }
+            6 -> data.sortBy { it.carbs }
+            7 -> data.sortByDescending { it.carbs }
+            8 -> data.sortBy { it.fats }
+            9 -> data.sortByDescending { it.fats }
+        }
+
+        meals.postValue(data)
     }
 }

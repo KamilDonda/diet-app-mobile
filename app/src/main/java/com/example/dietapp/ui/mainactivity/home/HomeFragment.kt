@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.dietapp.R
 import com.example.dietapp.adapters.HomeMealAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -29,6 +30,8 @@ class HomeFragment : Fragment() {
         val homeMealAdapter = HomeMealAdapter()
         home_rv.adapter = homeMealAdapter
 
+        setupButtons()
+
         viewModel.meals.observe(viewLifecycleOwner, {
             homeMealAdapter.setList(it)
         })
@@ -38,5 +41,14 @@ class HomeFragment : Fragment() {
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {}
             })
+    }
+
+    private fun setupButtons() {
+        day_stats.setOnClickListener {
+            it.findNavController().navigate(R.id.action_homeFragment_to_dayFragment)
+        }
+        week_stats.setOnClickListener {
+            it.findNavController().navigate(R.id.action_homeFragment_to_weekFragment)
+        }
     }
 }

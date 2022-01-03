@@ -28,7 +28,7 @@ class MealsAdapter(private val viewModel: MealViewModel) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = Holder(
         LayoutInflater.from(parent.context).inflate(
-            R.layout.meal, parent, false
+            R.layout.item, parent, false
         )
     )
 

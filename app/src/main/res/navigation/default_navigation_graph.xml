@@ -9,7 +9,14 @@
         android:id="@+id/homeFragment"
         android:name="com.example.dietapp.ui.mainactivity.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_dayFragment"
+            app:destination="@id/dayFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_weekFragment"
+            app:destination="@id/weekFragment" />
+    </fragment>
     <fragment
         android:id="@+id/ingredientsFragment"
         android:name="com.example.dietapp.ui.mainactivity.ingredients.IngredientsFragment"
@@ -37,5 +44,23 @@
         <action
             android:id="@+id/action_mealFragment_to_mealsFragment"
             app:popUpTo="@+id/mealsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dayFragment"
+        android:name="com.example.dietapp.ui.mainactivity.home.DayFragment"
+        android:label="fragment_day"
+        tools:layout="@layout/fragment_day">
+        <action
+            android:id="@+id/action_dayFragment_to_homeFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weekFragment"
+        android:name="com.example.dietapp.ui.mainactivity.home.WeekFragment"
+        android:label="fragment_week"
+        tools:layout="@layout/fragment_week">
+        <action
+            android:id="@+id/action_weekFragment_to_homeFragment"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
 </navigation>

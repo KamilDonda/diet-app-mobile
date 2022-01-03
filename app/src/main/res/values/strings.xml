@@ -40,6 +40,7 @@
 
     <string name="cancel">Anuluj</string>
     <string name="ok">Ok</string>
+    <string name="reset">Resetuj</string>
     <string name="login_btn">Logowanie</string>
     <string name="register_btn">Rejestracja</string>
     <string name="email">Wpisz email</string>
@@ -54,4 +55,24 @@
     <string name="email_is_empty">Pole E-mail jest puste!</string>
     <string name="password_is_empty">Pole hasło jest puste!</string>
     <string name="different_passwords">Hasła są różne!</string>
+
+    <string name="search">Wyszukaj...</string>
+    <string name="filters">Filtry</string>
+    <string name="sorting">Sortowanie</string>
+    <string name="filtering">Filtrowanie</string>
+
+    <string name="order">Kolejność</string>
+
+    <string-array name="filter_order">
+        <item>Nazwa: A - Z</item>
+        <item>Nazwa: Z - A</item>
+        <item>Kalorie: rosnąco</item>
+        <item>Kalorie: malejąco</item>
+        <item>Białko: rosnąco</item>
+        <item>Białko: malejąco</item>
+        <item>Węglowodany:\nrosnąco</item>
+        <item>Węglowodany:\nmalejąco</item>
+        <item>Tłuszcze: rosnąco</item>
+        <item>Tłuszcze: malejąco</item>
+    </string-array>
 </resources>
