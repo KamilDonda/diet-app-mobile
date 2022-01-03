@@ -56,6 +56,9 @@ abstract class FilterViewModel : ViewModel() {
                     option.contains(context.getString(R.string.carbs)) -> {
                         setFilterOptions(filter.copy(carbsMin = 0, carbsMax = null))
                     }
+                    else -> {
+                        setFilterOptions(filter.copy(order = 0))
+                    }
                 }
                 chipGroup.removeView(chip)
                 chips.postValue(filter)

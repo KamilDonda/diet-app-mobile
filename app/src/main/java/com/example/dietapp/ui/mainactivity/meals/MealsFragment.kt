@@ -39,8 +39,8 @@ class MealsFragment : Fragment() {
 
         viewModel.chips.observe(viewLifecycleOwner, {
             meals_chipGroup.removeAllViewsInLayout()
-            val ranges = it.getRanges(requireContext()).filterNotNull()
-            viewModel.setupChips(meals_chipGroup, requireContext(), ranges)
+            val texts = it.getTextsForChips(requireContext()).filterNotNull()
+            viewModel.setupChips(meals_chipGroup, requireContext(), texts)
             viewModel.search()
         })
     }
