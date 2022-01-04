@@ -23,6 +23,18 @@ class IngredientsAdapter(private val viewModel: IngredientViewModel) :
         notifyDataSetChanged()
     }
 
+    fun getFirstAppearancePosition(letter: Char): Int {
+        var char = letter
+        while (char <= 'Z') {
+            _list.forEach {
+                if (it.name.startsWith(char, true))
+                    return _list.indexOf(it)
+            }
+            ++char
+        }
+        return itemCount - 1
+    }
+
     override fun getItemCount() = _list.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = Holder(
