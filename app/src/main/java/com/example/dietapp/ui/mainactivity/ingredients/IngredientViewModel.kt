@@ -28,11 +28,11 @@ class IngredientViewModel(private val dbService: DatabaseService) : FilterViewMo
     }
 
     fun prepareIngredients() {
-        viewModelScope.launch {
-            _ingredients.clear()
-            _ingredients.addAll(dbService.db.ingredientDao().selectAll())
-
-            ingredients.postValue(_ingredients)
+        if (_ingredients.isEmpty()) {
+            viewModelScope.launch {
+                _ingredients.addAll(dbService.db.ingredientDao().selectAll())
+                ingredients.postValue(_ingredients)
+            }
         }
     }
 
