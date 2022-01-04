@@ -5,6 +5,10 @@
     <string name="carbs">Węglowodany</string>
     <string name="fats">Tłuszcze</string>
 
+    <string name="breakfast">Śniadanie</string>
+    <string name="lunch">Obiad</string>
+    <string name="dinner">Kolacja</string>
+
     <string name="ingredients">Składniki</string>
     <string name="preparation">Przygotowanie</string>
     <string name="macronutrients">Makroskładniki</string>
@@ -74,5 +78,15 @@
         <item>Węglowodany:\nmalejąco</item>
         <item>Tłuszcze: rosnąco</item>
         <item>Tłuszcze: malejąco</item>
+    </string-array>
+
+    <string-array name="days">
+        <item>Pn</item>
+        <item>Wt</item>
+        <item>Śr</item>
+        <item>Czw</item>
+        <item>Pt</item>
+        <item>Sb</item>
+        <item>Ndz</item>
     </string-array>
 </resources>
