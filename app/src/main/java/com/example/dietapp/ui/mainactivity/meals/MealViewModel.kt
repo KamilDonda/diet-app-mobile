@@ -90,25 +90,47 @@ class MealViewModel : FilterViewModel() {
     }
 
     fun search() {
+        val f = this.filter
+
+        var caloriesMin = f.caloriesMin.toFloat()
+        var caloriesMax = f.caloriesMax?.toFloat()
+        var proteinsMin = f.proteinsMin.toFloat()
+        var proteinsMax = f.proteinsMax?.toFloat()
+        var fatsMin = f.fatsMin.toFloat()
+        var fatsMax = f.fatsMax?.toFloat()
+        var carbsMin = f.carbsMin.toFloat()
+        var carbsMax = f.carbsMax?.toFloat()
+
+        if (f.isChecked) {
+            caloriesMin = caloriesMin.div(100)
+            caloriesMax = caloriesMax?.div(100)
+            proteinsMin = proteinsMin.div(100)
+            proteinsMax = proteinsMax?.div(100)
+            fatsMin = fatsMin.div(100)
+            fatsMax = fatsMax?.div(100)
+            carbsMin = carbsMin.div(100)
+            carbsMax = carbsMax?.div(100)
+        }
+
         var data = _meals.filter {
             it.name.contains(searchText, true) &&
-                    it.kcal.toFloat() >= filter.caloriesMin &&
-                    it.proteins.toFloat() >= filter.proteinsMin &&
-                    it.fats.toFloat() >= filter.fatsMin &&
-                    it.carbs.toFloat() >= filter.carbsMin
+                    it.kcal.toFloat() >= caloriesMin &&
+                    it.proteins.toFloat() >= proteinsMin &&
+                    it.fats.toFloat() >= fatsMin &&
+                    it.carbs.toFloat() >= carbsMin
         } as ArrayList
 
-        if (filter.caloriesMax != null && filter.caloriesMax != 0) {
-            data = data.filter { it.kcal.toFloat() < filter.caloriesMax!! } as ArrayList
+        if (caloriesMax != null && caloriesMax != 0f) {
+            data = data.filter { it.kcal.toFloat() < caloriesMax } as ArrayList
         }
-        if (filter.proteinsMax != null && filter.proteinsMax != 0) {
-            data = data.filter { it.proteins.toFloat() < filter.proteinsMax!! } as ArrayList
+        if (proteinsMax != null && proteinsMax != 0f) {
+            data = data.filter { it.proteins.toFloat() < proteinsMax } as ArrayList
         }
-        if (filter.fatsMax != null && filter.fatsMax != 0) {
-            data = data.filter { it.fats.toFloat() < filter.fatsMax!! } as ArrayList
+        if (fatsMax != null && fatsMax != 0f) {
+            data = data.filter { it.fats.toFloat() < fatsMax } as ArrayList
         }
-        if (filter.carbsMax != null && filter.carbsMax != 0) {
-            data = data.filter { it.carbs.toFloat() < filter.carbsMax!! } as ArrayList
+        if (carbsMax != null && carbsMax != 0f) {
+            data = data.filter { it.carbs.toFloat() < carbsMax } as ArrayList
         }
 
         when (filter.order) {

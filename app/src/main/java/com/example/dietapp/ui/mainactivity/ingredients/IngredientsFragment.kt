@@ -1,20 +1,27 @@
 package com.example.dietapp.ui.mainactivity.ingredients
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearSmoothScroller
+import androidx.recyclerview.widget.RecyclerView.SmoothScroller
 import com.example.dietapp.R
 import com.example.dietapp.adapters.IngredientsAdapter
 import com.example.dietapp.ui.filter.FilterFragment
+import com.example.dietapp.utils.FastScrollAdapter
 import kotlinx.android.synthetic.main.fragment_ingredients.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+
 
 class IngredientsFragment : Fragment() {
 
     private val viewModel: IngredientViewModel by sharedViewModel()
+    private lateinit var ingredientsAdapter: IngredientsAdapter
+    private lateinit var fastScrollAdapter: FastScrollAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,12 +35,15 @@ class IngredientsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.prepareIngredients()
 
-        val ingredientsAdapter = IngredientsAdapter(viewModel)
+        ingredientsAdapter = IngredientsAdapter(viewModel)
         ingredients_rv.adapter = ingredientsAdapter
 
         viewModel.ingredients.observe(viewLifecycleOwner, {
             ingredientsAdapter.setList(it)
         })
+
+        fastScrollAdapter = FastScrollAdapter { onLetterClick(it) }
+        fastScroll.adapter = fastScrollAdapter
 
         setupSearch()
         setupDialog()
@@ -62,6 +72,18 @@ class IngredientsFragment : Fragment() {
         searchField.setStartIconOnClickListener {
             viewModel.search()
         }
+    }
+
+    private fun onLetterClick(letter: Char) {
+        val smoothScroller: SmoothScroller = object : LinearSmoothScroller(context) {
+            override fun getVerticalSnapPreference(): Int {
+                return SNAP_TO_START
+            }
+        }
+        val pos = ingredientsAdapter.getFirstAppearancePosition(letter)
+        smoothScroller.targetPosition = pos
+        Log.v("ttt", "pos: $pos")
+        ingredients_rv.layoutManager!!.startSmoothScroll(smoothScroller)
     }
 
     override fun onResume() {
