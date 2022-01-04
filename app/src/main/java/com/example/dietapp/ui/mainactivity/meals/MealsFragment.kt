@@ -26,6 +26,7 @@ class MealsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.prepareMeals()
 
         val mealsAdapter = MealsAdapter(viewModel)
         meals_rv.adapter = mealsAdapter

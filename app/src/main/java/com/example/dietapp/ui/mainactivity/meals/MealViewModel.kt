@@ -2,19 +2,19 @@ package com.example.dietapp.ui.mainactivity.meals
 
 import android.os.Parcelable
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.dietapp.models.Meal
 import com.example.dietapp.ui.filter.FilterViewModel
+import kotlinx.coroutines.launch
 import java.text.Collator
 import java.util.*
 import kotlin.collections.ArrayList
 
 class MealViewModel : FilterViewModel() {
 
-    private val _meals = prepareMeals()
+    private val _meals = arrayListOf<Meal>()
 
-    val meals = MutableLiveData(ArrayList<Meal>()).apply {
-        value = _meals
-    }
+    val meals = MutableLiveData(ArrayList<Meal>())
 
     var currentMeal: Meal? = null
         private set
@@ -27,7 +27,8 @@ class MealViewModel : FilterViewModel() {
         currentMeal = meals.value!![position]
     }
 
-    private fun prepareMeals(): ArrayList<Meal> {
+    // todo
+    fun temp(): ArrayList<Meal> {
         val meals = ArrayList<Meal>()
         meals.add(
             Meal(
@@ -68,8 +69,17 @@ class MealViewModel : FilterViewModel() {
         meals.add(Meal(4, "Name4", "", "", 32.5f, 1f, 1f, 1f))
         meals.add(Meal(5, "Name5", "", "", 10f, 1f, 1f, 1f))
         meals.add(Meal(6, "Name6", "", "", 15f, 1f, 1f, 1f))
-
         return meals
+    }
+
+    fun prepareMeals() {
+        if (_meals.isEmpty()) {
+            viewModelScope.launch {
+//                _meals.addAll(dbService.db.ingredientDao().selectAll())
+                _meals.addAll(temp())
+                meals.postValue(_meals)
+            }
+        }
     }
 
     var searchText: String = ""
