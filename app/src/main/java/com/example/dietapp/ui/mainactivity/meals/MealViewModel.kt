@@ -3,6 +3,9 @@ package com.example.dietapp.ui.mainactivity.meals
 import androidx.lifecycle.MutableLiveData
 import com.example.dietapp.models.Meal
 import com.example.dietapp.ui.filter.FilterViewModel
+import java.text.Collator
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MealViewModel : FilterViewModel() {
 
@@ -98,8 +101,8 @@ class MealViewModel : FilterViewModel() {
         }
 
         when (filter.order) {
-            0 -> data.sortBy { it.name }
-            1 -> data.sortByDescending { it.name }
+            0 -> data.sortWith(Comparator.comparing(Meal::name, Collator.getInstance()))
+            1 -> data.sortWith(Comparator.comparing(Meal::name, Collator.getInstance().reversed()))
             2 -> data.sortBy { it.kcal }
             3 -> data.sortByDescending { it.kcal }
             4 -> data.sortBy { it.proteins }

@@ -6,6 +6,9 @@ import com.example.dietapp.database.models.ingredient.IngredientEntity
 import com.example.dietapp.services.DatabaseService
 import com.example.dietapp.ui.filter.FilterViewModel
 import kotlinx.coroutines.launch
+import java.text.Collator
+import java.util.*
+import kotlin.collections.ArrayList
 
 class IngredientViewModel(private val dbService: DatabaseService) : FilterViewModel() {
 
@@ -63,8 +66,13 @@ class IngredientViewModel(private val dbService: DatabaseService) : FilterViewMo
         }
 
         when (filter.order) {
-            0 -> data.sortBy { it.name }
-            1 -> data.sortByDescending { it.name }
+            0 -> data.sortWith(Comparator.comparing(IngredientEntity::name, Collator.getInstance()))
+            1 -> data.sortWith(
+                Comparator.comparing(
+                    IngredientEntity::name,
+                    Collator.getInstance().reversed()
+                )
+            )
             2 -> data.sortBy { it.kcal }
             3 -> data.sortByDescending { it.kcal }
             4 -> data.sortBy { it.proteins }
