@@ -26,6 +26,7 @@ class IngredientsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.prepareIngredients()
 
         val ingredientsAdapter = IngredientsAdapter(viewModel)
         ingredients_rv.adapter = ingredientsAdapter
@@ -39,15 +40,15 @@ class IngredientsFragment : Fragment() {
 
         viewModel.chips.observe(viewLifecycleOwner, {
             ingredients_chipGroup.removeAllViewsInLayout()
-            val texts = it.getTextsForChips(requireContext()).filterNotNull()
-            viewModel.setupChips(ingredients_chipGroup, requireContext(), texts)
+            val texts = it.getTextsForChips(requireContext(), false).filterNotNull()
+            viewModel.setupChips(ingredients_chipGroup, requireContext(), texts, false)
             viewModel.search()
         })
     }
 
     private fun setupDialog() {
         filter_button.setOnClickListener {
-            val dialog = FilterFragment(viewModel)
+            val dialog = FilterFragment(viewModel, false)
 
             dialog.show(requireActivity().supportFragmentManager, "FILTER_INGREDIENTS")
         }
@@ -66,5 +67,16 @@ class IngredientsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         searchInput.setText(viewModel.searchText)
+        if (viewModel.stateInitialized()) {
+            ingredients_rv.layoutManager?.onRestoreInstanceState(
+                viewModel.restoreRecyclerViewState()
+            )
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        ingredients_rv.layoutManager?.onSaveInstanceState()
+            ?.let { viewModel.saveRecyclerViewState(it) }
     }
 }

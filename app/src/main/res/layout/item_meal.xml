@@ -13,7 +13,7 @@
         android:background="#fafafa">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/item_number"
+            android:id="@+id/meal_number"
             android:layout_width="100dp"
             android:layout_height="0dp"
             android:backgroundTint="@color/primaryColorLight"
@@ -26,21 +26,21 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/item_name"
+            android:id="@+id/meal_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="5dp"
-            android:lines="2"
+            android:lines="4"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constrainedWidth="true"
-            app:layout_constraintEnd_toStartOf="@+id/item_kcal"
-            app:layout_constraintStart_toEndOf="@+id/item_number"
+            app:layout_constraintEnd_toStartOf="@+id/meal_kcal"
+            app:layout_constraintStart_toEndOf="@+id/meal_number"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/item_kcal"
+            android:id="@+id/meal_kcal"
             android:layout_width="90dp"
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
@@ -64,11 +64,11 @@
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/item_number"
-            app:layout_constraintTop_toBottomOf="@+id/item_name">
+            app:layout_constraintStart_toEndOf="@+id/meal_number"
+            app:layout_constraintTop_toBottomOf="@+id/meal_name">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/item_proteins_header"
+                android:id="@+id/meal_proteins_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/proteins"
@@ -76,16 +76,16 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/item_carbs_header"
+                android:id="@+id/meal_carbs_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/carbs"
-                app:layout_constraintEnd_toStartOf="@+id/item_fats"
-                app:layout_constraintStart_toEndOf="@+id/item_proteins"
+                app:layout_constraintEnd_toStartOf="@+id/meal_fats"
+                app:layout_constraintStart_toEndOf="@+id/meal_proteins"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/item_fats_header"
+                android:id="@+id/meal_fats_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fats"
@@ -93,34 +93,34 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/item_proteins"
+                android:id="@+id/meal_proteins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/item_proteins_header"
-                app:layout_constraintStart_toStartOf="@+id/item_proteins_header"
-                app:layout_constraintTop_toBottomOf="@+id/item_proteins_header" />
+                app:layout_constraintEnd_toEndOf="@+id/meal_proteins_header"
+                app:layout_constraintStart_toStartOf="@+id/meal_proteins_header"
+                app:layout_constraintTop_toBottomOf="@+id/meal_proteins_header" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/item_carbs"
+                android:id="@+id/meal_carbs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/item_carbs_header"
-                app:layout_constraintStart_toStartOf="@+id/item_carbs_header"
-                app:layout_constraintTop_toBottomOf="@+id/item_carbs_header" />
+                app:layout_constraintEnd_toEndOf="@+id/meal_carbs_header"
+                app:layout_constraintStart_toStartOf="@+id/meal_carbs_header"
+                app:layout_constraintTop_toBottomOf="@+id/meal_carbs_header" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/item_fats"
+                android:id="@+id/meal_fats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/item_fats_header"
-                app:layout_constraintStart_toStartOf="@+id/item_fats_header"
-                app:layout_constraintTop_toBottomOf="@+id/item_fats_header" />
+                app:layout_constraintEnd_toEndOf="@+id/meal_fats_header"
+                app:layout_constraintStart_toStartOf="@+id/meal_fats_header"
+                app:layout_constraintTop_toBottomOf="@+id/meal_fats_header" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

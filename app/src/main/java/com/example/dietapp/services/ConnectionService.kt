@@ -1,6 +1,5 @@
 package com.example.dietapp.services
 
-import android.util.Log
 import com.example.dietapp.database.models.ingredient.IngredientEntityList
 import com.example.dietapp.database.models.meal.MealEntityList
 import com.example.dietapp.database.retrofit.RetrofitBuilder
@@ -8,7 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ConnectionService {
+class ConnectionService(private val dbService: DatabaseService) {
     private suspend fun downloadIngredients(): IngredientEntityList? {
         return try {
             RetrofitBuilder
@@ -35,11 +34,9 @@ class ConnectionService {
 
     fun synchronize() {
         CoroutineScope(Dispatchers.IO).launch {
-            val ingredientEntityList = downloadIngredients()
-            val mealEntityList = downloadMeals()
+            downloadIngredients()?.let { dbService.db.ingredientDao().insertAll(it) }
 
-            Log.v("ttt", ingredientEntityList.toString())
-            Log.v("ttt", mealEntityList.toString())
+            val mealEntityList = downloadMeals()
         }
     }
 }

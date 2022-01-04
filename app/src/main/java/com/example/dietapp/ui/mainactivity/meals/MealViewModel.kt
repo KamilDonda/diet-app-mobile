@@ -1,16 +1,20 @@
 package com.example.dietapp.ui.mainactivity.meals
 
+import android.os.Parcelable
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.dietapp.models.Meal
 import com.example.dietapp.ui.filter.FilterViewModel
+import kotlinx.coroutines.launch
+import java.text.Collator
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MealViewModel : FilterViewModel() {
 
-    private val _meals = prepareMeals()
+    private val _meals = arrayListOf<Meal>()
 
-    val meals = MutableLiveData(ArrayList<Meal>()).apply {
-        value = _meals
-    }
+    val meals = MutableLiveData(ArrayList<Meal>())
 
     var currentMeal: Meal? = null
         private set
@@ -23,7 +27,8 @@ class MealViewModel : FilterViewModel() {
         currentMeal = meals.value!![position]
     }
 
-    private fun prepareMeals(): ArrayList<Meal> {
+    // todo
+    fun temp(): ArrayList<Meal> {
         val meals = ArrayList<Meal>()
         meals.add(
             Meal(
@@ -64,8 +69,17 @@ class MealViewModel : FilterViewModel() {
         meals.add(Meal(4, "Name4", "", "", 32.5f, 1f, 1f, 1f))
         meals.add(Meal(5, "Name5", "", "", 10f, 1f, 1f, 1f))
         meals.add(Meal(6, "Name6", "", "", 15f, 1f, 1f, 1f))
-
         return meals
+    }
+
+    fun prepareMeals() {
+        if (_meals.isEmpty()) {
+            viewModelScope.launch {
+//                _meals.addAll(dbService.db.ingredientDao().selectAll())
+                _meals.addAll(temp())
+                meals.postValue(_meals)
+            }
+        }
     }
 
     var searchText: String = ""
@@ -78,10 +92,10 @@ class MealViewModel : FilterViewModel() {
     fun search() {
         var data = _meals.filter {
             it.name.contains(searchText, true) &&
-                    it.kcal.toFloat() > filter.caloriesMin &&
-                    it.proteins.toFloat() > filter.proteinsMin &&
-                    it.fats.toFloat() > filter.fatsMin &&
-                    it.carbs.toFloat() > filter.carbsMin
+                    it.kcal.toFloat() >= filter.caloriesMin &&
+                    it.proteins.toFloat() >= filter.proteinsMin &&
+                    it.fats.toFloat() >= filter.fatsMin &&
+                    it.carbs.toFloat() >= filter.carbsMin
         } as ArrayList
 
         if (filter.caloriesMax != null && filter.caloriesMax != 0) {
@@ -98,8 +112,8 @@ class MealViewModel : FilterViewModel() {
         }
 
         when (filter.order) {
-            0 -> data.sortBy { it.name }
-            1 -> data.sortByDescending { it.name }
+            0 -> data.sortWith(Comparator.comparing(Meal::name, Collator.getInstance()))
+            1 -> data.sortWith(Comparator.comparing(Meal::name, Collator.getInstance().reversed()))
             2 -> data.sortBy { it.kcal }
             3 -> data.sortByDescending { it.kcal }
             4 -> data.sortBy { it.proteins }
@@ -112,4 +126,12 @@ class MealViewModel : FilterViewModel() {
 
         meals.postValue(data)
     }
+
+    private lateinit var state: Parcelable
+    fun saveRecyclerViewState(parcelable: Parcelable) {
+        state = parcelable
+    }
+
+    fun restoreRecyclerViewState(): Parcelable = state
+    fun stateInitialized(): Boolean = ::state.isInitialized
 }

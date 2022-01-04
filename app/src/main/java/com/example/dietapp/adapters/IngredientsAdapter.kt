@@ -33,21 +33,22 @@ class IngredientsAdapter(private val viewModel: IngredientViewModel) :
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val root = holder.itemView.rootView
-        val number = holder.itemView.findViewById<MaterialButton>(R.id.meal_number)
-        val name = holder.itemView.findViewById<MaterialTextView>(R.id.meal_name)
-        val kcal = holder.itemView.findViewById<MaterialButton>(R.id.meal_kcal)
-        val proteins = holder.itemView.findViewById<MaterialTextView>(R.id.meal_proteins)
-        val carbs = holder.itemView.findViewById<MaterialTextView>(R.id.meal_carbs)
-        val fats = holder.itemView.findViewById<MaterialTextView>(R.id.meal_fats)
+        val number = holder.itemView.findViewById<MaterialButton>(R.id.item_number)
+        val name = holder.itemView.findViewById<MaterialTextView>(R.id.item_name)
+        val kcal = holder.itemView.findViewById<MaterialButton>(R.id.item_kcal)
+        val proteins = holder.itemView.findViewById<MaterialTextView>(R.id.item_proteins)
+        val carbs = holder.itemView.findViewById<MaterialTextView>(R.id.item_carbs)
+        val fats = holder.itemView.findViewById<MaterialTextView>(R.id.item_fats)
 
         val item = _list[position]
+        val isChecked = viewModel.filter.isChecked
 
         number.text = (position + 1).toString()
         name.text = item.name
-        kcal.text = FloatConverter.floatToString(item.kcal.toFloat(), "kcal")
-        proteins.text = FloatConverter.floatToString(item.proteins.toFloat(), "g")
-        carbs.text = FloatConverter.floatToString(item.carbohydrates.toFloat(), "g")
-        fats.text = FloatConverter.floatToString(item.fats.toFloat(), "g")
+        kcal.text = FloatConverter.floatToString(item.kcal.toFloat(), "kcal", isChecked)
+        proteins.text = FloatConverter.floatToString(item.proteins.toFloat(), "g", isChecked)
+        carbs.text = FloatConverter.floatToString(item.carbohydrates.toFloat(), "g", isChecked)
+        fats.text = FloatConverter.floatToString(item.fats.toFloat(), "g", isChecked)
 
         root.setOnClickListener {
             viewModel.setCurrentIngredient(position)

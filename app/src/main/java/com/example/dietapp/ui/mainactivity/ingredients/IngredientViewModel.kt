@@ -1,16 +1,21 @@
 package com.example.dietapp.ui.mainactivity.ingredients
 
+import android.os.Parcelable
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.dietapp.database.models.ingredient.IngredientEntity
+import com.example.dietapp.services.DatabaseService
 import com.example.dietapp.ui.filter.FilterViewModel
+import kotlinx.coroutines.launch
+import java.text.Collator
+import java.util.*
+import kotlin.collections.ArrayList
 
-class IngredientViewModel : FilterViewModel() {
+class IngredientViewModel(private val dbService: DatabaseService) : FilterViewModel() {
 
-    private val _ingredients = prepareIngredients()
+    private val _ingredients = arrayListOf<IngredientEntity>()
 
-    val ingredients = MutableLiveData(ArrayList<IngredientEntity>()).apply {
-        value = _ingredients
-    }
+    val ingredients = MutableLiveData(ArrayList<IngredientEntity>())
 
     var currentIngredient: IngredientEntity? = null
         private set
@@ -23,17 +28,13 @@ class IngredientViewModel : FilterViewModel() {
         this.currentIngredient = ingredients.value!![position]
     }
 
-    private fun prepareIngredients(): ArrayList<IngredientEntity> {
-        val ingredients = ArrayList<IngredientEntity>()
-
-        ingredients.add(IngredientEntity("20", "30", 1, "240", "Ser", "20", ""))
-        ingredients.add(IngredientEntity("10", "20", 2, "220", "Masło", "50", ""))
-        ingredients.add(IngredientEntity("30", "10", 3, "250", "Chleb", "10", ""))
-        ingredients.add(IngredientEntity("35", "10", 4, "250", "Szynka", "10", ""))
-        ingredients.add(IngredientEntity("12", "15", 5, "250", "Pieczarka", "10", ""))
-        ingredients.add(IngredientEntity("53", "62", 6, "250", "Pomidor", "10", ""))
-
-        return ingredients
+    fun prepareIngredients() {
+        if (_ingredients.isEmpty()) {
+            viewModelScope.launch {
+                _ingredients.addAll(dbService.db.ingredientDao().selectAll())
+                ingredients.postValue(_ingredients)
+            }
+        }
     }
 
     var searchText: String = ""
@@ -44,14 +45,12 @@ class IngredientViewModel : FilterViewModel() {
     }
 
     fun search() {
-//        val data = _ingredients.filter { it.name.contains(searchText, true) } as ArrayList
-
         var data = _ingredients.filter {
             it.name.contains(searchText, true) &&
-                    it.kcal.toFloat() > filter.caloriesMin &&
-                    it.proteins.toFloat() > filter.proteinsMin &&
-                    it.fats.toFloat() > filter.fatsMin &&
-                    it.carbohydrates.toFloat() > filter.carbsMin
+                    it.kcal.toFloat() >= filter.caloriesMin &&
+                    it.proteins.toFloat() >= filter.proteinsMin &&
+                    it.fats.toFloat() >= filter.fatsMin &&
+                    it.carbohydrates.toFloat() >= filter.carbsMin
         } as ArrayList
 
         if (filter.caloriesMax != null && filter.caloriesMax != 0) {
@@ -68,8 +67,13 @@ class IngredientViewModel : FilterViewModel() {
         }
 
         when (filter.order) {
-            0 -> data.sortBy { it.name }
-            1 -> data.sortByDescending { it.name }
+            0 -> data.sortWith(Comparator.comparing(IngredientEntity::name, Collator.getInstance()))
+            1 -> data.sortWith(
+                Comparator.comparing(
+                    IngredientEntity::name,
+                    Collator.getInstance().reversed()
+                )
+            )
             2 -> data.sortBy { it.kcal }
             3 -> data.sortByDescending { it.kcal }
             4 -> data.sortBy { it.proteins }
@@ -79,7 +83,14 @@ class IngredientViewModel : FilterViewModel() {
             8 -> data.sortBy { it.fats }
             9 -> data.sortByDescending { it.fats }
         }
-
         ingredients.postValue(data)
     }
+
+    private lateinit var state: Parcelable
+    fun saveRecyclerViewState(parcelable: Parcelable) {
+        state = parcelable
+    }
+
+    fun restoreRecyclerViewState(): Parcelable = state
+    fun stateInitialized(): Boolean = ::state.isInitialized
 }
