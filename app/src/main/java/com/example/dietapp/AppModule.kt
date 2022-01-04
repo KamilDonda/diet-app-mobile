@@ -2,6 +2,7 @@ package com.example.dietapp
 
 import com.example.dietapp.database.retrofit.RetrofitBuilder
 import com.example.dietapp.services.ConnectionService
+import com.example.dietapp.services.DatabaseService
 import com.example.dietapp.services.LoginService
 import com.example.dietapp.services.LogoutService
 import com.example.dietapp.sharedpreferences.Preferences
@@ -43,9 +44,10 @@ val appModule = module {
     viewModel { LoginViewModel(get()) }
 
 // Services
-    single { ConnectionService() }
+    single { ConnectionService(get()) }
     single { LoginService(get(), get()) }
     single { LogoutService(get()) }
+    single { DatabaseService(get()) }
 
 // SharedPreferences
     single { Preferences(get()) }

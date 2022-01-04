@@ -1,7 +1,5 @@
-package com.example.dietapp.services
+package com.example.dietapp.database.models
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import java.io.Serializable
 
 data class User(

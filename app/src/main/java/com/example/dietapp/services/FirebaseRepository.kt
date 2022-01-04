@@ -1,6 +1,7 @@
 package com.example.dietapp.services
 
 import android.util.Log
+import com.example.dietapp.database.models.User
 import com.google.firebase.firestore.FirebaseFirestore
 
 class FirebaseRepository {

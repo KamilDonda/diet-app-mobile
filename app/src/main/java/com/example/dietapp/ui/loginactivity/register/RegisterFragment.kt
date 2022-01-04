@@ -9,8 +9,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
+import com.example.dietapp.database.models.User
 import com.example.dietapp.services.FirebaseRepository
-import com.example.dietapp.services.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
