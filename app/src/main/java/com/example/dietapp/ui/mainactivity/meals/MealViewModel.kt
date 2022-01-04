@@ -1,5 +1,6 @@
 package com.example.dietapp.ui.mainactivity.meals
 
+import android.os.Parcelable
 import androidx.lifecycle.MutableLiveData
 import com.example.dietapp.models.Meal
 import com.example.dietapp.ui.filter.FilterViewModel
@@ -115,4 +116,12 @@ class MealViewModel : FilterViewModel() {
 
         meals.postValue(data)
     }
+
+    private lateinit var state: Parcelable
+    fun saveRecyclerViewState(parcelable: Parcelable) {
+        state = parcelable
+    }
+
+    fun restoreRecyclerViewState(): Parcelable = state
+    fun stateInitialized(): Boolean = ::state.isInitialized
 }

@@ -66,5 +66,15 @@ class MealsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         searchInput.setText(viewModel.searchText)
+        if (viewModel.stateInitialized()) {
+            meals_rv.layoutManager?.onRestoreInstanceState(
+                viewModel.restoreRecyclerViewState()
+            )
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        meals_rv.layoutManager?.onSaveInstanceState()?.let { viewModel.saveRecyclerViewState(it) }
     }
 }

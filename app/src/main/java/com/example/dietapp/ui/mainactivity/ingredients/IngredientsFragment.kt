@@ -67,5 +67,16 @@ class IngredientsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         searchInput.setText(viewModel.searchText)
+        if (viewModel.stateInitialized()) {
+            ingredients_rv.layoutManager?.onRestoreInstanceState(
+                viewModel.restoreRecyclerViewState()
+            )
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        ingredients_rv.layoutManager?.onSaveInstanceState()
+            ?.let { viewModel.saveRecyclerViewState(it) }
     }
 }
