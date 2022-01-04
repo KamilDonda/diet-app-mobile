@@ -92,10 +92,10 @@ class MealViewModel : FilterViewModel() {
     fun search() {
         var data = _meals.filter {
             it.name.contains(searchText, true) &&
-                    it.kcal.toFloat() > filter.caloriesMin &&
-                    it.proteins.toFloat() > filter.proteinsMin &&
-                    it.fats.toFloat() > filter.fatsMin &&
-                    it.carbs.toFloat() > filter.carbsMin
+                    it.kcal.toFloat() >= filter.caloriesMin &&
+                    it.proteins.toFloat() >= filter.proteinsMin &&
+                    it.fats.toFloat() >= filter.fatsMin &&
+                    it.carbs.toFloat() >= filter.carbsMin
         } as ArrayList
 
         if (filter.caloriesMax != null && filter.caloriesMax != 0) {

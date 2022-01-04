@@ -47,10 +47,10 @@ class IngredientViewModel(private val dbService: DatabaseService) : FilterViewMo
     fun search() {
         var data = _ingredients.filter {
             it.name.contains(searchText, true) &&
-                    it.kcal.toFloat() > filter.caloriesMin &&
-                    it.proteins.toFloat() > filter.proteinsMin &&
-                    it.fats.toFloat() > filter.fatsMin &&
-                    it.carbohydrates.toFloat() > filter.carbsMin
+                    it.kcal.toFloat() >= filter.caloriesMin &&
+                    it.proteins.toFloat() >= filter.proteinsMin &&
+                    it.fats.toFloat() >= filter.fatsMin &&
+                    it.carbohydrates.toFloat() >= filter.carbsMin
         } as ArrayList
 
         if (filter.caloriesMax != null && filter.caloriesMax != 0) {
@@ -83,7 +83,6 @@ class IngredientViewModel(private val dbService: DatabaseService) : FilterViewMo
             8 -> data.sortBy { it.fats }
             9 -> data.sortByDescending { it.fats }
         }
-
         ingredients.postValue(data)
     }
 
