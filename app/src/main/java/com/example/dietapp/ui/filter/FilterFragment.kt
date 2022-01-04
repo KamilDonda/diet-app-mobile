@@ -12,7 +12,11 @@ import com.example.dietapp.utils.setupDropdownMenu
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.android.synthetic.main.fragment_filter.*
 
-class FilterFragment(private val viewModel: FilterViewModel) : DialogFragment() {
+class FilterFragment(
+    private val viewModel: FilterViewModel,
+    private val isCheckboxEnabled: Boolean = true
+) :
+    DialogFragment() {
 
     private lateinit var filters: ArrayList<String>
 
@@ -67,7 +71,15 @@ class FilterFragment(private val viewModel: FilterViewModel) : DialogFragment() 
         fats_end_input.setText(viewModel.intOrNullToString(f.fatsMax))
         carbs_start_input.setText(viewModel.intOrNullToString(f.carbsMin))
         carbs_end_input.setText(viewModel.intOrNullToString(f.carbsMax))
-        filter_checkBox.isChecked = f.isChecked
+
+
+        if (!isCheckboxEnabled) {
+            filter_checkBox.isChecked = true
+            filter_checkBox.isEnabled = false
+//            viewModel.setFilterOptions(f.copy(isChecked = true))
+        } else {
+            filter_checkBox.isChecked = f.isChecked
+        }
 
         setupDropdownMenu(filters, order.editText)
     }

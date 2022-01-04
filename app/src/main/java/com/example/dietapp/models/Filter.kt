@@ -25,7 +25,15 @@ data class Filter(
         }
     }
 
-    fun getTextsForChips(context: Context) = listOf(
+    private fun isChecked(context: Context, isCheckboxEnabled: Boolean): String? {
+        return if (isChecked || !isCheckboxEnabled)
+            context.getString(R.string.calculated_100g)
+        else
+            null
+    }
+
+    fun getTextsForChips(context: Context, isCheckboxEnabled: Boolean = true) = listOf(
+        isChecked(context, isCheckboxEnabled),
         context.resources.getStringArray(R.array.filter_order).getAsArrayList()[order],
         getRange(caloriesMin, caloriesMax, context.getString(R.string.calories), "kcal"),
         getRange(proteinsMin, proteinsMax, context.getString(R.string.proteins), "g"),

@@ -27,7 +27,12 @@ abstract class FilterViewModel : ViewModel() {
 
     val chips = MutableLiveData(Filter())
 
-    fun setupChips(chipGroup: ChipGroup, context: Context, ranges: List<String>) {
+    fun setupChips(
+        chipGroup: ChipGroup,
+        context: Context,
+        ranges: List<String>,
+        isCheckboxEnabled: Boolean = true
+    ) {
         ranges.forEach { option ->
             val chip = Chip(context)
             val drawable = ChipDrawable.createFromAttributes(
@@ -44,6 +49,9 @@ abstract class FilterViewModel : ViewModel() {
 
             chip.setOnClickListener {
                 when {
+                    option == context.getString(R.string.calculated_100g) -> {
+                        setFilterOptions(filter.copy(isChecked = !filter.isChecked))
+                    }
                     option.contains(context.getString(R.string.calories)) -> {
                         setFilterOptions(filter.copy(caloriesMin = 0, caloriesMax = null))
                     }
@@ -62,6 +70,10 @@ abstract class FilterViewModel : ViewModel() {
                 }
                 chipGroup.removeView(chip)
                 chips.postValue(filter)
+            }
+            if (option == context.getString(R.string.calculated_100g) && !isCheckboxEnabled) {
+                chip.isEnabled = false
+                setFilterOptions(filter.copy(isChecked = true))
             }
 
             chipGroup.addView(chip)

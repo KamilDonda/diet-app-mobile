@@ -26,6 +26,7 @@ class IngredientsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.prepareIngredients()
 
         val ingredientsAdapter = IngredientsAdapter(viewModel)
         ingredients_rv.adapter = ingredientsAdapter
@@ -39,15 +40,15 @@ class IngredientsFragment : Fragment() {
 
         viewModel.chips.observe(viewLifecycleOwner, {
             ingredients_chipGroup.removeAllViewsInLayout()
-            val texts = it.getTextsForChips(requireContext()).filterNotNull()
-            viewModel.setupChips(ingredients_chipGroup, requireContext(), texts)
+            val texts = it.getTextsForChips(requireContext(), false).filterNotNull()
+            viewModel.setupChips(ingredients_chipGroup, requireContext(), texts, false)
             viewModel.search()
         })
     }
 
     private fun setupDialog() {
         filter_button.setOnClickListener {
-            val dialog = FilterFragment(viewModel)
+            val dialog = FilterFragment(viewModel, false)
 
             dialog.show(requireActivity().supportFragmentManager, "FILTER_INGREDIENTS")
         }

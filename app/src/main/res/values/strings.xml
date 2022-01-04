@@ -62,7 +62,7 @@
     <string name="filtering">Filtrowanie</string>
 
     <string name="order">Kolejność</string>
-
+    <string name="calculated_100g">w przeliczeniu na 100g</string>
     <string-array name="filter_order">
         <item>Nazwa: A - Z</item>
         <item>Nazwa: Z - A</item>
