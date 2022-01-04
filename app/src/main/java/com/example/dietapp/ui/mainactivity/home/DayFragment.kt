@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.toColor
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
@@ -141,7 +140,7 @@ class DayFragment : Fragment() {
     {
         //Tworzenie zmiennych do wykresu
         val barChart = idBarChart
-        val days = arrayOf(
+        val name = arrayOf(
             getString(R.string.breakfast),
             getString(R.string.lunch),
             getString(R.string.dinner)
@@ -193,7 +192,7 @@ class DayFragment : Fragment() {
         xAxis.granularity = 1.245f  //Przesuwanie opisu osi X (śniadanie, obiad, kolacja)
         xAxis.textSize = 14f
         xAxis.axisMaximum = data.xMax + 0.74f
-        xAxis.valueFormatter = IndexAxisValueFormatter(days)
+        xAxis.valueFormatter = IndexAxisValueFormatter(name)
         xAxis.isGranularityEnabled = true
         xAxis.yOffset = -1.2f
 

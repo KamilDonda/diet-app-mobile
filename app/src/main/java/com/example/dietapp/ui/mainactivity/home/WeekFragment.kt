@@ -2,7 +2,6 @@ package com.example.dietapp.ui.mainactivity.home
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,24 +13,14 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import kotlinx.android.synthetic.main.fragment_week.*
-import java.util.*
+import kotlin.collections.ArrayList
 
 
-class WeekFragment : Fragment(), OnChartValueSelectedListener {
+class WeekFragment : Fragment() {
 
-    private val x = arrayOf(
-        "Pn",
-        "Wt",
-        "Śr",
-        "Czw",
-        "Pt",
-        "Sb",
-        "Ndz"
-    )
+    private lateinit var x: Array<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +33,8 @@ class WeekFragment : Fragment(), OnChartValueSelectedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Calories()
+        x = resources.getStringArray(R.array.days)
+        calories()
         drawLineChart()
         drawLineChartMacro()
 
@@ -53,15 +43,15 @@ class WeekFragment : Fragment(), OnChartValueSelectedListener {
         }
     }
 
-    override fun onNothingSelected() {
-    }
+//    override fun onNothingSelected() {
+//    }
+//
+//    override fun onValueSelected(e: Entry?, h: Highlight?) {
+//        Log.d("LineChart", e?.y.toString())
+//        Log.d("LineChart", (e as Entry).toString())
+//    }
 
-    override fun onValueSelected(e: Entry?, h: Highlight?) {
-        Log.d("LineChart", e?.y.toString())
-        Log.d("LineChart", (e as Entry).toString())
-    }
-
-    private fun Calories()
+    private fun calories()
     {
         val days = ArrayList<BarEntry>()
         val barChart = idbarchart
@@ -155,11 +145,8 @@ class WeekFragment : Fragment(), OnChartValueSelectedListener {
         lineDataSet3.valueTextSize = 10f
         lineDataSet3.valueTextColor = Color.DKGRAY
 
-        val dataSets = ArrayList<ILineDataSet>()
-        dataSets.add(lineDataSet1)
-        dataSets.add(lineDataSet2)
-        dataSets.add(lineDataSet3)
-        val lineData = LineData(dataSets)
+        val dataSets = arrayListOf(lineDataSet1, lineDataSet2, lineDataSet3)
+        val lineData = LineData(dataSets as List<ILineDataSet>?)
 
         val legend = lineChart.legend
         legend.textSize = 12f
@@ -167,14 +154,14 @@ class WeekFragment : Fragment(), OnChartValueSelectedListener {
 
         lineChart.description.isEnabled = false
         lineChart.setDrawMarkers(true)
-        lineChart.setOnChartValueSelectedListener(this)
+        //lineChart.setOnChartValueSelectedListener(this)
         lineChart.xAxis.position = XAxis.XAxisPosition.BOTH_SIDED
-        lineChart.animateY(1500)
         lineChart.xAxis.isGranularityEnabled = true
         lineChart.xAxis.granularity = 1.0f
         lineChart.xAxis.textSize = 12f
         lineChart.xAxis.yOffset = 0.6f
         lineChart.xAxis.valueFormatter = IndexAxisValueFormatter(x)
+        lineChart.animateY(1500)
         lineChart.data = lineData
         lineChart.invalidate()
     }
@@ -260,11 +247,8 @@ class WeekFragment : Fragment(), OnChartValueSelectedListener {
         lineDataSet3.valueTextSize = 10f
         lineDataSet3.valueTextColor = Color.DKGRAY
 
-        val dataSets = ArrayList<ILineDataSet>()
-        dataSets.add(lineDataSet1)
-        dataSets.add(lineDataSet2)
-        dataSets.add(lineDataSet3)
-        val lineData = LineData(dataSets)
+        val dataSets = arrayListOf(lineDataSet1, lineDataSet2, lineDataSet3)
+        val lineData = LineData(dataSets as List<ILineDataSet>?)
 
         val legend = lineChart.legend
         legend.textSize = 12f
@@ -272,7 +256,7 @@ class WeekFragment : Fragment(), OnChartValueSelectedListener {
 
         lineChart.description.isEnabled = false
         lineChart.setDrawMarkers(true)
-        lineChart.setOnChartValueSelectedListener(this)
+        //lineChart.setOnChartValueSelectedListener(this)
         lineChart.xAxis.position = XAxis.XAxisPosition.BOTH_SIDED
         lineChart.animateY(1500)
         lineChart.xAxis.isGranularityEnabled = true
