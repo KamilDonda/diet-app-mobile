@@ -5,12 +5,12 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class IngredientEntity(
-    val carbohydrates: String,
-    val fats: String,
+    val carbohydrates: Float,
+    val fats: Float,
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val kcal: String,
+    val kcal: Float,
     val name: String,
-    val proteins: String,
+    val proteins: Float,
     val tags: String?
 )

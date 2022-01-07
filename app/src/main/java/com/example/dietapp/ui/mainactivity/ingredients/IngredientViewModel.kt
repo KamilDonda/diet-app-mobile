@@ -69,23 +69,23 @@ class IngredientViewModel(private val dbService: DatabaseService) : FilterViewMo
 
         var data = _ingredients.filter {
             it.name.contains(searchText, true) &&
-                    it.kcal.toFloat() >= caloriesMin &&
-                    it.proteins.toFloat() >= proteinsMin &&
-                    it.fats.toFloat() >= fatsMin &&
-                    it.carbohydrates.toFloat() >= carbsMin
+                    it.kcal >= caloriesMin &&
+                    it.proteins >= proteinsMin &&
+                    it.fats >= fatsMin &&
+                    it.carbohydrates >= carbsMin
         } as ArrayList
 
         if (caloriesMax != null && caloriesMax != 0f) {
-            data = data.filter { it.kcal.toFloat() < caloriesMax } as ArrayList
+            data = data.filter { it.kcal < caloriesMax } as ArrayList
         }
         if (proteinsMax != null && proteinsMax != 0f) {
-            data = data.filter { it.proteins.toFloat() < proteinsMax } as ArrayList
+            data = data.filter { it.proteins < proteinsMax } as ArrayList
         }
         if (fatsMax != null && fatsMax != 0f) {
-            data = data.filter { it.fats.toFloat() < fatsMax } as ArrayList
+            data = data.filter { it.fats < fatsMax } as ArrayList
         }
         if (carbsMax != null && carbsMax != 0f) {
-            data = data.filter { it.carbohydrates.toFloat() < carbsMax } as ArrayList
+            data = data.filter { it.carbohydrates < carbsMax } as ArrayList
         }
 
         when (f.order) {

@@ -57,10 +57,10 @@ class IngredientsAdapter(private val viewModel: IngredientViewModel) :
 
         number.text = (position + 1).toString()
         name.text = item.name
-        kcal.text = FloatConverter.floatToString(item.kcal.toFloat(), "kcal", isChecked)
-        proteins.text = FloatConverter.floatToString(item.proteins.toFloat(), "g", isChecked)
-        carbs.text = FloatConverter.floatToString(item.carbohydrates.toFloat(), "g", isChecked)
-        fats.text = FloatConverter.floatToString(item.fats.toFloat(), "g", isChecked)
+        kcal.text = FloatConverter.floatToString(item.kcal, "kcal", isChecked)
+        proteins.text = FloatConverter.floatToString(item.proteins, "g", isChecked)
+        carbs.text = FloatConverter.floatToString(item.carbohydrates, "g", isChecked)
+        fats.text = FloatConverter.floatToString(item.fats, "g", isChecked)
 
         root.setOnClickListener {
             viewModel.setCurrentIngredient(position)
