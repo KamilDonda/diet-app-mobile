@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
 import com.example.dietapp.database.models.User
-import com.example.dietapp.services.FirebaseRepository
+import com.example.dietapp.services.FirebaseService
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -23,7 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class LoginFragment : Fragment() {
 
-    private val repository = FirebaseRepository()
+    private val repository = FirebaseService()
     private val viewModel: LoginViewModel by sharedViewModel()
     private val auth = FirebaseAuth.getInstance()
     private lateinit var googleSignInClient: GoogleSignInClient

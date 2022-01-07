@@ -4,14 +4,16 @@ import android.os.Parcelable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.dietapp.database.models.ingredient.IngredientEntity
-import com.example.dietapp.services.DatabaseService
+import com.example.dietapp.database.repositories.IngredientRepo
 import com.example.dietapp.ui.filter.FilterViewModel
 import kotlinx.coroutines.launch
 import java.text.Collator
 import java.util.*
 import kotlin.collections.ArrayList
 
-class IngredientViewModel(private val dbService: DatabaseService) : FilterViewModel() {
+class IngredientViewModel(
+    private val ingredientRepo: IngredientRepo
+) : FilterViewModel() {
 
     private val _ingredients = arrayListOf<IngredientEntity>()
 
@@ -31,7 +33,7 @@ class IngredientViewModel(private val dbService: DatabaseService) : FilterViewMo
     fun prepareIngredients() {
         if (_ingredients.isEmpty()) {
             viewModelScope.launch {
-                _ingredients.addAll(dbService.db.ingredientDao().selectAll())
+                _ingredients.addAll(ingredientRepo.getAll())
                 ingredients.postValue(_ingredients)
             }
         }
