@@ -23,4 +23,7 @@ interface ApiInterface {
 
     @GET("meals_ingredients")
     fun getMealsIngredientAsync(): Deferred<Response<MealIngredientEntityList>>
+
+//    @GET("meals_ingredients/{id}")
+//    fun getMealIngredientAsync(@Path("id") id: Int): Deferred<Response<MealIngredientEntity>>
 }

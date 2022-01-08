@@ -9,6 +9,6 @@ data class MealIngredientEntity(
     val description: String,
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val ingredient_name: Int,
+    val ingredient_id: Int,
     val meal_id: Int
 )

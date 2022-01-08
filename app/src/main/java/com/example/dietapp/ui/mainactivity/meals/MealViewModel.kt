@@ -3,6 +3,7 @@ package com.example.dietapp.ui.mainactivity.meals
 import android.os.Parcelable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.dietapp.database.repositories.MealRepo
 import com.example.dietapp.models.Meal
 import com.example.dietapp.ui.filter.FilterViewModel
 import kotlinx.coroutines.launch
@@ -10,7 +11,9 @@ import java.text.Collator
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MealViewModel : FilterViewModel() {
+class MealViewModel(
+    private val mealRepo: MealRepo
+) : FilterViewModel() {
 
     private val _meals = arrayListOf<Meal>()
 
@@ -75,8 +78,8 @@ class MealViewModel : FilterViewModel() {
     fun prepareMeals() {
         if (_meals.isEmpty()) {
             viewModelScope.launch {
-//                _meals.addAll(dbService.db.ingredientDao().selectAll())
-                _meals.addAll(temp())
+                _meals.addAll(mealRepo.getAll())
+//                _meals.addAll(temp())
                 meals.postValue(_meals)
             }
         }
