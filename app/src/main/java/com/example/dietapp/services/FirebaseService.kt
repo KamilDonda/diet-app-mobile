@@ -8,16 +8,13 @@ class FirebaseService {
 
     private val cloud = FirebaseFirestore.getInstance()
 
-    private val PATH_USER = "users"
-    private val FIELD_UID = "uid"
-
     // Create new user
     fun createUser(user: User) {
         cloud.collection(PATH_USER)
             .document(user.uid)
             .set(user)
-            .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully written!") }
-            .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
     }
 
     // Create new user with Google
@@ -29,5 +26,19 @@ class FirebaseService {
                         createUser(user)
                 }
             }
+    }
+
+    fun updateUser(user: User) {
+        cloud.collection(PATH_USER)
+            .document(user.uid)
+            .set(user)
+            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+    }
+
+    companion object {
+        private const val TAG = "FIREBASE_SERVICE"
+        private const val PATH_USER = "users"
+        private const val FIELD_UID = "uid"
     }
 }

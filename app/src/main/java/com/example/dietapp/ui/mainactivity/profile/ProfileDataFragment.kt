@@ -208,7 +208,7 @@ class ProfileDataFragment : Fragment() {
         }
 
         profile_save.setOnClickListener {
-
+            viewModel.save()
         }
     }
 }

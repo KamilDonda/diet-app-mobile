@@ -3,10 +3,7 @@ package com.example.dietapp
 import com.example.dietapp.database.repositories.IngredientRepo
 import com.example.dietapp.database.repositories.MealRepo
 import com.example.dietapp.database.retrofit.RetrofitBuilder
-import com.example.dietapp.services.ConnectionService
-import com.example.dietapp.services.DatabaseService
-import com.example.dietapp.services.LoginService
-import com.example.dietapp.services.LogoutService
+import com.example.dietapp.services.*
 import com.example.dietapp.sharedpreferences.Preferences
 import com.example.dietapp.ui.loginactivity.login.LoginFragment
 import com.example.dietapp.ui.loginactivity.login.LoginViewModel
@@ -41,12 +38,13 @@ val appModule = module {
 // ViewModel
     viewModel { MealViewModel(get()) }
     viewModel { IngredientViewModel(get()) }
-    viewModel { ProfileViewModel() }
+    viewModel { ProfileViewModel(get()) }
     viewModel { HomeViewModel() }
     viewModel { RegisterViewModel(get()) }
     viewModel { LoginViewModel(get()) }
 
 // Services
+    single { FirebaseService() }
     single { ConnectionService(get()) }
     single { LoginService(get(), get()) }
     single { LogoutService(get()) }

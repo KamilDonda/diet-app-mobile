@@ -2,10 +2,12 @@ package com.example.dietapp.ui.mainactivity.profile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.dietapp.database.models.User
+import com.example.dietapp.services.FirebaseService
 import com.example.dietapp.utils.PasswordUtil
 import kotlin.math.round
 
-class ProfileViewModel : ViewModel() {
+class ProfileViewModel(private val firebaseService: FirebaseService) : ViewModel() {
 
     val hasInputFocus = MutableLiveData<Boolean?>(null)
 
@@ -89,5 +91,19 @@ class ProfileViewModel : ViewModel() {
         setAge(null)
         setWeight(null)
         setHeight(null)
+    }
+
+    fun save() {
+        val user = User(
+            "uid",
+            "",
+            gender == "Mężczyzna",
+            age,
+            height,
+            weight,
+            0,
+            0,
+        )
+        firebaseService.updateUser(user)
     }
 }
