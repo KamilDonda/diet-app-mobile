@@ -8,6 +8,7 @@ import com.example.dietapp.database.retrofit.RetrofitBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class ConnectionService(private val dbService: DatabaseService) {
 
@@ -57,7 +58,10 @@ class ConnectionService(private val dbService: DatabaseService) {
     fun synchronize() {
         CoroutineScope(Dispatchers.IO).launch {
             downloadIngredients()?.let {
-                dbService.db.ingredientDao().insertAll(it)
+                dbService.db.ingredientDao()
+                    .insertAll(it.map { entity ->
+                        entity.copy(name = entity.name.capitalize(Locale.ROOT))
+                    })
             }
             downloadMeals()?.let {
                 dbService.db.mealDao().insertAll(it)
