@@ -31,24 +31,24 @@ class ProfileViewModel : ViewModel() {
         this.repeatedPassword = password
     }
 
-    var gender: String = "Wybierz"
+    var gender: String? = null
         private set
 
-    fun setGender(gender: String) {
+    fun setGender(gender: String?) {
         this.gender = gender
     }
 
-    var goal: String = "Wybierz"
+    var goal: String? = null
         private set
 
-    fun setGoal(goal: String) {
+    fun setGoal(goal: String?) {
         this.goal = goal
     }
 
-    var activity: String = "Wybierz"
+    var activity: String? = null
         private set
 
-    fun setActivity(activity: String) {
+    fun setActivity(activity: String?) {
         this.activity = activity
     }
 
@@ -80,5 +80,14 @@ class ProfileViewModel : ViewModel() {
             val bmi = weight!! / ((height!! / 100) * (height!! / 100))
             this.bmi.value = (round(bmi * 100) / 100).toString()
         }
+    }
+
+    fun reset() {
+        setGender(null)
+        setGoal(null)
+        setActivity(null)
+        setAge(null)
+        setWeight(null)
+        setHeight(null)
     }
 }

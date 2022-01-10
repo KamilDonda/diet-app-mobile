@@ -65,12 +65,14 @@ class ProfileDataFragment : Fragment() {
         goal.editText?.doOnTextChanged { text, _, _, _ ->
             viewModel.setGoal(text.toString())
         }
+
+        setupButtons()
     }
 
     private fun initData() {
-        gender.editText?.setText(viewModel.gender)
-        goal.editText?.setText(viewModel.goal)
-        activity_level.editText?.setText(viewModel.activity)
+        gender.editText?.setText(viewModel.gender ?: "Wybierz")
+        goal.editText?.setText(viewModel.goal ?: "Wybierz")
+        activity_level.editText?.setText(viewModel.activity ?: "Wybierz")
 
         age.text = AgeConverter.intToString(viewModel.age)
         weight.text = FloatConverter.floatToString(viewModel.weight, "kg")
@@ -197,5 +199,16 @@ class ProfileDataFragment : Fragment() {
             age--
         }
         return age
+    }
+
+    private fun setupButtons() {
+        profile_reset.setOnClickListener {
+            viewModel.reset()
+            initData()
+        }
+
+        profile_save.setOnClickListener {
+
+        }
     }
 }
