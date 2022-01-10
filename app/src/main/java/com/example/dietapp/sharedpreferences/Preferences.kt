@@ -17,7 +17,16 @@ class Preferences(context: Context) {
         preferences.edit().putBoolean(IS_LOGGED, value).apply()
     }
 
+    fun getUserId(): String {
+        return preferences.getString(USER_ID, "") ?: ""
+    }
+
+    fun setUserId(value: String) {
+        preferences.edit().putString(USER_ID, value).apply()
+    }
+
     companion object {
         const val IS_LOGGED = "IS_LOGGED"
+        const val USER_ID = "USER_ID"
     }
 }

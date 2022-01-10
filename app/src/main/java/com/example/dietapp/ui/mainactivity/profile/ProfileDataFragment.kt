@@ -213,7 +213,7 @@ class ProfileDataFragment : Fragment() {
 
         profile_save.setOnClickListener {
             val user = User(
-                "uid",
+                viewModel.getUserId(),
                 "",
                 viewModel.gender == getString(R.string.man),
                 viewModel.age,

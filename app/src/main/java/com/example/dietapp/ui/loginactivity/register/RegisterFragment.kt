@@ -69,7 +69,7 @@ class RegisterFragment : Fragment() {
                             if (it.user != null) {
                                 val user = User(it.user!!.uid)
                                 repository.createUser(user)
-                                viewModel.login(this, requireContext())
+                                viewModel.login(this, requireContext(), user.uid)
                             }
                         }
                         .addOnFailureListener {
@@ -120,7 +120,7 @@ class RegisterFragment : Fragment() {
                             if (it.result!!.user != null) {
                                 val user = User(it.result!!.user!!.uid)
                                 repository.createUserWithGoogle(user)
-                                viewModel.login(this, requireContext())
+                                viewModel.login(this, requireContext(), user.uid)
                             }
                         } else {
                             showSnackbar(it.exception?.message.toString())

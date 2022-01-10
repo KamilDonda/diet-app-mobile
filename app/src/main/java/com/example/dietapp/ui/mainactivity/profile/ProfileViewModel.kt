@@ -4,10 +4,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dietapp.database.models.User
 import com.example.dietapp.services.FirebaseService
+import com.example.dietapp.sharedpreferences.Preferences
 import com.example.dietapp.utils.PasswordUtil
 import kotlin.math.round
 
-class ProfileViewModel(private val firebaseService: FirebaseService) : ViewModel() {
+class ProfileViewModel(
+    private val firebaseService: FirebaseService,
+    private val sharedPreferences: Preferences
+) : ViewModel() {
+
+    fun getUserId() = sharedPreferences.getUserId()
 
     val hasInputFocus = MutableLiveData<Boolean?>(null)
 

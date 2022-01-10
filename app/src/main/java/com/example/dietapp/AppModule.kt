@@ -38,7 +38,7 @@ val appModule = module {
 // ViewModel
     viewModel { MealViewModel(get()) }
     viewModel { IngredientViewModel(get()) }
-    viewModel { ProfileViewModel(get()) }
+    viewModel { ProfileViewModel(get(), get()) }
     viewModel { HomeViewModel() }
     viewModel { RegisterViewModel(get()) }
     viewModel { LoginViewModel(get()) }

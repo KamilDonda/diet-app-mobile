@@ -64,7 +64,7 @@ class LoginFragment : Fragment() {
                     auth.signInWithEmailAndPassword(email, password)
                         .addOnSuccessListener {
                             if (it.user != null) {
-                                viewModel.login(this, requireContext())
+                                viewModel.login(this, requireContext(), it.user!!.uid)
                             }
                         }
                         .addOnFailureListener {
@@ -111,7 +111,7 @@ class LoginFragment : Fragment() {
                             if (it.result!!.user != null) {
                                 val user = User(it.result!!.user!!.uid)
                                 repository.createUserWithGoogle(user)
-                                viewModel.login(this, requireContext())
+                                viewModel.login(this, requireContext(), user.uid)
                             }
                         } else {
                             showSnackbar(it.exception?.message.toString())

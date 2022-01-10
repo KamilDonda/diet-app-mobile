@@ -10,7 +10,7 @@ class FirebaseService {
 
     // Create new user
     fun createUser(user: User) {
-        cloud.collection(PATH_USER)
+        cloud.collection(PATH_USERS)
             .document(user.uid)
             .set(user)
             .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
@@ -19,7 +19,7 @@ class FirebaseService {
 
     // Create new user with Google
     fun createUserWithGoogle(user: User) {
-        cloud.collection(PATH_USER).whereEqualTo(FIELD_UID, user.uid).get()
+        cloud.collection(PATH_USERS).whereEqualTo(FIELD_UID, user.uid).get()
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     if (it.result!!.documents.isEmpty())
@@ -29,7 +29,7 @@ class FirebaseService {
     }
 
     fun updateUser(user: User) {
-        cloud.collection(PATH_USER)
+        cloud.collection(PATH_USERS)
             .document(user.uid)
             .set(user)
             .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
@@ -38,7 +38,7 @@ class FirebaseService {
 
     companion object {
         private const val TAG = "FIREBASE_SERVICE"
-        private const val PATH_USER = "users"
+        private const val PATH_USERS = "users"
         private const val FIELD_UID = "uid"
     }
 }

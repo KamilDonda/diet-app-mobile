@@ -11,8 +11,9 @@ class LoginService(
     private val connectionService: ConnectionService
 ) {
 
-    fun login(fragment: Fragment, context: Context) {
+    fun login(fragment: Fragment, context: Context, uid: String) {
         sharedPreferences.setIsLogged(true)
+        sharedPreferences.setUserId(uid)
         navigateToHome(fragment, context)
     }
 

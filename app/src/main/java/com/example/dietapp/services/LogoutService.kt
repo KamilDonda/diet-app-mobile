@@ -7,6 +7,7 @@ class LogoutService(private val sharedPreferences: Preferences) {
 
     fun logout(activity: AppCompatActivity) {
         sharedPreferences.setIsLogged(false)
+        sharedPreferences.setUserId("")
         activity.finish()
     }
 }
