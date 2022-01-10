@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.example.dietapp.R
+import com.example.dietapp.database.models.User
 import com.example.dietapp.utils.AgeConverter
+import com.example.dietapp.utils.ArrayUtil.Companion.getArrayList
 import com.example.dietapp.utils.FloatConverter
 import com.example.dietapp.utils.setupDropdownMenu
 import com.google.android.material.button.MaterialButton
@@ -25,6 +27,10 @@ class ProfileDataFragment : Fragment() {
 
     private val viewModel: ProfileViewModel by sharedViewModel()
 
+    private lateinit var genders: ArrayList<String>
+    private lateinit var goals: ArrayList<String>
+    private lateinit var activities: ArrayList<String>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,21 +42,19 @@ class ProfileDataFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        genders = getArrayList(R.array.genders, requireContext())
+        goals = getArrayList(R.array.goals, requireContext())
+        activities = getArrayList(R.array.activities, requireContext())
+
         viewModel.bmi.observe(viewLifecycleOwner, {
             bmi.text = it.toString()
         })
 
         initData()
 
-        setupDropdownMenu(listOf("Mężczyzna", "Kobieta"), gender.editText)
-        setupDropdownMenu(
-            listOf("Schudnięcie", "Utrzymanie wagi", "Nabranie wagi"),
-            goal.editText
-        )
-        setupDropdownMenu(
-            listOf("Bardzo niska", "Niska", "Umiarkowana", "Wysoka", "Bardzo wysoka"),
-            activity_level.editText
-        )
+        setupDropdownMenu(genders, gender.editText)
+        setupDropdownMenu(goals, goal.editText)
+        setupDropdownMenu(activities, activity_level.editText)
 
         setupDatePicker()
         showAlertWithTextInputLayout("Podaj wagę", weight, "kg")
@@ -208,7 +212,17 @@ class ProfileDataFragment : Fragment() {
         }
 
         profile_save.setOnClickListener {
-            viewModel.save()
+            val user = User(
+                "uid",
+                "",
+                viewModel.gender == getString(R.string.man),
+                viewModel.age,
+                viewModel.height,
+                viewModel.weight,
+                activities.indexOf(viewModel.activity),
+                goals.indexOf(viewModel.goal),
+            )
+            viewModel.save(user)
         }
     }
 }

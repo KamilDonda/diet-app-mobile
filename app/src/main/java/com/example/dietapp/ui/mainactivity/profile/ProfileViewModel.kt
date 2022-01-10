@@ -93,17 +93,7 @@ class ProfileViewModel(private val firebaseService: FirebaseService) : ViewModel
         setHeight(null)
     }
 
-    fun save() {
-        val user = User(
-            "uid",
-            "",
-            gender == "Mężczyzna",
-            age,
-            height,
-            weight,
-            0,
-            0,
-        )
+    fun save(user: User) {
         firebaseService.updateUser(user)
     }
 }

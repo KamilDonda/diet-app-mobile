@@ -90,4 +90,25 @@
         <item>Sb</item>
         <item>Ndz</item>
     </string-array>
+
+    <string-array name="genders">
+        <item>Mężczyzna</item>
+        <item>Kobieta</item>
+    </string-array>
+    <string name="man">Mężczyzna</string>
+    <string name="woman">Kobieta</string>
+
+    <string-array name="goals">
+        <item>Schudnięcie</item>
+        <item>Utrzymanie wagi</item>
+        <item>Nabranie wagi</item>
+    </string-array>
+
+    <string-array name="activities">
+        <item>Bardzo niska</item>
+        <item>Niska</item>
+        <item>Umiarkowana</item>
+        <item>Wysoka</item>
+        <item>Bardzo wysoka</item>
+    </string-array>
 </resources>
