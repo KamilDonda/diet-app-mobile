@@ -115,11 +115,16 @@ class ProfileDataFragment : Fragment() {
             val builder = AlertDialog.Builder(activity).setView(view)
             val alert = builder.show()
 
-            val data = when (suffix) {
+            var data = when (suffix) {
                 "cm" -> viewModel.height.toString()
                 "kg" -> viewModel.weight.toString()
                 else -> ""
             }
+
+            if (data == null.toString()) {
+                data = ""
+            }
+
             view.dialog_input.setText(data)
 
             view.dialog_input.doOnTextChanged { text, _, _, _ ->

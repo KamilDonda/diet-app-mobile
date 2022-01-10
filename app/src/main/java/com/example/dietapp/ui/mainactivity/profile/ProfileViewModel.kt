@@ -31,52 +31,54 @@ class ProfileViewModel : ViewModel() {
         this.repeatedPassword = password
     }
 
-    var gender: String = "Mężczyzna"
+    var gender: String = "Wybierz"
         private set
 
     fun setGender(gender: String) {
         this.gender = gender
     }
 
-    var goal: String = "Utrzymanie wagi"
+    var goal: String = "Wybierz"
         private set
 
     fun setGoal(goal: String) {
         this.goal = goal
     }
 
-    var activity: String = "Umiarkowana"
+    var activity: String = "Wybierz"
         private set
 
     fun setActivity(activity: String) {
         this.activity = activity
     }
 
-    var age: Int = 20
+    var age: Int? = null
         private set
 
-    fun setAge(age: Int) {
+    fun setAge(age: Int?) {
         this.age = age
     }
 
-    var weight: Float = 50f
+    var weight: Float? = null
         private set
 
-    fun setWeight(weight: Float) {
+    fun setWeight(weight: Float?) {
         this.weight = weight
     }
 
-    var height: Float = 170f
+    var height: Float? = null
         private set
 
-    fun setHeight(height: Float) {
+    fun setHeight(height: Float?) {
         this.height = height
     }
 
-    val bmi = MutableLiveData(0f)
+    val bmi = MutableLiveData("")
 
     fun setBMI() {
-        val bmi = weight / ((height / 100) * (height / 100))
-        this.bmi.value = round(bmi * 100) / 100
+        if (weight != null && height != null) {
+            val bmi = weight!! / ((height!! / 100) * (height!! / 100))
+            this.bmi.value = (round(bmi * 100) / 100).toString()
+        }
     }
 }
