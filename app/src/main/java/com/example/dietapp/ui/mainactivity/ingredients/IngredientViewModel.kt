@@ -27,7 +27,13 @@ class IngredientViewModel(
     }
 
     fun setCurrentIngredient(position: Int) {
-        this.currentIngredient = ingredients.value!![position]
+        val ingredient = ingredients.value!![position]
+        this.currentIngredient = ingredient.copy(
+            carbohydrates = ingredient.carbohydrates * 100,
+            fats = ingredient.fats * 100,
+            kcal = ingredient.kcal * 100,
+            proteins = ingredient.proteins * 100,
+        )
     }
 
     fun prepareIngredients() {

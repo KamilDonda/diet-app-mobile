@@ -10,6 +10,15 @@ class FloatConverter {
             return "$number $suffix".trim()
         }
 
+        fun floatToString(
+            float: Float,
+            suffix: String = "",
+            prefix: String,
+            isChecked: Boolean = false
+        ): String {
+            return "$prefix ${floatToString(float, suffix, isChecked)}"
+        }
+
         private fun isWhole(value: Float): Boolean {
             return value - value.toInt() == 0.0f
         }
