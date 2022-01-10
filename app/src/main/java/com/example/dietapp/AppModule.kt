@@ -17,6 +17,7 @@ import com.example.dietapp.ui.mainactivity.home.DayFragment
 import com.example.dietapp.ui.mainactivity.home.HomeFragment
 import com.example.dietapp.ui.mainactivity.home.HomeViewModel
 import com.example.dietapp.ui.mainactivity.home.WeekFragment
+import com.example.dietapp.ui.mainactivity.ingredients.IngredientFragment
 import com.example.dietapp.ui.mainactivity.ingredients.IngredientViewModel
 import com.example.dietapp.ui.mainactivity.ingredients.IngredientsFragment
 import com.example.dietapp.ui.mainactivity.meals.*
@@ -78,6 +79,7 @@ val appModule = module {
     single { WeekFragment() }
     // Ingredients
     single { IngredientsFragment() }
+    single { IngredientFragment() }
     // Meals
     single { MealsFragment() }
     single { MealFragment() }

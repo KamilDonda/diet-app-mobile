@@ -3,6 +3,7 @@ package com.example.dietapp.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietapp.R
 import com.example.dietapp.database.models.ingredient.IngredientEntity
@@ -64,7 +65,7 @@ class IngredientsAdapter(private val viewModel: IngredientViewModel) :
 
         root.setOnClickListener {
             viewModel.setCurrentIngredient(position)
-//            it.findNavController().navigate(R.id.)
+            it.findNavController().navigate(R.id.action_ingredientsFragment_to_ingredientFragment)
         }
     }
 }
