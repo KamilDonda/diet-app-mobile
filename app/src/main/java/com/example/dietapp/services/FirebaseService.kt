@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.dietapp.database.models.User
 import com.google.firebase.firestore.FirebaseFirestore
 
-class FirebaseRepository {
+class FirebaseService {
 
     private val cloud = FirebaseFirestore.getInstance()
 

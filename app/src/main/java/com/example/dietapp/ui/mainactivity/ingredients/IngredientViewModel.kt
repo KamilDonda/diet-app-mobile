@@ -4,14 +4,16 @@ import android.os.Parcelable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.dietapp.database.models.ingredient.IngredientEntity
-import com.example.dietapp.services.DatabaseService
+import com.example.dietapp.database.repositories.IngredientRepo
 import com.example.dietapp.ui.filter.FilterViewModel
 import kotlinx.coroutines.launch
 import java.text.Collator
 import java.util.*
 import kotlin.collections.ArrayList
 
-class IngredientViewModel(private val dbService: DatabaseService) : FilterViewModel() {
+class IngredientViewModel(
+    private val ingredientRepo: IngredientRepo
+) : FilterViewModel() {
 
     private val _ingredients = arrayListOf<IngredientEntity>()
 
@@ -31,7 +33,7 @@ class IngredientViewModel(private val dbService: DatabaseService) : FilterViewMo
     fun prepareIngredients() {
         if (_ingredients.isEmpty()) {
             viewModelScope.launch {
-                _ingredients.addAll(dbService.db.ingredientDao().selectAll())
+                _ingredients.addAll(ingredientRepo.getAll())
                 ingredients.postValue(_ingredients)
             }
         }
@@ -69,23 +71,23 @@ class IngredientViewModel(private val dbService: DatabaseService) : FilterViewMo
 
         var data = _ingredients.filter {
             it.name.contains(searchText, true) &&
-                    it.kcal.toFloat() >= caloriesMin &&
-                    it.proteins.toFloat() >= proteinsMin &&
-                    it.fats.toFloat() >= fatsMin &&
-                    it.carbohydrates.toFloat() >= carbsMin
+                    it.kcal >= caloriesMin &&
+                    it.proteins >= proteinsMin &&
+                    it.fats >= fatsMin &&
+                    it.carbohydrates >= carbsMin
         } as ArrayList
 
         if (caloriesMax != null && caloriesMax != 0f) {
-            data = data.filter { it.kcal.toFloat() < caloriesMax } as ArrayList
+            data = data.filter { it.kcal < caloriesMax } as ArrayList
         }
         if (proteinsMax != null && proteinsMax != 0f) {
-            data = data.filter { it.proteins.toFloat() < proteinsMax } as ArrayList
+            data = data.filter { it.proteins < proteinsMax } as ArrayList
         }
         if (fatsMax != null && fatsMax != 0f) {
-            data = data.filter { it.fats.toFloat() < fatsMax } as ArrayList
+            data = data.filter { it.fats < fatsMax } as ArrayList
         }
         if (carbsMax != null && carbsMax != 0f) {
-            data = data.filter { it.carbohydrates.toFloat() < carbsMax } as ArrayList
+            data = data.filter { it.carbohydrates < carbsMax } as ArrayList
         }
 
         when (f.order) {

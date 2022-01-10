@@ -1,5 +1,7 @@
 package com.example.dietapp
 
+import com.example.dietapp.database.repositories.IngredientRepo
+import com.example.dietapp.database.repositories.MealRepo
 import com.example.dietapp.database.retrofit.RetrofitBuilder
 import com.example.dietapp.services.ConnectionService
 import com.example.dietapp.services.DatabaseService
@@ -36,7 +38,7 @@ val appModule = module {
     single { RetrofitBuilder }
 
 // ViewModel
-    viewModel { MealViewModel() }
+    viewModel { MealViewModel(get()) }
     viewModel { IngredientViewModel(get()) }
     viewModel { ProfileViewModel() }
     viewModel { HomeViewModel() }
@@ -48,6 +50,10 @@ val appModule = module {
     single { LoginService(get(), get()) }
     single { LogoutService(get()) }
     single { DatabaseService(get()) }
+
+// Repositories
+    single { IngredientRepo(get()) }
+    single { MealRepo(get()) }
 
 // SharedPreferences
     single { Preferences(get()) }
