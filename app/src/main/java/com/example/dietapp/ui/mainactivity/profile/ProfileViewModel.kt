@@ -91,15 +91,17 @@ class ProfileViewModel(
     }
 
     fun reset() {
-        setGender(null)
-        setGoal(null)
-        setActivity(null)
-        setAge(null)
-        setWeight(null)
-        setHeight(null)
+        val user = sharedPreferences.getProfileData()
+        setGender(user.gender)
+        setGoal(user.goal)
+        setActivity(user.activity)
+        setAge(user.age)
+        setWeight(user.weight)
+        setHeight(user.height)
     }
 
     fun save(user: User) {
         firebaseService.updateUser(user)
+        sharedPreferences.setProfileData(user)
     }
 }

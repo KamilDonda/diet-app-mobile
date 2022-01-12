@@ -80,6 +80,7 @@ class ProfileDataFragment : Fragment() {
     }
 
     private fun initData() {
+        viewModel.reset()
         gender.editText?.setText(genderBoolToString(viewModel.gender, requireContext()))
         goal.editText?.setText(goalIntToString(viewModel.goal, requireContext()))
         activity_level.editText?.setText(activityIntToString(viewModel.activity, requireContext()))
@@ -213,7 +214,6 @@ class ProfileDataFragment : Fragment() {
 
     private fun setupButtons() {
         profile_reset.setOnClickListener {
-            viewModel.reset()
             initData()
         }
 
