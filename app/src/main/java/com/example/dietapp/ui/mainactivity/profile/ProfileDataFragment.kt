@@ -12,6 +12,12 @@ import com.example.dietapp.database.models.User
 import com.example.dietapp.utils.AgeConverter
 import com.example.dietapp.utils.ArrayUtil.Companion.getArrayList
 import com.example.dietapp.utils.FloatConverter
+import com.example.dietapp.utils.ProfileDataConverter.Companion.activityIntToString
+import com.example.dietapp.utils.ProfileDataConverter.Companion.activityStringToInt
+import com.example.dietapp.utils.ProfileDataConverter.Companion.genderBoolToString
+import com.example.dietapp.utils.ProfileDataConverter.Companion.genderStringToBool
+import com.example.dietapp.utils.ProfileDataConverter.Companion.goalIntToString
+import com.example.dietapp.utils.ProfileDataConverter.Companion.goalStringToInt
 import com.example.dietapp.utils.setupDropdownMenu
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.CalendarConstraints
@@ -61,22 +67,22 @@ class ProfileDataFragment : Fragment() {
         showAlertWithTextInputLayout("Podaj wzrost", height, "cm")
 
         gender.editText?.doOnTextChanged { text, _, _, _ ->
-            viewModel.setGender(text.toString())
+            viewModel.setGender(genderStringToBool(text.toString(), requireContext()))
         }
         activity_level.editText?.doOnTextChanged { text, _, _, _ ->
-            viewModel.setActivity(text.toString())
+            viewModel.setActivity(activityStringToInt(text.toString(), requireContext()))
         }
         goal.editText?.doOnTextChanged { text, _, _, _ ->
-            viewModel.setGoal(text.toString())
+            viewModel.setGoal(goalStringToInt(text.toString(), requireContext()))
         }
 
         setupButtons()
     }
 
     private fun initData() {
-        gender.editText?.setText(viewModel.gender ?: "Wybierz")
-        goal.editText?.setText(viewModel.goal ?: "Wybierz")
-        activity_level.editText?.setText(viewModel.activity ?: "Wybierz")
+        gender.editText?.setText(genderBoolToString(viewModel.gender, requireContext()))
+        goal.editText?.setText(goalIntToString(viewModel.goal, requireContext()))
+        activity_level.editText?.setText(activityIntToString(viewModel.activity, requireContext()))
 
         age.text = AgeConverter.intToString(viewModel.age)
         weight.text = FloatConverter.floatToString(viewModel.weight, "kg")
@@ -215,12 +221,12 @@ class ProfileDataFragment : Fragment() {
             val user = User(
                 viewModel.getUserId(),
                 "",
-                viewModel.gender == getString(R.string.man),
+                viewModel.gender,
                 viewModel.age,
                 viewModel.height,
                 viewModel.weight,
-                activities.indexOf(viewModel.activity),
-                goals.indexOf(viewModel.goal),
+                viewModel.activity,
+                viewModel.goal,
             )
             viewModel.save(user)
         }

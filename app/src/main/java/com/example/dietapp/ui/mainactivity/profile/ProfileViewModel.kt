@@ -39,24 +39,24 @@ class ProfileViewModel(
         this.repeatedPassword = password
     }
 
-    var gender: String? = null
+    var gender: Boolean? = null
         private set
 
-    fun setGender(gender: String?) {
+    fun setGender(gender: Boolean?) {
         this.gender = gender
     }
 
-    var goal: String? = null
+    var goal: Int? = null
         private set
 
-    fun setGoal(goal: String?) {
+    fun setGoal(goal: Int?) {
         this.goal = goal
     }
 
-    var activity: String? = null
+    var activity: Int? = null
         private set
 
-    fun setActivity(activity: String?) {
+    fun setActivity(activity: Int?) {
         this.activity = activity
     }
 
