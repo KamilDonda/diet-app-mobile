@@ -43,6 +43,6 @@ class Preferences(context: Context) {
     companion object {
         const val IS_LOGGED = "IS_LOGGED"
         const val USER_ID = "USER_ID"
-        const val PROFILE_DATA = "USER_ID"
+        const val PROFILE_DATA = "PROFILE_DATA"
     }
 }

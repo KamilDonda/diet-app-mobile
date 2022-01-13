@@ -24,7 +24,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class RegisterFragment : Fragment() {
 
     private val viewModel: RegisterViewModel by sharedViewModel()
-    private val repository = FirebaseService()
+    private val firebaseService = FirebaseService()
     private val auth = FirebaseAuth.getInstance()
     private lateinit var googleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 123
@@ -68,7 +68,7 @@ class RegisterFragment : Fragment() {
                         .addOnSuccessListener {
                             if (it.user != null) {
                                 val user = User(it.user!!.uid)
-                                repository.createUser(user)
+                                firebaseService.createUser(user)
                                 viewModel.login(this, requireContext(), user.uid)
                             }
                         }
@@ -119,7 +119,7 @@ class RegisterFragment : Fragment() {
                         if (it.isSuccessful) {
                             if (it.result!!.user != null) {
                                 val user = User(it.result!!.user!!.uid)
-                                repository.createUserWithGoogle(user)
+                                firebaseService.createUserWithGoogle(user)
                                 viewModel.login(this, requireContext(), user.uid)
                             }
                         } else {

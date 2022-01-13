@@ -14,11 +14,11 @@ class LoginService(
     fun login(fragment: Fragment, context: Context, uid: String) {
         sharedPreferences.setIsLogged(true)
         sharedPreferences.setUserId(uid)
-        navigateToHome(fragment, context)
+        navigateToHome(fragment, context, uid)
     }
 
-    fun navigateToHome(fragment: Fragment, context: Context) {
-        connectionService.synchronize()
+    fun navigateToHome(fragment: Fragment, context: Context, uid: String? = null) {
+        connectionService.synchronize(uid)
         val intent = Intent(context, MainActivity::class.java)
         fragment.startActivity(intent)
     }

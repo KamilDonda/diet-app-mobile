@@ -45,7 +45,7 @@ val appModule = module {
 
 // Services
     single { FirebaseService() }
-    single { ConnectionService(get()) }
+    single { ConnectionService(get(), get(), get()) }
     single { LoginService(get(), get()) }
     single { LogoutService(get()) }
     single { DatabaseService(get()) }
