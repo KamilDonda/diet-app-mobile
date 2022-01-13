@@ -2,7 +2,7 @@ package com.example.dietapp.models
 
 import android.content.Context
 import com.example.dietapp.R
-import com.example.dietapp.utils.getAsArrayList
+import com.example.dietapp.utils.ArrayUtil.Companion.getArrayList
 
 data class Filter(
     val order: Int = 0,
@@ -34,7 +34,7 @@ data class Filter(
 
     fun getTextsForChips(context: Context, isCheckboxEnabled: Boolean = true) = listOf(
         isChecked(context, isCheckboxEnabled),
-        context.resources.getStringArray(R.array.filter_order).getAsArrayList()[order],
+        getArrayList(R.array.filter_order, context)[order],
         getRange(caloriesMin, caloriesMax, context.getString(R.string.calories), "kcal"),
         getRange(proteinsMin, proteinsMax, context.getString(R.string.proteins), "g"),
         getRange(fatsMin, fatsMax, context.getString(R.string.fats), "g"),

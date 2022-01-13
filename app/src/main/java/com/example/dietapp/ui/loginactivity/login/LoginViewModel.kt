@@ -28,8 +28,8 @@ class LoginViewModel(private val loginService: LoginService) : ViewModel() {
         setPassword("")
     }
 
-    fun login(fragment: Fragment, context: Context) {
-        loginService.login(fragment, context)
+    fun login(fragment: Fragment, context: Context, uid: String) {
+        loginService.login(fragment, context, uid)
         clearData()
     }
 }

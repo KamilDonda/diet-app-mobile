@@ -8,8 +8,16 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.example.dietapp.R
+import com.example.dietapp.database.models.User
 import com.example.dietapp.utils.AgeConverter
+import com.example.dietapp.utils.ArrayUtil.Companion.getArrayList
 import com.example.dietapp.utils.FloatConverter
+import com.example.dietapp.utils.ProfileDataConverter.Companion.activityIntToString
+import com.example.dietapp.utils.ProfileDataConverter.Companion.activityStringToInt
+import com.example.dietapp.utils.ProfileDataConverter.Companion.genderBoolToString
+import com.example.dietapp.utils.ProfileDataConverter.Companion.genderStringToBool
+import com.example.dietapp.utils.ProfileDataConverter.Companion.goalIntToString
+import com.example.dietapp.utils.ProfileDataConverter.Companion.goalStringToInt
 import com.example.dietapp.utils.setupDropdownMenu
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.CalendarConstraints
@@ -25,6 +33,10 @@ class ProfileDataFragment : Fragment() {
 
     private val viewModel: ProfileViewModel by sharedViewModel()
 
+    private lateinit var genders: ArrayList<String>
+    private lateinit var goals: ArrayList<String>
+    private lateinit var activities: ArrayList<String>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,41 +48,42 @@ class ProfileDataFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        genders = getArrayList(R.array.genders, requireContext())
+        goals = getArrayList(R.array.goals, requireContext())
+        activities = getArrayList(R.array.activities, requireContext())
+
         viewModel.bmi.observe(viewLifecycleOwner, {
             bmi.text = it.toString()
         })
 
         initData()
 
-        setupDropdownMenu(listOf("Mężczyzna", "Kobieta"), gender.editText)
-        setupDropdownMenu(
-            listOf("Schudnięcie", "Utrzymanie wagi", "Nabranie wagi"),
-            goal.editText
-        )
-        setupDropdownMenu(
-            listOf("Bardzo niska", "Niska", "Umiarkowana", "Wysoka", "Bardzo wysoka"),
-            activity_level.editText
-        )
+        setupDropdownMenu(genders, gender.editText)
+        setupDropdownMenu(goals, goal.editText)
+        setupDropdownMenu(activities, activity_level.editText)
 
         setupDatePicker()
         showAlertWithTextInputLayout("Podaj wagę", weight, "kg")
         showAlertWithTextInputLayout("Podaj wzrost", height, "cm")
 
         gender.editText?.doOnTextChanged { text, _, _, _ ->
-            viewModel.setGender(text.toString())
+            viewModel.setGender(genderStringToBool(text.toString(), requireContext()))
         }
         activity_level.editText?.doOnTextChanged { text, _, _, _ ->
-            viewModel.setActivity(text.toString())
+            viewModel.setActivity(activityStringToInt(text.toString(), requireContext()))
         }
         goal.editText?.doOnTextChanged { text, _, _, _ ->
-            viewModel.setGoal(text.toString())
+            viewModel.setGoal(goalStringToInt(text.toString(), requireContext()))
         }
+
+        setupButtons()
     }
 
     private fun initData() {
-        gender.editText?.setText(viewModel.gender)
-        goal.editText?.setText(viewModel.goal)
-        activity_level.editText?.setText(viewModel.activity)
+        viewModel.reset()
+        gender.editText?.setText(genderBoolToString(viewModel.gender, requireContext()))
+        goal.editText?.setText(goalIntToString(viewModel.goal, requireContext()))
+        activity_level.editText?.setText(activityIntToString(viewModel.activity, requireContext()))
 
         age.text = AgeConverter.intToString(viewModel.age)
         weight.text = FloatConverter.floatToString(viewModel.weight, "kg")
@@ -115,11 +128,16 @@ class ProfileDataFragment : Fragment() {
             val builder = AlertDialog.Builder(activity).setView(view)
             val alert = builder.show()
 
-            val data = when (suffix) {
+            var data = when (suffix) {
                 "cm" -> viewModel.height.toString()
                 "kg" -> viewModel.weight.toString()
                 else -> ""
             }
+
+            if (data == null.toString()) {
+                data = ""
+            }
+
             view.dialog_input.setText(data)
 
             view.dialog_input.doOnTextChanged { text, _, _, _ ->
@@ -192,5 +210,25 @@ class ProfileDataFragment : Fragment() {
             age--
         }
         return age
+    }
+
+    private fun setupButtons() {
+        profile_reset.setOnClickListener {
+            initData()
+        }
+
+        profile_save.setOnClickListener {
+            val user = User(
+                viewModel.getUserId(),
+                "",
+                viewModel.gender,
+                viewModel.age,
+                viewModel.height,
+                viewModel.weight,
+                viewModel.activity,
+                viewModel.goal,
+            )
+            viewModel.save(user)
+        }
     }
 }

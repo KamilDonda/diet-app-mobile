@@ -36,8 +36,8 @@ class RegisterViewModel(private val loginService: LoginService) : ViewModel() {
         setRepeatedPassword("")
     }
 
-    fun login(fragment: Fragment, context: Context) {
-        loginService.login(fragment, context)
+    fun login(fragment: Fragment, context: Context, uid: String) {
+        loginService.login(fragment, context, uid)
         clearData()
     }
 }

@@ -4,7 +4,11 @@ import kotlin.math.round
 
 class FloatConverter {
     companion object {
-        fun floatToString(float: Float, suffix: String = "", isChecked: Boolean = false): String {
+        fun floatToString(float: Float?, suffix: String = "", isChecked: Boolean = false): String {
+            if (float == null) {
+                return "Wybierz"
+            }
+
             val f = if (isChecked) float * 100 else float
             val number = if (isWhole(f)) f.toInt() else f.round(1)
             return "$number $suffix".trim()

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.dietapp.R
 import com.example.dietapp.models.Filter
-import com.example.dietapp.utils.getAsArrayList
+import com.example.dietapp.utils.ArrayUtil.Companion.getArrayList
 import com.example.dietapp.utils.setupDropdownMenu
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.android.synthetic.main.fragment_filter.*
@@ -36,7 +36,7 @@ class FilterFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        filters = resources.getStringArray(R.array.filter_order).getAsArrayList()
+        filters = getArrayList(R.array.filter_order, requireContext())
 
         dialog_ok.setOnClickListener {
             val f = getFilterOptions()

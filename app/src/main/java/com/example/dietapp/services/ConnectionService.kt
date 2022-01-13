@@ -5,12 +5,17 @@ import com.example.dietapp.database.models.ingredient.IngredientEntityList
 import com.example.dietapp.database.models.meal.MealEntityList
 import com.example.dietapp.database.models.mealingredient.MealIngredientEntityList
 import com.example.dietapp.database.retrofit.RetrofitBuilder
+import com.example.dietapp.sharedpreferences.Preferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
-class ConnectionService(private val dbService: DatabaseService) {
+class ConnectionService(
+    private val dbService: DatabaseService,
+    private val firebaseService: FirebaseService,
+    private val sharedPreferences: Preferences
+) {
 
     companion object {
         const val TAG = "CONNECTION_SERVICE"
@@ -55,7 +60,7 @@ class ConnectionService(private val dbService: DatabaseService) {
         }
     }
 
-    fun synchronize() {
+    fun synchronize(uid: String?) {
         CoroutineScope(Dispatchers.IO).launch {
             downloadIngredients()?.let {
                 dbService.db.ingredientDao()
@@ -68,6 +73,11 @@ class ConnectionService(private val dbService: DatabaseService) {
             }
             downloadMealsIngredient()?.let {
                 dbService.db.mealIngredientDao().insertAll(it)
+            }
+
+            if (uid != null) {
+                val user = firebaseService.getUserData(uid)
+                sharedPreferences.setProfileData(user)
             }
         }
     }
