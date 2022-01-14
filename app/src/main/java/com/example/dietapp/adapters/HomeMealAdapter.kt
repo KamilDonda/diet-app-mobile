@@ -3,6 +3,8 @@ package com.example.dietapp.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.content.res.ResourcesCompat.getDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietapp.R
 import com.example.dietapp.models.MealHome
@@ -34,11 +36,14 @@ class HomeMealAdapter :
         val name = holder.itemView.findViewById<MaterialTextView>(R.id.home_meal_name)
         val type = holder.itemView.findViewById<MaterialTextView>(R.id.home_meal_type)
         val kcal = holder.itemView.findViewById<MaterialButton>(R.id.home_meal_kcal)
+        val icon = holder.itemView.findViewById<ImageView>(R.id.materialButton)
 
         val item = _list[position]
 
         name.text = item.name
         type.text = item.type
         kcal.text = FloatConverter.floatToString(item.kcal, "kcal")
+        val image = icon.resources.getDrawable(item.icon)
+        icon.setImageDrawable(image)
     }
 }

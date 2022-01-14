@@ -13,18 +13,19 @@
         android:layout_height="wrap_content"
         android:background="#fafafa">
 
-        <com.google.android.material.button.MaterialButton
+        <ImageView
             android:id="@+id/materialButton"
             android:layout_width="100dp"
             android:layout_height="0dp"
-            android:backgroundTint="@color/primaryColorLight"
             android:clickable="false"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:textSize="50sp"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@null"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/home_meal_type"
