@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/icon_todolist"
         android:title="Home" />
     <item
         android:id="@+id/mealsFragment"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/icon_restaurant"
         android:title="Meals" />
     <item
         android:id="@+id/ingredientsFragment"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/icon_apple"
         android:title="Ingredients" />
     <item
         android:id="@+id/profileFragment"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/icon_preference"
         android:title="Profile" />
 </menu>
