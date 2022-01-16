@@ -12,19 +12,6 @@
         android:layout_height="wrap_content"
         android:background="#fafafa">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/item_number"
-            android:layout_width="100dp"
-            android:layout_height="0dp"
-            android:backgroundTint="@color/primaryColorLight"
-            android:clickable="false"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/item_name"
             android:layout_width="match_parent"
@@ -36,7 +23,7 @@
             android:textSize="16sp"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toStartOf="@+id/item_kcal"
-            app:layout_constraintStart_toEndOf="@+id/item_number"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
@@ -64,7 +51,7 @@
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/item_number"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_name">
 
             <com.google.android.material.textview.MaterialTextView

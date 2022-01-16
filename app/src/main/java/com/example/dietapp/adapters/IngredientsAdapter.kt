@@ -46,7 +46,6 @@ class IngredientsAdapter(private val viewModel: IngredientViewModel) :
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val root = holder.itemView.rootView
-        val number = holder.itemView.findViewById<MaterialButton>(R.id.item_number)
         val name = holder.itemView.findViewById<MaterialTextView>(R.id.item_name)
         val kcal = holder.itemView.findViewById<MaterialButton>(R.id.item_kcal)
         val proteins = holder.itemView.findViewById<MaterialTextView>(R.id.item_proteins)
@@ -56,7 +55,6 @@ class IngredientsAdapter(private val viewModel: IngredientViewModel) :
         val item = _list[position]
         val isChecked = viewModel.filter.isChecked
 
-        number.text = (position + 1).toString()
         name.text = item.name
         kcal.text = FloatConverter.floatToString(item.kcal, "kcal", isChecked)
         proteins.text = FloatConverter.floatToString(item.proteins, "g", isChecked)
