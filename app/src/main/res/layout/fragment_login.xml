@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="match_parent" android:layout_height="match_parent"
     tools:context=".ui.loginactivity.login.LoginFragment">
 
     <ImageView
@@ -38,7 +38,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:rippleColor="@color/primaryColorLight" />
-
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,7 +72,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
             <com.example.dietapp.utils.CustomTextInputEditText
                 android:id="@+id/email_input"
                 android:layout_width="match_parent"
@@ -81,7 +79,6 @@
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/primaryColor" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -96,7 +93,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/email_field">
-
             <com.example.dietapp.utils.CustomTextInputEditText
                 android:id="@+id/password_input"
                 android:layout_width="match_parent"
@@ -104,7 +100,6 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:textColor="@color/primaryColor" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -114,7 +109,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password_field" />
+            app:layout_constraintTop_toBottomOf="@+id/password_field"
+            android:textAllCaps="false"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

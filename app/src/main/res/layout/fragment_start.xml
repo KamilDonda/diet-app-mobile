@@ -40,7 +40,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textAllCaps="false"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/start_register_button"
@@ -49,7 +50,8 @@
             android:text="@string/register_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/start_login_button" />
+            app:layout_constraintTop_toBottomOf="@+id/start_login_button"
+            android:textAllCaps="false"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
