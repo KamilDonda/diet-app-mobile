@@ -1,6 +1,7 @@
 package com.example.dietapp.services
 
 import android.util.Log
+import com.example.dietapp.database.models.diet.DietEntityList
 import com.example.dietapp.database.models.ingredient.IngredientEntityList
 import com.example.dietapp.database.models.meal.MealEntityList
 import com.example.dietapp.database.models.mealingredient.MealIngredientEntityList
@@ -52,6 +53,19 @@ class ConnectionService(
             RetrofitBuilder
                 .instance
                 .getMealsIngredientAsync()
+                .await()
+                .body()!!
+        } catch (e: Exception) {
+            Log.v(TAG, e.stackTraceToString())
+            null
+        }
+    }
+
+    suspend fun downloadDiet(uid: String): DietEntityList? {
+        return try {
+            RetrofitBuilder
+                .instance
+                .getGeneratedDietAsync(uid)
                 .await()
                 .body()!!
         } catch (e: Exception) {

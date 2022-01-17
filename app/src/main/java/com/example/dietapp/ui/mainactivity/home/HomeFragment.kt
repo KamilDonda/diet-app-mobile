@@ -50,5 +50,8 @@ class HomeFragment : Fragment() {
         week_stats.setOnClickListener {
             it.findNavController().navigate(R.id.action_homeFragment_to_weekFragment)
         }
+        generate_diet.setOnClickListener {
+            viewModel.generateDiet()
+        }
     }
 }
