@@ -17,6 +17,6 @@ class HomeViewModel(private val connectionService: ConnectionService) : ViewMode
     }
 
     fun generateDiet() {
-        connectionService.synchronizeDiet()
+        connectionService.synchronizeDietWithApi()
     }
 }

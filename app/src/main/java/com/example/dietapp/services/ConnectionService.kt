@@ -90,13 +90,18 @@ class ConnectionService(
             }
 
             if (uid != null) {
-                val user = firebaseService.getUserData(uid)
-                sharedPreferences.setProfileData(user)
+                try {
+                    val user = firebaseService.getUserData(uid)
+                    sharedPreferences.setProfileData(user)
+                    dbService.db.dietDao().insertAll(user.diet)
+                } catch (e: Exception) {
+                    Log.v(TAG, e.stackTraceToString())
+                }
             }
         }
     }
 
-    fun synchronizeDiet() {
+    fun synchronizeDietWithApi() {
         CoroutineScope(Dispatchers.IO).launch {
             val uid = sharedPreferences.getUserId()
             downloadDiet(uid)?.let {
