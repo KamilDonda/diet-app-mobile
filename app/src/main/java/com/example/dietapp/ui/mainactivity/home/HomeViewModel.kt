@@ -2,17 +2,11 @@ package com.example.dietapp.ui.mainactivity.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.dietapp.R
 import com.example.dietapp.models.MealHome
 import com.example.dietapp.services.ConnectionService
-import com.example.dietapp.sharedpreferences.Preferences
-import kotlinx.coroutines.launch
 
-class HomeViewModel(
-    private val sharedPreferences: Preferences,
-    private val connectionService: ConnectionService
-) : ViewModel() {
+class HomeViewModel(private val connectionService: ConnectionService) : ViewModel() {
 
     val meals = MutableLiveData(ArrayList<MealHome>()).apply {
         value = arrayListOf(
@@ -23,8 +17,6 @@ class HomeViewModel(
     }
 
     fun generateDiet() {
-        viewModelScope.launch {
-            val diet = connectionService.downloadDiet(sharedPreferences.getUserId())
-        }
+        connectionService.synchronizeDiet()
     }
 }

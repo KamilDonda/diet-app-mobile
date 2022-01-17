@@ -61,7 +61,7 @@ class ConnectionService(
         }
     }
 
-    suspend fun downloadDiet(uid: String): DietEntityList? {
+    private suspend fun downloadDiet(uid: String): DietEntityList? {
         return try {
             RetrofitBuilder
                 .instance
@@ -92,6 +92,18 @@ class ConnectionService(
             if (uid != null) {
                 val user = firebaseService.getUserData(uid)
                 sharedPreferences.setProfileData(user)
+            }
+        }
+    }
+
+    fun synchronizeDiet() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val uid = sharedPreferences.getUserId()
+            downloadDiet(uid)?.let {
+                var id = 1
+                val dietList = it.map { entity -> entity.copy(id = id++) }
+                dbService.db.dietDao().insertAll(dietList)
+                firebaseService.updateUserDiet(uid, dietList)
             }
         }
     }

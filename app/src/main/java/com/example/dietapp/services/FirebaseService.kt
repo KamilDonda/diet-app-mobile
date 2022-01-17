@@ -2,6 +2,7 @@ package com.example.dietapp.services
 
 import android.util.Log
 import com.example.dietapp.database.models.User
+import com.example.dietapp.database.models.diet.DietEntity
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
@@ -44,6 +45,14 @@ class FirebaseService {
                 .document(uid)
                 .get()
         ).toObject<User>() ?: User(uid)
+    }
+
+    fun updateUserDiet(uid: String, dietList: List<DietEntity>) {
+        cloud.collection(PATH_USERS)
+            .document(uid)
+            .update("diet", dietList)
+            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
     }
 
     companion object {
