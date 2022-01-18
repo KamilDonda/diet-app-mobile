@@ -1,5 +1,6 @@
 package com.example.dietapp.ui.mainactivity.home
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -33,12 +34,17 @@ class WeekFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_week, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         x = resources.getStringArray(R.array.days)
 
         viewModel.dietOfWeek.observe(viewLifecycleOwner, {
+            val start = DateUtil.dateToString(DateUtil.getStartOfWeek())
+            val end = DateUtil.dateToString(DateUtil.getEndOfWeek())
+            week_textView.text = "$start - $end"
+
             val dietList = ArrayList<Diet>()
             dietList.addAll(it.map { it.copy(date = DateUtil.longToDate(it.date).day.toLong()) }
                 .sortedBy { it.date })
