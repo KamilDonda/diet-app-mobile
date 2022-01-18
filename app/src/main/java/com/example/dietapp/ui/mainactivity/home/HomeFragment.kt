@@ -27,6 +27,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.setDietOfWeek()
+
         val homeMealAdapter = HomeMealAdapter()
         home_rv.adapter = homeMealAdapter
 
@@ -58,7 +60,9 @@ class HomeFragment : Fragment() {
             it.findNavController().navigate(R.id.action_homeFragment_to_weekFragment)
         }
         generate_diet.setOnClickListener {
-            viewModel.generateDiet()
+            viewModel.generateDiet().observe(viewLifecycleOwner, {
+                viewModel.setDietOfWeek()
+            })
         }
     }
 }

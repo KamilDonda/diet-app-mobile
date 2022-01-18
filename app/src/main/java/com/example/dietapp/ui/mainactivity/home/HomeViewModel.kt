@@ -1,5 +1,6 @@
 package com.example.dietapp.ui.mainactivity.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,9 +16,11 @@ class HomeViewModel(
     private val mealRepo: MealRepo
 ) : ViewModel() {
 
-    val dietOfWeek = MutableLiveData(ArrayList<Diet>()).apply {
+    val dietOfWeek = MutableLiveData(ArrayList<Diet>())
+
+    fun setDietOfWeek() {
         viewModelScope.launch {
-            this@apply.postValue(mealRepo.getDietOfWeek())
+            dietOfWeek.postValue(mealRepo.getDietOfWeek())
         }
     }
 
@@ -54,7 +57,7 @@ class HomeViewModel(
         homeMeals.postValue(list)
     }
 
-    fun generateDiet() {
-        connectionService.synchronizeDietWithApi()
+    fun generateDiet(): LiveData<Boolean> {
+        return connectionService.synchronizeDietWithApi()
     }
 }

@@ -1,6 +1,8 @@
 package com.example.dietapp.services
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.dietapp.database.models.diet.DietEntityList
 import com.example.dietapp.database.models.ingredient.IngredientEntityList
 import com.example.dietapp.database.models.meal.MealEntityList
@@ -101,7 +103,8 @@ class ConnectionService(
         }
     }
 
-    fun synchronizeDietWithApi() {
+    fun synchronizeDietWithApi(): LiveData<Boolean> {
+        val isFinished = MutableLiveData(false)
         CoroutineScope(Dispatchers.IO).launch {
             val uid = sharedPreferences.getUserId()
             downloadDiet(uid)?.let {
@@ -109,7 +112,10 @@ class ConnectionService(
                 val dietList = it.map { entity -> entity.copy(id = id++) }
                 dbService.db.dietDao().insertAll(dietList)
                 firebaseService.updateUserDiet(uid, dietList)
+
+                isFinished.postValue(true)
             }
         }
+        return isFinished
     }
 }
