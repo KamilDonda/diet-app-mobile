@@ -13,6 +13,8 @@ import com.example.dietapp.adapters.StaticDayAdapter
 import com.example.dietapp.models.Diet
 import com.example.dietapp.models.Macroday
 import com.example.dietapp.models.Static
+import com.example.dietapp.utils.ArrayUtil
+import com.example.dietapp.utils.DateUtil
 import com.example.dietapp.utils.FloatConverter.Companion.floatToString
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
@@ -50,6 +52,9 @@ class DayFragment : Fragment() {
         diet = viewModel.currentDiet!!
 
         title1.text = floatToString(diet.getKcal(), "kcal", "Kaloryczność:")
+        val date = Date(diet.date)
+        val day = ArrayUtil.getArrayList(R.array.days_of_week, requireContext())[date.day]
+        day_textView.text = "$day  - ${DateUtil.dateToString(date)}"
 
         setStatisticsData(Static(1, diet.breakfast.kcal, diet.dinner.kcal, diet.supper.kcal))
         setMacroData(Macroday(1, diet.getProteins(), diet.getCarbs(), diet.getFats()))
