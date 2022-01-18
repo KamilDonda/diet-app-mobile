@@ -14,4 +14,6 @@ data class DietEntity(
 ) : Serializable {
 
     constructor() : this(0)
+
+    fun getIds() = listOf(this.breakfast, this.dinner, this.supper)
 }

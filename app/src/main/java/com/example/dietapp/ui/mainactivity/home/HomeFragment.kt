@@ -32,8 +32,15 @@ class HomeFragment : Fragment() {
 
         setupButtons()
 
-        viewModel.meals.observe(viewLifecycleOwner, {
+        viewModel.homeMeals.observe(viewLifecycleOwner, {
             homeMealAdapter.setList(it)
+        })
+
+        viewModel.dietOfWeek.observe(viewLifecycleOwner, { dietList ->
+            if (dietList.isNotEmpty()) {
+                viewModel.setCurrentDiet(0)
+                viewModel.setHomeMeals()
+            }
         })
 
         requireActivity().onBackPressedDispatcher.addCallback(
