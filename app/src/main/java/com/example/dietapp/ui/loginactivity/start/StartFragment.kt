@@ -43,10 +43,16 @@ class StartFragment : Fragment() {
         super.onStart()
 
         if (sharedPreferences.getIsLogged()) {
+            progressBar.visibility = View.VISIBLE
+            start_login_button.isEnabled = false
+            start_register_button.isEnabled = false
             loginService.synchronize(sharedPreferences.getUserId()).observe(viewLifecycleOwner, {
                 if (it) {
                     val intent = Intent(context, MainActivity::class.java)
                     this.startActivity(intent)
+                    progressBar.visibility = View.GONE
+                    start_login_button.isEnabled = true
+                    start_register_button.isEnabled = true
                 }
             })
         }
