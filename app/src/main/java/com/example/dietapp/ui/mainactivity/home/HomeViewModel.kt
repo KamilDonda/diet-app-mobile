@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.dietapp.R
 import com.example.dietapp.database.repositories.MealRepo
 import com.example.dietapp.models.Diet
+import com.example.dietapp.models.Meal
 import com.example.dietapp.models.MealHome
 import com.example.dietapp.services.ConnectionService
 import kotlinx.coroutines.launch
@@ -59,5 +60,21 @@ class HomeViewModel(
 
     fun generateDiet(): LiveData<Boolean> {
         return connectionService.synchronizeDietWithApi()
+    }
+
+    var currentMeal: Meal? = null
+        private set
+
+    fun setCurrentMeal(position: Int) {
+        currentMeal = when (position) {
+            0 -> currentDiet!!.breakfast
+            1 -> currentDiet!!.dinner
+            2 -> currentDiet!!.supper
+            else -> null
+        }
+    }
+
+    fun setCurrentMeal(meal: Meal?) {
+        currentMeal = meal
     }
 }

@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
 
         viewModel.setDietOfWeek()
 
-        val homeMealAdapter = HomeMealAdapter()
+        val homeMealAdapter = HomeMealAdapter(viewModel)
         home_rv.adapter = homeMealAdapter
 
         setupButtons()
