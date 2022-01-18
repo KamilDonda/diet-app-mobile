@@ -31,9 +31,8 @@ class MealRepo(dbService: DatabaseService) {
             }
 
             val mealsOfDay = getMeals(mealEntities, ingredients, mealIngredient)
-            dietOfWeek.add(Diet(mealsOfDay[0], mealsOfDay[1], mealsOfDay[2]))
+            dietOfWeek.add(Diet(mealsOfDay[0], mealsOfDay[1], mealsOfDay[2], diet.date!!))
         }
-
         return dietOfWeek
     }
 }

@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
 import com.example.dietapp.adapters.HomeMealAdapter
+import com.example.dietapp.utils.ArrayUtil.Companion.getArrayList
+import com.example.dietapp.utils.DateUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -34,14 +36,24 @@ class HomeFragment : Fragment() {
 
         setupButtons()
 
-        viewModel.homeMeals.observe(viewLifecycleOwner, {
-            homeMealAdapter.setList(it)
-        })
-
         viewModel.dietOfWeek.observe(viewLifecycleOwner, { dietList ->
             if (dietList.isNotEmpty()) {
-                viewModel.setCurrentDiet(0)
+
+                val currentDate = DateUtil.getCurrentDay()
+                val currentDiet =
+                    dietList.find { (DateUtil.difference(currentDate, it.date) % 7) == 0L }
+
+                viewModel.setCurrentDiet(currentDiet!!)
                 viewModel.setHomeMeals()
+            }
+        })
+
+        viewModel.homeMeals.observe(viewLifecycleOwner, {
+            homeMealAdapter.setList(it)
+
+            if (viewModel.currentDiet != null) {
+                val date = DateUtil.longToDate(viewModel.currentDiet!!.date)
+                home_day.text = getArrayList(R.array.days_of_week, requireContext())[date.day]
             }
         })
 

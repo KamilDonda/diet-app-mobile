@@ -9,6 +9,7 @@ import com.example.dietapp.database.models.meal.MealEntityList
 import com.example.dietapp.database.models.mealingredient.MealIngredientEntityList
 import com.example.dietapp.database.retrofit.RetrofitBuilder
 import com.example.dietapp.sharedpreferences.Preferences
+import com.example.dietapp.utils.DateUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -113,7 +114,12 @@ class ConnectionService(
             val uid = sharedPreferences.getUserId()
             downloadDiet(uid)?.let {
                 var id = 1
-                val dietList = it.map { entity -> entity.copy(id = id++) }
+
+                val timeInMillis = DateUtil.getCurrentDay()
+                val nextDay = DateUtil.DAY
+                val dietList = it.mapIndexed { index, entity ->
+                    entity.copy(id = id++, date = timeInMillis + index * nextDay)
+                }
                 dbService.db.dietDao().insertAll(dietList)
                 firebaseService.updateUserDiet(uid, dietList)
 

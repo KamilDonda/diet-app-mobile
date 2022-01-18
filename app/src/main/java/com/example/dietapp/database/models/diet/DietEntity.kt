@@ -11,6 +11,7 @@ data class DietEntity(
     val breakfast: Int = -1,
     val dinner: Int = -1,
     val supper: Int = -1,
+    val date: Long? = null
 ) : Serializable {
 
     constructor() : this(0)
