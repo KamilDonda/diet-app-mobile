@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.example.dietapp.R
 import com.example.dietapp.database.models.User
 import com.example.dietapp.services.FirebaseService
+import com.example.dietapp.ui.mainactivity.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -31,6 +32,9 @@ class LoginFragment : Fragment() {
 
     protected fun showSnackbar(message: String, length: Int = Snackbar.LENGTH_LONG) {
         Snackbar.make(requireView(), message, length).show()
+        progressBar.visibility = View.GONE
+        login_button.isEnabled = true
+        login_google.isEnabled = true
     }
 
     override fun onCreateView(
@@ -54,6 +58,7 @@ class LoginFragment : Fragment() {
 
     private fun setupSignInClick() {
         login_button.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             val email = email_input.text?.trim().toString()
             val password = password_input.text?.trim().toString()
 
@@ -64,11 +69,13 @@ class LoginFragment : Fragment() {
                     auth.signInWithEmailAndPassword(email, password)
                         .addOnSuccessListener {
                             if (it.user != null) {
-                                viewModel.login(this, requireContext(), it.user!!.uid)
+                                viewModel.login(it.user!!.uid).observe(viewLifecycleOwner, {
+                                    login(it)
+                                })
                             }
                         }
                         .addOnFailureListener {
-                            showSnackbar(it.message.toString())
+                            showSnackbar("Coś poszło nie tak :(")
                         }
                 }
             }
@@ -111,20 +118,23 @@ class LoginFragment : Fragment() {
                             if (it.result!!.user != null) {
                                 val user = User(it.result!!.user!!.uid)
                                 firebaseService.createUserWithGoogle(user)
-                                viewModel.login(this, requireContext(), user.uid)
+                                viewModel.login(user.uid).observe(viewLifecycleOwner, {
+                                    login(it)
+                                })
                             }
                         } else {
-                            showSnackbar(it.exception?.message.toString())
+                            showSnackbar("Coś poszło nie tak :(")
                         }
                     }
             } catch (e: ApiException) {
-                showSnackbar(e.message.toString())
+                showSnackbar("Coś poszło nie tak :(")
             }
         }
     }
 
     private fun setupSignInWithGoogleClick() {
         login_google.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(
                 signInIntent,
@@ -141,5 +151,18 @@ class LoginFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         initData()
+    }
+
+    private fun login(canLogIn: Boolean) {
+        login_button.isEnabled = false
+        login_google.isEnabled = false
+
+        if (canLogIn) {
+            val intent = Intent(context, MainActivity::class.java)
+            this.startActivity(intent)
+            login_button.isEnabled = true
+            login_google.isEnabled = true
+            progressBar.visibility = View.GONE
+        }
     }
 }

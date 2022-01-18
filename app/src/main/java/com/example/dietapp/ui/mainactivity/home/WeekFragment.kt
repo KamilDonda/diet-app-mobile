@@ -1,5 +1,6 @@
 package com.example.dietapp.ui.mainactivity.home
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
+import com.example.dietapp.models.Diet
+import com.example.dietapp.utils.DateUtil
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -15,11 +18,12 @@ import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import kotlinx.android.synthetic.main.fragment_week.*
-import kotlin.collections.ArrayList
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class WeekFragment : Fragment() {
 
+    private val viewModel: HomeViewModel by sharedViewModel()
     private lateinit var x: Array<String>
 
     override fun onCreateView(
@@ -30,13 +34,29 @@ class WeekFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_week, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         x = resources.getStringArray(R.array.days)
-        calories()
-        drawLineChart()
-        drawLineChartMacro()
+
+        viewModel.dietOfWeek.observe(viewLifecycleOwner, {
+            val start = DateUtil.dateToString(DateUtil.getStartOfWeek())
+            val end = DateUtil.dateToString(DateUtil.getEndOfWeek())
+            week_textView.text = "$start - $end"
+
+            val dietList = ArrayList<Diet>()
+            dietList.addAll(it.map { it.copy(date = DateUtil.longToDate(it.date).day.toLong()) }
+                .sortedBy { it.date })
+            val first = dietList.first()
+            dietList.removeAt(0)
+            dietList.add(first)
+
+            calories(dietList)
+            drawLineChart(dietList)
+            drawLineChartMacro(dietList)
+
+        })
 
         week_back_button.setOnClickListener {
             it.findNavController().navigate(R.id.action_weekFragment_to_homeFragment)
@@ -51,18 +71,13 @@ class WeekFragment : Fragment() {
 //        Log.d("LineChart", (e as Entry).toString())
 //    }
 
-    private fun calories()
-    {
+    private fun calories(dietList: ArrayList<Diet>) {
         val days = ArrayList<BarEntry>()
         val barChart = idbarchart
 
-        days.add(BarEntry(0f, 2050f))
-        days.add(BarEntry(1f, 2740f))
-        days.add(BarEntry(2f, 2009f))
-        days.add(BarEntry(3f, 2150f))
-        days.add(BarEntry(4f, 2510f))
-        days.add(BarEntry(5f, 2400f))
-        days.add(BarEntry(6f, 2030f))
+        dietList.forEachIndexed { index, diet ->
+            days.add(BarEntry(index.toFloat(), diet.getKcal()))
+        }
 
         val barDataSet = BarDataSet(days, "Kalorie")
         barDataSet.setColors(resources.getColor(R.color.colorCarbs))
@@ -103,11 +118,11 @@ class WeekFragment : Fragment() {
         barChart.invalidate()
     }
 
-    private fun drawLineChart() {
-        val lineChart =  idlinechart
-        val lineEntries1 = getDataSet1()
-        val lineEntries2 = getDataSet2()
-        val lineEntries3 = getDataSet3()
+    private fun drawLineChart(dietList: ArrayList<Diet>) {
+        val lineChart = idlinechart
+        val lineEntries1 = getDataSet1(dietList)
+        val lineEntries2 = getDataSet2(dietList)
+        val lineEntries3 = getDataSet3(dietList)
         val lineDataSet1 = LineDataSet(lineEntries1, getString(R.string.breakfast))
         val lineDataSet2 = LineDataSet(lineEntries2, getString(R.string.lunch))
         val lineDataSet3 = LineDataSet(lineEntries3, getString(R.string.dinner))
@@ -166,50 +181,35 @@ class WeekFragment : Fragment() {
         lineChart.invalidate()
     }
 
-    private fun getDataSet1() :  ArrayList<Entry>{
+    private fun getDataSet1(dietList: ArrayList<Diet>): ArrayList<Entry> {
         val lineEntries = ArrayList<Entry>()
-        lineEntries.add(Entry(0f, 645f))
-        lineEntries.add(Entry(1f, 589f))
-        lineEntries.add(Entry(2f, 602f))
-        lineEntries.add(Entry(3f, 634f))
-        lineEntries.add(Entry(4f, 588f))
-        lineEntries.add(Entry(5f, 610f))
-        lineEntries.add(Entry(6f, 624f))
-
+        dietList.forEachIndexed { index, diet ->
+            lineEntries.add(Entry(index.toFloat(), diet.breakfast.kcal))
+        }
         return lineEntries
     }
 
-    private fun getDataSet2() :  ArrayList<Entry>{
+    private fun getDataSet2(dietList: ArrayList<Diet>): ArrayList<Entry> {
         val lineEntries = ArrayList<Entry>()
-        lineEntries.add(Entry(0f, 870f))
-        lineEntries.add(Entry(1f, 790f))
-        lineEntries.add(Entry(2f, 924f))
-        lineEntries.add(Entry(3f, 901f))
-        lineEntries.add(Entry(4f, 865f))
-        lineEntries.add(Entry(5f, 845f))
-        lineEntries.add(Entry(6f, 819f))
-
+        dietList.forEachIndexed { index, diet ->
+            lineEntries.add(Entry(index.toFloat(), diet.dinner.kcal))
+        }
         return lineEntries
     }
 
-    private fun getDataSet3() :  ArrayList<Entry>{
+    private fun getDataSet3(dietList: ArrayList<Diet>): ArrayList<Entry> {
         val lineEntries = ArrayList<Entry>()
-        lineEntries.add(Entry(0f, 645f))
-        lineEntries.add(Entry(1f, 802f))
-        lineEntries.add(Entry(2f, 780f))
-        lineEntries.add(Entry(3f, 680f))
-        lineEntries.add(Entry(4f, 750f))
-        lineEntries.add(Entry(5f, 744f))
-        lineEntries.add(Entry(6f, 801f))
-
+        dietList.forEachIndexed { index, diet ->
+            lineEntries.add(Entry(index.toFloat(), diet.supper.kcal))
+        }
         return lineEntries
     }
 
-    private fun drawLineChartMacro() {
-        val lineChart =  idlinechartmacro
-        val lineEntries1 = getDataSet4()
-        val lineEntries2 = getDataSet5()
-        val lineEntries3 = getDataSet6()
+    private fun drawLineChartMacro(dietList: ArrayList<Diet>) {
+        val lineChart = idlinechartmacro
+        val lineEntries1 = getDataSet4(dietList)
+        val lineEntries2 = getDataSet5(dietList)
+        val lineEntries3 = getDataSet6(dietList)
         val lineDataSet1 = LineDataSet(lineEntries1, getString(R.string.proteins))
         val lineDataSet2 = LineDataSet(lineEntries2, getString(R.string.carbs))
         val lineDataSet3 = LineDataSet(lineEntries3, getString(R.string.fats))
@@ -268,42 +268,27 @@ class WeekFragment : Fragment() {
         lineChart.invalidate()
     }
 
-    private fun getDataSet4() :  ArrayList<Entry>{
+    private fun getDataSet4(dietList: ArrayList<Diet>): ArrayList<Entry> {
         val lineEntries = ArrayList<Entry>()
-        lineEntries.add(Entry(0f, 82.2f))
-        lineEntries.add(Entry(1f, 76.5f))
-        lineEntries.add(Entry(2f, 86.1f))
-        lineEntries.add(Entry(3f, 80.3f))
-        lineEntries.add(Entry(4f, 78.3f))
-        lineEntries.add(Entry(5f, 89.4f))
-        lineEntries.add(Entry(6f, 96.6f))
-
+        dietList.forEachIndexed { index, diet ->
+            lineEntries.add(Entry(index.toFloat(), diet.getProteins()))
+        }
         return lineEntries
     }
 
-    private fun getDataSet5() :  ArrayList<Entry>{
+    private fun getDataSet5(dietList: ArrayList<Diet>): ArrayList<Entry> {
         val lineEntries = ArrayList<Entry>()
-        lineEntries.add(Entry(0f, 54.6f))
-        lineEntries.add(Entry(1f, 61.3f))
-        lineEntries.add(Entry(2f, 66.5f))
-        lineEntries.add(Entry(3f, 58.4f))
-        lineEntries.add(Entry(4f, 56.6f))
-        lineEntries.add(Entry(5f, 50.0f))
-        lineEntries.add(Entry(6f, 66.6f))
-
+        dietList.forEachIndexed { index, diet ->
+            lineEntries.add(Entry(index.toFloat(), diet.getCarbs()))
+        }
         return lineEntries
     }
 
-    private fun getDataSet6() :  ArrayList<Entry>{
+    private fun getDataSet6(dietList: ArrayList<Diet>): ArrayList<Entry> {
         val lineEntries = ArrayList<Entry>()
-        lineEntries.add(Entry(0f, 102.2f))
-        lineEntries.add(Entry(1f, 80.2f))
-        lineEntries.add(Entry(2f, 78.0f))
-        lineEntries.add(Entry(3f, 87.2f))
-        lineEntries.add(Entry(4f, 76.1f))
-        lineEntries.add(Entry(5f, 88.4f))
-        lineEntries.add(Entry(6f, 80.1f))
-
+        dietList.forEachIndexed { index, diet ->
+            lineEntries.add(Entry(index.toFloat(), diet.getFats()))
+        }
         return lineEntries
     }
 }

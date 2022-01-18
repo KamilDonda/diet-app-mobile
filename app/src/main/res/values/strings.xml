@@ -111,4 +111,14 @@
         <item>Wysoka</item>
         <item>Bardzo wysoka</item>
     </string-array>
+
+    <string-array name="days_of_week">
+        <item>Niedziela</item>
+        <item>Poniedziałek</item>
+        <item>Wtorek</item>
+        <item>Środa</item>
+        <item>Czwartek</item>
+        <item>Piątek</item>
+        <item>Sobota</item>
+    </string-array>
 </resources>

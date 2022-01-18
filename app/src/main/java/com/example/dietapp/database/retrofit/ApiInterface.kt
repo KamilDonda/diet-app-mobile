@@ -1,11 +1,13 @@
 package com.example.dietapp.database.retrofit
 
+import com.example.dietapp.database.models.diet.DietEntityList
 import com.example.dietapp.database.models.ingredient.IngredientEntityList
 import com.example.dietapp.database.models.meal.MealEntityList
 import com.example.dietapp.database.models.mealingredient.MealIngredientEntityList
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApiInterface {
 
@@ -26,4 +28,7 @@ interface ApiInterface {
 
 //    @GET("meals_ingredients/{id}")
 //    fun getMealIngredientAsync(@Path("id") id: Int): Deferred<Response<MealIngredientEntity>>
+
+    @GET("generate_diet")
+    fun getGeneratedDietAsync(@Query("uid") uid: String): Deferred<Response<DietEntityList>>
 }

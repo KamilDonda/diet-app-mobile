@@ -1,11 +1,15 @@
 package com.example.dietapp.services
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.dietapp.database.models.diet.DietEntityList
 import com.example.dietapp.database.models.ingredient.IngredientEntityList
 import com.example.dietapp.database.models.meal.MealEntityList
 import com.example.dietapp.database.models.mealingredient.MealIngredientEntityList
 import com.example.dietapp.database.retrofit.RetrofitBuilder
 import com.example.dietapp.sharedpreferences.Preferences
+import com.example.dietapp.utils.DateUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -60,7 +64,22 @@ class ConnectionService(
         }
     }
 
-    fun synchronize(uid: String?) {
+    private suspend fun downloadDiet(uid: String): DietEntityList? {
+        return try {
+            RetrofitBuilder
+                .instance
+                .getGeneratedDietAsync(uid)
+                .await()
+                .body()!!
+        } catch (e: Exception) {
+            Log.v(TAG, e.stackTraceToString())
+            null
+        }
+    }
+
+    fun synchronize(uid: String?): LiveData<Boolean> {
+        val isFinished = MutableLiveData(false)
+
         CoroutineScope(Dispatchers.IO).launch {
             downloadIngredients()?.let {
                 dbService.db.ingredientDao()
@@ -76,9 +95,37 @@ class ConnectionService(
             }
 
             if (uid != null) {
-                val user = firebaseService.getUserData(uid)
-                sharedPreferences.setProfileData(user)
+                try {
+                    val user = firebaseService.getUserData(uid)
+                    sharedPreferences.setProfileData(user)
+                    dbService.db.dietDao().insertAll(user.diet)
+                    isFinished.postValue(true)
+                } catch (e: Exception) {
+                    Log.v(TAG, e.stackTraceToString())
+                }
             }
         }
+        return isFinished
+    }
+
+    fun synchronizeDietWithApi(): LiveData<Boolean> {
+        val isFinished = MutableLiveData(false)
+        CoroutineScope(Dispatchers.IO).launch {
+            val uid = sharedPreferences.getUserId()
+            downloadDiet(uid)?.let {
+                var id = 1
+
+                val timeInMillis = DateUtil.getCurrentDay()
+                val nextDay = DateUtil.DAY
+                val dietList = it.mapIndexed { index, entity ->
+                    entity.copy(id = id++, date = timeInMillis + index * nextDay)
+                }
+                dbService.db.dietDao().insertAll(dietList)
+                firebaseService.updateUserDiet(uid, dietList)
+
+                isFinished.postValue(true)
+            }
+        }
+        return isFinished
     }
 }

@@ -1,5 +1,6 @@
 package com.example.dietapp.database.models
 
+import com.example.dietapp.database.models.diet.DietEntity
 import java.io.Serializable
 
 data class User(
@@ -12,6 +13,7 @@ data class User(
     var activity: Int? = null,
     var goal: Int? = null,
     val preferences: ArrayList<String> = ArrayList(),
+    val diet: ArrayList<DietEntity> = ArrayList()
 ) : Serializable {
 
     constructor() : this("", "")

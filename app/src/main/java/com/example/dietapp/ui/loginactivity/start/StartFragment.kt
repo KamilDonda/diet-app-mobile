@@ -1,5 +1,6 @@
 package com.example.dietapp.ui.loginactivity.start
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.navigation.findNavController
 import com.example.dietapp.R
 import com.example.dietapp.services.LoginService
 import com.example.dietapp.sharedpreferences.Preferences
+import com.example.dietapp.ui.mainactivity.MainActivity
 import kotlinx.android.synthetic.main.fragment_start.*
 import org.koin.android.ext.android.inject
 
@@ -41,7 +43,12 @@ class StartFragment : Fragment() {
         super.onStart()
 
         if (sharedPreferences.getIsLogged()) {
-            loginService.navigateToHome(this, requireContext())
+            loginService.synchronize(sharedPreferences.getUserId()).observe(viewLifecycleOwner, {
+                if (it) {
+                    val intent = Intent(context, MainActivity::class.java)
+                    this.startActivity(intent)
+                }
+            })
         }
     }
 }

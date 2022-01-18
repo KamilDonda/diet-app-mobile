@@ -1,25 +1,20 @@
 package com.example.dietapp.services
 
-import android.content.Context
-import android.content.Intent
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import com.example.dietapp.sharedpreferences.Preferences
-import com.example.dietapp.ui.mainactivity.MainActivity
 
 class LoginService(
     private val sharedPreferences: Preferences,
     private val connectionService: ConnectionService
 ) {
 
-    fun login(fragment: Fragment, context: Context, uid: String) {
+    fun login(uid: String): LiveData<Boolean> {
         sharedPreferences.setIsLogged(true)
         sharedPreferences.setUserId(uid)
-        navigateToHome(fragment, context, uid)
+        return synchronize(uid)
     }
 
-    fun navigateToHome(fragment: Fragment, context: Context, uid: String? = null) {
-        connectionService.synchronize(uid)
-        val intent = Intent(context, MainActivity::class.java)
-        fragment.startActivity(intent)
+    fun synchronize(uid: String? = null): LiveData<Boolean> {
+        return connectionService.synchronize(uid)
     }
 }
