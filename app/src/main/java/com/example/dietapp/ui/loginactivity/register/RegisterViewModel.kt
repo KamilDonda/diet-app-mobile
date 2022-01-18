@@ -1,7 +1,6 @@
 package com.example.dietapp.ui.loginactivity.register
 
-import android.content.Context
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.dietapp.services.LoginService
 import com.example.dietapp.utils.PasswordUtil
@@ -36,8 +35,8 @@ class RegisterViewModel(private val loginService: LoginService) : ViewModel() {
         setRepeatedPassword("")
     }
 
-    fun login(fragment: Fragment, context: Context, uid: String) {
-        loginService.login(fragment, context, uid)
+    fun login(uid: String): LiveData<Boolean> {
         clearData()
+        return loginService.login(uid)
     }
 }

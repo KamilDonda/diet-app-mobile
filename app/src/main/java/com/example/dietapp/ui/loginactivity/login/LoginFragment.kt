@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.example.dietapp.R
 import com.example.dietapp.database.models.User
 import com.example.dietapp.services.FirebaseService
+import com.example.dietapp.ui.mainactivity.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -64,7 +65,12 @@ class LoginFragment : Fragment() {
                     auth.signInWithEmailAndPassword(email, password)
                         .addOnSuccessListener {
                             if (it.user != null) {
-                                viewModel.login(this, requireContext(), it.user!!.uid)
+                                viewModel.login(it.user!!.uid).observe(viewLifecycleOwner, {
+                                    if (it) {
+                                        val intent = Intent(context, MainActivity::class.java)
+                                        this.startActivity(intent)
+                                    }
+                                })
                             }
                         }
                         .addOnFailureListener {
@@ -111,7 +117,12 @@ class LoginFragment : Fragment() {
                             if (it.result!!.user != null) {
                                 val user = User(it.result!!.user!!.uid)
                                 firebaseService.createUserWithGoogle(user)
-                                viewModel.login(this, requireContext(), user.uid)
+                                viewModel.login(user.uid).observe(viewLifecycleOwner, {
+                                    if (it) {
+                                        val intent = Intent(context, MainActivity::class.java)
+                                        this.startActivity(intent)
+                                    }
+                                })
                             }
                         } else {
                             showSnackbar(it.exception?.message.toString())

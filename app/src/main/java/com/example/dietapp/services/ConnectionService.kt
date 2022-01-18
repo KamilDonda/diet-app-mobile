@@ -76,7 +76,9 @@ class ConnectionService(
         }
     }
 
-    fun synchronize(uid: String?) {
+    fun synchronize(uid: String?): LiveData<Boolean> {
+        val isFinished = MutableLiveData(false)
+
         CoroutineScope(Dispatchers.IO).launch {
             downloadIngredients()?.let {
                 dbService.db.ingredientDao()
@@ -96,11 +98,13 @@ class ConnectionService(
                     val user = firebaseService.getUserData(uid)
                     sharedPreferences.setProfileData(user)
                     dbService.db.dietDao().insertAll(user.diet)
+                    isFinished.postValue(true)
                 } catch (e: Exception) {
                     Log.v(TAG, e.stackTraceToString())
                 }
             }
         }
+        return isFinished
     }
 
     fun synchronizeDietWithApi(): LiveData<Boolean> {
