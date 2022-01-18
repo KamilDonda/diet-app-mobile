@@ -15,11 +15,12 @@ import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import kotlinx.android.synthetic.main.fragment_week.*
-import kotlin.collections.ArrayList
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class WeekFragment : Fragment() {
 
+    private val viewModel: HomeViewModel by sharedViewModel()
     private lateinit var x: Array<String>
 
     override fun onCreateView(

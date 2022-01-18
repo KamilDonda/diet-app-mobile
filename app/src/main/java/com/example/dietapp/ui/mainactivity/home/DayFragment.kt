@@ -10,8 +10,10 @@ import androidx.navigation.findNavController
 import com.example.dietapp.R
 import com.example.dietapp.adapters.MacroDayAdapter
 import com.example.dietapp.adapters.StaticDayAdapter
+import com.example.dietapp.models.Diet
 import com.example.dietapp.models.Macroday
 import com.example.dietapp.models.Static
+import com.example.dietapp.utils.FloatConverter.Companion.floatToString
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -20,13 +22,16 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import kotlinx.android.synthetic.main.fragment_day.*
 import org.eazegraph.lib.models.PieModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
 
 class DayFragment : Fragment() {
 
+    private val viewModel: HomeViewModel by sharedViewModel()
     private val statisticsAdapter = StaticDayAdapter()
     private val macrodayAdapter = MacroDayAdapter()
+    private lateinit var diet: Diet
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,9 +47,13 @@ class DayFragment : Fragment() {
         calories_rv.adapter = statisticsAdapter
         macro_rv.adapter = macrodayAdapter
 
-        setStatisticsData(Static(1, 840f, 1280f, 640f))
-        setMacroData(Macroday(1, 245f, 124f, 368f))
-        lol()
+        diet = viewModel.currentDiet!!
+
+        title1.text = floatToString(diet.getKcal(), "kcal", "Kaloryczność:")
+
+        setStatisticsData(Static(1, diet.breakfast.kcal, diet.dinner.kcal, diet.supper.kcal))
+        setMacroData(Macroday(1, diet.getProteins(), diet.getCarbs(), diet.getFats()))
+        setupBars()
 
         day_back_button.setOnClickListener {
             it.findNavController().navigate(R.id.action_dayFragment_to_homeFragment)
@@ -110,9 +119,9 @@ class DayFragment : Fragment() {
 
         val barEntries = ArrayList<BarEntry>()
 
-        barEntries.add(BarEntry(1f, 14.5f))
-        barEntries.add(BarEntry(2f, 12.5f))
-        barEntries.add(BarEntry(3f, 6.2f))
+        barEntries.add(BarEntry(1f, diet.breakfast.proteins))
+        barEntries.add(BarEntry(2f, diet.dinner.proteins))
+        barEntries.add(BarEntry(3f, diet.supper.proteins))
         return barEntries
     }
 
@@ -120,9 +129,9 @@ class DayFragment : Fragment() {
 
         val barEntries = ArrayList<BarEntry>()
 
-        barEntries.add(BarEntry(1f, 8.5f))
-        barEntries.add(BarEntry(2f, 4.2f))
-        barEntries.add(BarEntry(3f, 7.8f))
+        barEntries.add(BarEntry(1f, diet.breakfast.carbs))
+        barEntries.add(BarEntry(2f, diet.dinner.carbs))
+        barEntries.add(BarEntry(3f, diet.supper.carbs))
         return barEntries
     }
 
@@ -130,14 +139,13 @@ class DayFragment : Fragment() {
 
         val barEntries = ArrayList<BarEntry>()
 
-        barEntries.add(BarEntry(1f, 6.8f))
-        barEntries.add(BarEntry(2f, 11.1f))
-        barEntries.add(BarEntry(3f, 7.2f))
+        barEntries.add(BarEntry(1f, diet.breakfast.fats))
+        barEntries.add(BarEntry(2f, diet.dinner.fats))
+        barEntries.add(BarEntry(3f, diet.supper.fats))
         return barEntries
     }
 
-    private fun lol()
-    {
+    private fun setupBars() {
         //Tworzenie zmiennych do wykresu
         val barChart = idBarChart
         val name = arrayOf(
