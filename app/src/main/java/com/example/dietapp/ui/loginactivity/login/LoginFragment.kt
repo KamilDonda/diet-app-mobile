@@ -32,6 +32,9 @@ class LoginFragment : Fragment() {
 
     protected fun showSnackbar(message: String, length: Int = Snackbar.LENGTH_LONG) {
         Snackbar.make(requireView(), message, length).show()
+        progressBar.visibility = View.GONE
+        login_button.isEnabled = true
+        login_google.isEnabled = true
     }
 
     override fun onCreateView(
@@ -55,6 +58,7 @@ class LoginFragment : Fragment() {
 
     private fun setupSignInClick() {
         login_button.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             val email = email_input.text?.trim().toString()
             val password = password_input.text?.trim().toString()
 
@@ -66,15 +70,12 @@ class LoginFragment : Fragment() {
                         .addOnSuccessListener {
                             if (it.user != null) {
                                 viewModel.login(it.user!!.uid).observe(viewLifecycleOwner, {
-                                    if (it) {
-                                        val intent = Intent(context, MainActivity::class.java)
-                                        this.startActivity(intent)
-                                    }
+                                    login(it)
                                 })
                             }
                         }
                         .addOnFailureListener {
-                            showSnackbar(it.message.toString())
+                            showSnackbar("Coś poszło nie tak :(")
                         }
                 }
             }
@@ -118,24 +119,22 @@ class LoginFragment : Fragment() {
                                 val user = User(it.result!!.user!!.uid)
                                 firebaseService.createUserWithGoogle(user)
                                 viewModel.login(user.uid).observe(viewLifecycleOwner, {
-                                    if (it) {
-                                        val intent = Intent(context, MainActivity::class.java)
-                                        this.startActivity(intent)
-                                    }
+                                    login(it)
                                 })
                             }
                         } else {
-                            showSnackbar(it.exception?.message.toString())
+                            showSnackbar("Coś poszło nie tak :(")
                         }
                     }
             } catch (e: ApiException) {
-                showSnackbar(e.message.toString())
+                showSnackbar("Coś poszło nie tak :(")
             }
         }
     }
 
     private fun setupSignInWithGoogleClick() {
         login_google.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(
                 signInIntent,
@@ -152,5 +151,18 @@ class LoginFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         initData()
+    }
+
+    private fun login(canLogIn: Boolean) {
+        login_button.isEnabled = false
+        login_google.isEnabled = false
+
+        if (canLogIn) {
+            val intent = Intent(context, MainActivity::class.java)
+            this.startActivity(intent)
+            login_button.isEnabled = true
+            login_google.isEnabled = true
+            progressBar.visibility = View.GONE
+        }
     }
 }
