@@ -54,6 +54,7 @@ class HomeFragment : Fragment() {
             if (viewModel.currentDiet != null) {
                 val date = DateUtil.longToDate(viewModel.currentDiet!!.date)
                 home_day.text = getArrayList(R.array.days_of_week, requireContext())[date.day]
+                welcome_text.visibility = View.GONE
             }
         })
 
