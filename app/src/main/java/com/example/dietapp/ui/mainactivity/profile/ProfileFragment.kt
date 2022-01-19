@@ -1,6 +1,9 @@
 package com.example.dietapp.ui.mainactivity.profile
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +16,15 @@ import com.example.dietapp.adapters.AppPagerAdapter
 import com.example.dietapp.services.LogoutService
 import com.example.dietapp.utils.SlideAnimation
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.net.URL
 
 
 class ProfileFragment : Fragment(), TabLayout.OnTabSelectedListener {
@@ -37,6 +46,9 @@ class ProfileFragment : Fragment(), TabLayout.OnTabSelectedListener {
         super.onViewCreated(view, savedInstanceState)
 
         setupTab(view)
+
+        val photo = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
+        setBitmapFromURL(photo)
 
         profile_name_area.doOnLayout { it ->
             val slide = SlideAnimation(it.measuredHeight, it)
@@ -84,5 +96,21 @@ class ProfileFragment : Fragment(), TabLayout.OnTabSelectedListener {
     override fun onTabUnselected(tab: TabLayout.Tab?) {}
     override fun onTabReselected(tab: TabLayout.Tab?) {
         profile_root.requestFocus()
+    }
+
+    private fun setBitmapFromURL(src: String?) {
+        CoroutineScope(Job() + Dispatchers.IO).launch {
+            try {
+                val url = URL(src)
+                val bitMap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                profile_iv.setImageBitmap(Bitmap.createScaledBitmap(bitMap, 100, 100, true))
+            } catch (e: Exception) {
+                Log.v(TAG, e.stackTraceToString())
+            }
+        }
+    }
+
+    companion object {
+        const val TAG = "BITMAP"
     }
 }
