@@ -125,4 +125,12 @@
         <item>Piątek</item>
         <item>Sobota</item>
     </string-array>
+
+    <string-array name="password_strength">
+        <item>Bardzo słabe hasło</item>
+        <item>Słabe hasło</item>
+        <item>Średnie hasło</item>
+        <item>Dobre hasło</item>
+        <item>Bardzo dobre hasło</item>
+    </string-array>
 </resources>

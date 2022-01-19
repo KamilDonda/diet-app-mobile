@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.example.dietapp.R
+import com.example.dietapp.utils.ArrayUtil
 import com.example.dietapp.utils.HideKeyboard.hideKeyboard
+import com.example.dietapp.utils.PasswordUtil
 import kotlinx.android.synthetic.main.fragment_profile_account.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -45,7 +47,14 @@ class ProfileAccountFragment : Fragment() {
         }
 
         new_password_input.doOnTextChanged { text, _, _, _ ->
-            linearProgressIndicator.progress = viewModel.setNewPassword(text.toString())
+            val progress = viewModel.setNewPassword(text.toString())
+            linearProgressIndicator.progress = progress
+            val index = PasswordUtil.getIndex(progress)
+            password_strength.text = ArrayUtil.getArrayList(
+                R.array.password_strength,
+                requireContext()
+            )[index]
+            password_strength.setTextColor(PasswordUtil.getColor(index))
         }
 
         repeat_password_input.doOnTextChanged { text, _, _, _ ->

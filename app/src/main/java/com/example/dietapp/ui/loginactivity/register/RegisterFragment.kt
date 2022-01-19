@@ -12,6 +12,8 @@ import com.example.dietapp.R
 import com.example.dietapp.database.models.User
 import com.example.dietapp.services.FirebaseService
 import com.example.dietapp.ui.mainactivity.MainActivity
+import com.example.dietapp.utils.ArrayUtil
+import com.example.dietapp.utils.PasswordUtil
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -92,7 +94,14 @@ class RegisterFragment : Fragment() {
         }
 
         new_password_input.doOnTextChanged { text, _, _, _ ->
-            linearProgressIndicatorRegister.progress = viewModel.setNewPassword(text.toString())
+            val progress = viewModel.setNewPassword(text.toString())
+            linearProgressIndicatorRegister.progress = progress
+            val index = PasswordUtil.getIndex(progress)
+            password_strength2.text = ArrayUtil.getArrayList(
+                R.array.password_strength,
+                requireContext()
+            )[index]
+            password_strength2.setTextColor(PasswordUtil.getColor(index))
         }
 
         repeat_password_input.doOnTextChanged { text, _, _, _ ->
