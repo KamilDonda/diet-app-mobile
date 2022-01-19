@@ -42,8 +42,9 @@
             app:backgroundTint="@android:color/transparent"
             app:icon="@drawable/ic_filter"
             app:iconTint="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/searchField"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/searchField"
             app:rippleColor="@color/transparentBlack" />
 
         <HorizontalScrollView
