@@ -1,6 +1,7 @@
 package com.example.dietapp.ui.mainactivity.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,10 @@ import com.example.dietapp.R
 import com.example.dietapp.utils.ArrayUtil
 import com.example.dietapp.utils.HideKeyboard.hideKeyboard
 import com.example.dietapp.utils.PasswordUtil
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_profile_account.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -32,6 +37,36 @@ class ProfileAccountFragment : Fragment() {
         setupTextFields()
 
         change_password_button.setOnClickListener {
+//            val user = FirebaseAuth.getInstance().currentUser
+            val oldPassword = old_password_input.text?.trim().toString()
+            val password = new_password_input.text?.trim().toString()
+            val repeatPassword = repeat_password_input.text?.trim().toString()
+
+            when {
+                oldPassword.isEmpty() -> showSnackbar(getString(R.string.old_password_is_empty))
+                password.isEmpty() -> showSnackbar(getString(R.string.password_is_empty))
+                password != repeatPassword -> showSnackbar(getString(R.string.different_passwords))
+                else -> {
+                    val user = Firebase.auth.currentUser!!
+
+                    val credential = EmailAuthProvider
+                        .getCredential(user.email!!, oldPassword)
+
+                    user.reauthenticate(credential)
+                        .addOnCompleteListener { Log.d(TAG, "User re-authenticated.") }
+
+                    user.updatePassword(password).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            showSnackbar("Hasło zostało zmienione!")
+                        } else {
+                            showSnackbar("Coś poszło nie tak :(")
+                        }
+                        Log.v(TAG, task.toString())
+                    }.addOnFailureListener {
+                        Log.v(TAG, it.stackTraceToString())
+                    }
+                }
+            }
         }
 
         viewModel.hasInputFocus.observe(viewLifecycleOwner, {
@@ -85,8 +120,16 @@ class ProfileAccountFragment : Fragment() {
         repeat_password_input.setText(viewModel.repeatedPassword)
     }
 
+    private fun showSnackbar(message: String, length: Int = Snackbar.LENGTH_LONG) {
+        Snackbar.make(requireView(), message, length).show()
+    }
+
     override fun onResume() {
         super.onResume()
         initData()
+    }
+
+    companion object {
+        const val TAG = "FIREBASE_AUTHENTICATION"
     }
 }
