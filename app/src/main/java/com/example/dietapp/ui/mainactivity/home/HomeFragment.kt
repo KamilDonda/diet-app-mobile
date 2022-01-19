@@ -114,6 +114,8 @@ class HomeFragment : Fragment() {
         save_button.setOnClickListener {
             if (sharedViewModel.isEditModeOn) {
                 sharedViewModel.changeEditMode()
+                save_button.visibility =
+                    if (sharedViewModel.isEditModeOn) View.VISIBLE else View.GONE
             }
         }
     }
