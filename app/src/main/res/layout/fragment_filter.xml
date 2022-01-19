@@ -364,55 +364,6 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout style="@style/Row_A">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/materialTextView"
-                        style="@style/RowTextView2"
-                        android:layout_width="wrap_content"
-                        android:layout_weight="0"
-                        android:text="@string/disabled"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="50dp"
-                        app:layout_constrainedWidth="true"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/materialTextView"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <com.google.android.material.chip.ChipGroup
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:chipSpacingHorizontal="10dp"
-                            app:singleLine="true"
-                            app:singleSelection="false">
-
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/meat"
-                                style="@style/TagChip"
-                                android:text="@string/meat" />
-
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/lactose"
-                                style="@style/TagChip"
-                                android:text="@string/lactose" />
-
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/peanuts"
-                                style="@style/TagChip"
-                                android:text="@string/peanuts" />
-
-                        </com.google.android.material.chip.ChipGroup>
-                    </HorizontalScrollView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
             </LinearLayout>
 
         </ScrollView>
