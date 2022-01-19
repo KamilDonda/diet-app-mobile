@@ -9,14 +9,21 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
 import com.example.dietapp.adapters.HomeMealAdapter
+import com.example.dietapp.sharedpreferences.Preferences
+import com.example.dietapp.ui.mainactivity.SharedViewModel
 import com.example.dietapp.utils.ArrayUtil.Companion.getArrayList
 import com.example.dietapp.utils.DateUtil
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by sharedViewModel()
+    private val sharedViewModel: SharedViewModel by sharedViewModel()
+    private val sharedPreferences: Preferences by inject()
+    private lateinit var homeMealAdapter: HomeMealAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +38,7 @@ class HomeFragment : Fragment() {
 
         viewModel.setDietOfWeek()
 
-        val homeMealAdapter = HomeMealAdapter(viewModel)
+        homeMealAdapter = HomeMealAdapter(viewModel, sharedViewModel)
         home_rv.adapter = homeMealAdapter
 
         setupButtons()
@@ -54,6 +61,7 @@ class HomeFragment : Fragment() {
             if (viewModel.currentDiet != null) {
                 val date = DateUtil.longToDate(viewModel.currentDiet!!.date)
                 home_day.text = getArrayList(R.array.days_of_week, requireContext())[date.day]
+                welcome_text.visibility = View.GONE
             }
         })
 
@@ -72,9 +80,43 @@ class HomeFragment : Fragment() {
             it.findNavController().navigate(R.id.action_homeFragment_to_weekFragment)
         }
         generate_diet.setOnClickListener {
-            viewModel.generateDiet().observe(viewLifecycleOwner, {
-                viewModel.setDietOfWeek()
-            })
+            val user = sharedPreferences.getProfileData()
+            val canGenerate = user.canGenerate()
+            when {
+                canGenerate == null -> {
+                    Snackbar.make(
+                        requireView(),
+                        "Minimalny wiek wynosi 17 lat!",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+                canGenerate -> {
+                    viewModel.generateDiet().observe(viewLifecycleOwner, {
+                        viewModel.setDietOfWeek()
+                    })
+                }
+                else -> {
+                    Snackbar.make(
+                        requireView(),
+                        "Nie wszystkie dane są uzupełnione poprawnie!",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+
+        edit_button.setOnClickListener {
+            sharedViewModel.changeEditMode()
+            homeMealAdapter.notifyDataSetChanged()
+        }
+
+        save_button.visibility = if (sharedViewModel.isEditModeOn) View.VISIBLE else View.GONE
+        save_button.setOnClickListener {
+            if (sharedViewModel.isEditModeOn) {
+                sharedViewModel.changeEditMode()
+                save_button.visibility =
+                    if (sharedViewModel.isEditModeOn) View.VISIBLE else View.GONE
+            }
         }
     }
 }

@@ -14,7 +14,7 @@
         android:theme="@style/Theme.DietApp">
         <activity
             android:name=".ui.mainactivity.MainActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
 
             android:name=".ui.loginactivity.LoginActivity"

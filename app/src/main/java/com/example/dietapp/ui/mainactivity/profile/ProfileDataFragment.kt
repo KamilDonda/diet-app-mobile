@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.children
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.example.dietapp.R
@@ -20,6 +21,7 @@ import com.example.dietapp.utils.ProfileDataConverter.Companion.goalIntToString
 import com.example.dietapp.utils.ProfileDataConverter.Companion.goalStringToInt
 import com.example.dietapp.utils.setupDropdownMenu
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.chip.Chip
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -77,6 +79,7 @@ class ProfileDataFragment : Fragment() {
         }
 
         setupButtons()
+        setupChips()
     }
 
     private fun initData() {
@@ -88,6 +91,7 @@ class ProfileDataFragment : Fragment() {
         age.text = AgeConverter.intToString(viewModel.age)
         weight.text = FloatConverter.floatToString(viewModel.weight, "kg")
         height.text = FloatConverter.floatToString(viewModel.height, "cm")
+        initChips()
 
         viewModel.setBMI()
     }
@@ -227,8 +231,32 @@ class ProfileDataFragment : Fragment() {
                 viewModel.weight,
                 viewModel.activity,
                 viewModel.goal,
+                viewModel.preferences,
             )
             viewModel.save(user)
+        }
+    }
+
+    private fun setupChips() {
+        val chips = chip_group?.children?.toList()
+        chips?.forEach {
+            (it as Chip).setOnClickListener {
+                val tags = chips.filter {
+                    (it as Chip).isChecked
+                }.map {
+                    (it as Chip).text.toString()
+                }
+                viewModel.setPreferences(tags)
+            }
+        }
+    }
+
+    private fun initChips() {
+        val chips = chip_group?.children?.toList()
+        chips?.forEach {
+            if ((it as Chip).text in viewModel.preferences) {
+                it.isChecked = true
+            }
         }
     }
 }

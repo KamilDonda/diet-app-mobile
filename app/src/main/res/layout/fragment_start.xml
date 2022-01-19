@@ -17,13 +17,13 @@
             android:layout_marginBottom="-5dp"
             android:adjustViewBounds="true"
             android:alpha="0.9"
+            android:contentDescription="@null"
             android:scaleType="centerCrop"
             android:src="@drawable/startimage"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@null" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView"
@@ -37,21 +37,28 @@
             android:id="@+id/start_login_button"
             style="@style/Button"
             android:text="@string/login_btn"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textAllCaps="false"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/start_register_button"
             style="@style/Button"
             android:layout_marginTop="50dp"
             android:text="@string/register_btn"
+            android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/start_login_button"
-            android:textAllCaps="false"/>
+            app:layout_constraintTop_toBottomOf="@+id/start_login_button" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/ProgressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

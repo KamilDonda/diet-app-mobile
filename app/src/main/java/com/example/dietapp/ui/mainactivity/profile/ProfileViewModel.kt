@@ -81,6 +81,14 @@ class ProfileViewModel(
         this.height = height
     }
 
+    var preferences = ArrayList<String>()
+        private set
+
+    fun setPreferences(pref: List<String>) {
+        preferences.clear()
+        preferences.addAll(pref)
+    }
+
     val bmi = MutableLiveData("")
 
     fun setBMI() {
@@ -98,6 +106,7 @@ class ProfileViewModel(
         setAge(user.age)
         setWeight(user.weight)
         setHeight(user.height)
+        setPreferences(user.preferences)
     }
 
     fun save(user: User) {

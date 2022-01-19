@@ -9,12 +9,15 @@ import androidx.fragment.app.Fragment
 import com.example.dietapp.R
 import com.example.dietapp.adapters.MealsAdapter
 import com.example.dietapp.ui.filter.FilterFragment
+import com.example.dietapp.utils.FastScrollAdapter
 import kotlinx.android.synthetic.main.fragment_meals.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MealsFragment : Fragment() {
 
     private val viewModel: MealViewModel by sharedViewModel()
+    private lateinit var mealsAdapter: MealsAdapter
+    private lateinit var fastScrollAdapter: FastScrollAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,12 +31,15 @@ class MealsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.prepareMeals()
 
-        val mealsAdapter = MealsAdapter(viewModel)
+        mealsAdapter = MealsAdapter(viewModel)
         meals_rv.adapter = mealsAdapter
 
         viewModel.meals.observe(viewLifecycleOwner, {
             mealsAdapter.setList(it)
         })
+
+        fastScrollAdapter = FastScrollAdapter { onLetterClick(it) }
+        fastScroll.adapter = fastScrollAdapter
 
         setupSearch()
         setupDialog()
@@ -62,6 +68,11 @@ class MealsFragment : Fragment() {
         searchField.setStartIconOnClickListener {
             viewModel.search()
         }
+    }
+
+    private fun onLetterClick(letter: Char) {
+        val pos = mealsAdapter.getFirstAppearancePosition(letter)
+        meals_rv.layoutManager!!.scrollToPosition(pos)
     }
 
     override fun onResume() {

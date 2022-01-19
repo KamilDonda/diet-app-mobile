@@ -1,10 +1,32 @@
 package com.example.dietapp.utils
 
+import android.graphics.Color
+
 object PasswordUtil {
     fun securityLevel(password: String): Int {
         return passwordLength(password) + hasLowerAndUpperCase(password) + hasDigit(password) + hasSpecialChar(
             password
         )
+    }
+
+    fun getIndex(strength: Int): Int {
+        return when {
+            strength < 24 -> 0
+            strength < 44 -> 1
+            strength < 64 -> 2
+            strength < 89 -> 3
+            else -> 4
+        }
+    }
+
+    fun getColor(index: Int): Int {
+        return listOf(
+            Color.parseColor("#ff0000"),
+            Color.parseColor("#D32F2F"),
+            Color.parseColor("#FFA000"),
+            Color.parseColor("#689F38"),
+            Color.parseColor("#64DD17")
+        )[index]
     }
 
     private fun passwordLength(password: String): Int {

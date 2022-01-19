@@ -12,6 +12,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="transparentBlack">#40000000</color>
+    <color name="transparentBlack2">#BF000000</color>
 
     <color name="colorProteins">#64DD17</color>
     <color name="colorProteinsDark">#1faa00</color>

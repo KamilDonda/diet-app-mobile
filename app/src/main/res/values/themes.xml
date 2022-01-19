@@ -115,7 +115,7 @@
         <item name="android:gravity">top</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:paddingStart">20dp</item>
-        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingTop">0dp</item>
         <item name="android:paddingBottom">0dp</item>
         <item name="android:paddingEnd">10dp</item>
     </style>
@@ -179,6 +179,22 @@
     <style name="FilterChip" parent="Widget.MaterialComponents.Chip.Entry">
         <item name="chipMinHeight">34dp</item>
         <item name="chipMinTouchTargetSize">0dp</item>
+    </style>
+
+    <style name="ProgressBarStyle">
+        <item name="android:background">@color/transparentBlack2</item>
+        <item name="android:indeterminate">true</item>
+        <item name="android:translationZ">10dp</item>
+        <item name="android:indeterminateDrawable">@drawable/progress_bar</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="TagChip" parent="Widget.MaterialComponents.Chip.Choice">
+        <!--        <item name="chipMinHeight">34dp</item>-->
+        <!--        <item name="chipMinTouchTargetSize">0dp</item>-->
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:checked">false</item>
     </style>
 
 </resources>

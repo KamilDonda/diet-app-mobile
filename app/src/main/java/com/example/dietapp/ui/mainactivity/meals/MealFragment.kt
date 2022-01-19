@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.dietapp.R
 import com.example.dietapp.adapters.AppPagerAdapter
+import com.example.dietapp.ui.mainactivity.SharedViewModel
 import com.example.dietapp.ui.mainactivity.home.HomeViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_meal.*
@@ -18,6 +19,7 @@ class MealFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
     private val viewModel: MealViewModel by sharedViewModel()
     private val homeViewModel: HomeViewModel by sharedViewModel()
+    private val sharedViewModel: SharedViewModel by sharedViewModel()
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager2: ViewPager2
 
@@ -31,6 +33,15 @@ class MealFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        change_button.visibility = if (sharedViewModel.isEditModeOn) View.VISIBLE else View.GONE
+
+        change_button.setOnClickListener {
+            if (sharedViewModel.isEditModeOn) {
+                sharedViewModel.updateNewMeal(viewModel.currentMeal!!.id)
+            }
+        }
+
         if (homeViewModel.currentMeal != null) {
             viewModel.setCurrentMeal(homeViewModel.currentMeal!!)
             homeViewModel.setCurrentMeal(null)

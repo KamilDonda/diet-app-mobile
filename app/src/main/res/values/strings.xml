@@ -31,9 +31,13 @@
     <string name="height">Wzrost</string>
     <string name="activity">Aktywność fizyczna</string>
     <string name="goal">Cel</string>
-    <string name="preferences">Preferencje</string>
+    <string name="disabled">Wyklucz</string>
     <string name="bmi">BMI</string>
     <string name="setup_activity_level">Wybierz poziom aktywności</string>
+
+    <string name="meat">mięso</string>
+    <string name="lactose">laktoza</string>
+    <string name="peanuts">orzechy</string>
 
     <string name="error_empty_field">To pole nie może być puste!</string>
     <string name="error_format">Niepoprawne dane!</string>
@@ -54,11 +58,14 @@
     <string name="sign_in">Zaloguj się</string>
     <string name="sign_up">Zarejestruj się</string>
     <string name="logout">Wyloguj</string>
+    <string name="edit">Edytuj</string>
+    <string name="change">Zamień</string>
 
     <string name="sign_up_successfufly">Konto utworzone pomyślnie!</string>
     <string name="sign_in_successfufly">Zalogowano pomyślnie!</string>
     <string name="email_is_empty">Pole E-mail jest puste!</string>
     <string name="password_is_empty">Pole hasło jest puste!</string>
+    <string name="old_password_is_empty">Stare hasło jest puste!</string>
     <string name="different_passwords">Hasła są różne!</string>
 
     <string name="search">Wyszukaj...</string>
@@ -120,5 +127,13 @@
         <item>Czwartek</item>
         <item>Piątek</item>
         <item>Sobota</item>
+    </string-array>
+
+    <string-array name="password_strength">
+        <item>Bardzo słabe hasło</item>
+        <item>Słabe hasło</item>
+        <item>Średnie hasło</item>
+        <item>Dobre hasło</item>
+        <item>Bardzo dobre hasło</item>
     </string-array>
 </resources>
