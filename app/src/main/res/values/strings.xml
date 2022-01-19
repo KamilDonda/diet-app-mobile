@@ -59,6 +59,7 @@
     <string name="sign_up">Zarejestruj się</string>
     <string name="logout">Wyloguj</string>
     <string name="edit">Edytuj</string>
+    <string name="change">Zamień</string>
 
     <string name="sign_up_successfufly">Konto utworzone pomyślnie!</string>
     <string name="sign_in_successfufly">Zalogowano pomyślnie!</string>

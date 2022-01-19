@@ -109,5 +109,12 @@ class HomeFragment : Fragment() {
             sharedViewModel.changeEditMode()
             homeMealAdapter.notifyDataSetChanged()
         }
+
+        save_button.visibility = if (sharedViewModel.isEditModeOn) View.VISIBLE else View.GONE
+        save_button.setOnClickListener {
+            if (sharedViewModel.isEditModeOn) {
+                sharedViewModel.changeEditMode()
+            }
+        }
     }
 }

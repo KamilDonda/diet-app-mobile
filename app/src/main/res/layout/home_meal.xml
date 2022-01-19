@@ -75,6 +75,7 @@
             android:text="@string/edit"
             android:textAlignment="center"
             android:textColor="@color/white"
+            android:foreground="?android:attr/selectableItemBackground"
             android:textFontWeight="600"
             android:textSize="16sp"
             android:translationZ="10dp"

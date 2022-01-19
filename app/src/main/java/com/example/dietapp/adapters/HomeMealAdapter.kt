@@ -60,9 +60,11 @@ class HomeMealAdapter(
         }
 
         editMeal.visibility = if (sharedViewModel.isEditModeOn) View.VISIBLE else View.GONE
+        holder.itemView.isEnabled = !sharedViewModel.isEditModeOn
 
         editMeal.setOnClickListener {
             if (sharedViewModel.isEditModeOn) {
+                sharedViewModel.setPosition(position)
                 it.findNavController().navigate(R.id.action_homeFragment_to_mealsFragment)
             }
         }
