@@ -17,4 +17,23 @@ data class User(
 ) : Serializable {
 
     constructor() : this("", "")
+
+    fun canGenerate(): Boolean? {
+        val fields = listOf(
+            gender,
+            age,
+            height,
+            weight,
+            activity,
+            goal
+        )
+
+        if (fields.contains(null)) {
+            return false
+        }
+        if (age!! < 17) {
+            return null
+        }
+        return true
+    }
 }
