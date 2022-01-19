@@ -10,6 +10,7 @@ import com.example.dietapp.ui.loginactivity.login.LoginViewModel
 import com.example.dietapp.ui.loginactivity.register.RegisterFragment
 import com.example.dietapp.ui.loginactivity.register.RegisterViewModel
 import com.example.dietapp.ui.loginactivity.start.StartFragment
+import com.example.dietapp.ui.mainactivity.SharedViewModel
 import com.example.dietapp.ui.mainactivity.home.DayFragment
 import com.example.dietapp.ui.mainactivity.home.HomeFragment
 import com.example.dietapp.ui.mainactivity.home.HomeViewModel
@@ -42,6 +43,7 @@ val appModule = module {
     viewModel { HomeViewModel(get(), get()) }
     viewModel { RegisterViewModel(get()) }
     viewModel { LoginViewModel(get()) }
+    viewModel { SharedViewModel() }
 
 // Services
     single { FirebaseService() }

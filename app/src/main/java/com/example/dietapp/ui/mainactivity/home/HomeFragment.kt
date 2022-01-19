@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import com.example.dietapp.R
 import com.example.dietapp.adapters.HomeMealAdapter
 import com.example.dietapp.sharedpreferences.Preferences
+import com.example.dietapp.ui.mainactivity.SharedViewModel
 import com.example.dietapp.utils.ArrayUtil.Companion.getArrayList
 import com.example.dietapp.utils.DateUtil
 import com.google.android.material.snackbar.Snackbar
@@ -20,7 +21,9 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by sharedViewModel()
+    private val sharedViewModel: SharedViewModel by sharedViewModel()
     private val sharedPreferences: Preferences by inject()
+    private lateinit var homeMealAdapter: HomeMealAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +38,7 @@ class HomeFragment : Fragment() {
 
         viewModel.setDietOfWeek()
 
-        val homeMealAdapter = HomeMealAdapter(viewModel)
+        homeMealAdapter = HomeMealAdapter(viewModel, sharedViewModel)
         home_rv.adapter = homeMealAdapter
 
         setupButtons()
@@ -100,6 +103,11 @@ class HomeFragment : Fragment() {
                     ).show()
                 }
             }
+        }
+
+        edit_button.setOnClickListener {
+            sharedViewModel.changeEditMode()
+            homeMealAdapter.notifyDataSetChanged()
         }
     }
 }

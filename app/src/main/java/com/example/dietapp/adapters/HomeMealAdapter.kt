@@ -9,12 +9,16 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dietapp.R
 import com.example.dietapp.models.MealHome
+import com.example.dietapp.ui.mainactivity.SharedViewModel
 import com.example.dietapp.ui.mainactivity.home.HomeViewModel
 import com.example.dietapp.utils.FloatConverter
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 
-class HomeMealAdapter(private val viewModel: HomeViewModel) :
+class HomeMealAdapter(
+    private val viewModel: HomeViewModel,
+    private val sharedViewModel: SharedViewModel
+) :
     RecyclerView.Adapter<HomeMealAdapter.Holder>() {
     inner class Holder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -40,6 +44,7 @@ class HomeMealAdapter(private val viewModel: HomeViewModel) :
         val type = holder.itemView.findViewById<MaterialTextView>(R.id.home_meal_type)
         val kcal = holder.itemView.findViewById<MaterialButton>(R.id.home_meal_kcal)
         val icon = holder.itemView.findViewById<ImageView>(R.id.materialButton)
+        val editMeal = holder.itemView.findViewById<View>(R.id.edit_meal)
 
         val item = _list[position]
 
@@ -52,6 +57,14 @@ class HomeMealAdapter(private val viewModel: HomeViewModel) :
         holder.itemView.setOnClickListener {
             viewModel.setCurrentMeal(position)
             it.findNavController().navigate(R.id.action_homeFragment_to_mealFragment)
+        }
+
+        editMeal.visibility = if (sharedViewModel.isEditModeOn) View.VISIBLE else View.GONE
+
+        editMeal.setOnClickListener {
+            if (sharedViewModel.isEditModeOn) {
+                it.findNavController().navigate(R.id.action_homeFragment_to_mealsFragment)
+            }
         }
     }
 }
