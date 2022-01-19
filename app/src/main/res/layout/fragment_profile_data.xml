@@ -253,6 +253,7 @@
                     android:layout_height="wrap_content"
                     app:chipSpacingHorizontal="10dp"
                     app:singleLine="true"
+                    android:id="@+id/chip_group"
                     app:singleSelection="false">
 
                     <com.google.android.material.chip.Chip
