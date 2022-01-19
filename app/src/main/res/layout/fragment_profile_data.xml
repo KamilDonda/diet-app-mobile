@@ -11,234 +11,326 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout style="@style/Row_A">
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/Row_A">
 
-            <com.google.android.material.textview.MaterialTextView
-                style="@style/RowTextView"
-                android:text="@string/gender" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/gender"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                app:endIconTint="@color/black"
-                tools:ignore="RtlSymmetry">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="20dp">
 
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/RowTextView"
+                    android:text="@string/gender" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/gender"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:padding="0dp"
-                    android:paddingStart="10dp"
-                    android:text="Mężczyzna"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:layout_weight="1"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:endIconTint="@color/black"
+                    tools:ignore="RtlSymmetry">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:padding="0dp"
+                        android:paddingStart="10dp"
+                        android:text="Mężczyzna"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
 
-        </LinearLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout style="@style/Row_B">
+            </LinearLayout>
 
-            <com.google.android.material.textview.MaterialTextView
-                style="@style/RowTextView"
-                android:text="@string/age" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/age"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/Row_B">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="10dp"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                app:icon="@drawable/dropdown_arrow"
-                app:iconGravity="end"
-                app:iconTint="@color/black"
-                tools:ignore="RtlSymmetry" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="20dp">
 
-        </LinearLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/RowTextView"
+                    android:text="@string/age" />
 
-        <LinearLayout style="@style/Row_A">
-
-            <com.google.android.material.textview.MaterialTextView
-                style="@style/RowTextView"
-                android:text="@string/weight" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/weight"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="10dp"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                app:icon="@drawable/dropdown_arrow"
-                app:iconGravity="end"
-                app:iconTint="@color/black"
-                tools:ignore="RtlSymmetry" />
-
-        </LinearLayout>
-
-        <LinearLayout style="@style/Row_B">
-
-            <com.google.android.material.textview.MaterialTextView
-                style="@style/RowTextView"
-                android:text="@string/height" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/height"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingStart="10dp"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                app:icon="@drawable/dropdown_arrow"
-                app:iconGravity="end"
-                app:iconTint="@color/black"
-                tools:ignore="RtlSymmetry" />
-
-        </LinearLayout>
-
-        <LinearLayout style="@style/Row_A">
-
-            <com.google.android.material.textview.MaterialTextView
-                style="@style/RowTextView"
-                android:text="@string/activity" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/activity_level"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                tools:ignore="RtlSymmetry">
-
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/age"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:padding="0dp"
+                    android:layout_weight="1"
                     android:paddingStart="10dp"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    app:icon="@drawable/dropdown_arrow"
+                    app:iconGravity="end"
+                    app:iconTint="@color/black"
+                    tools:ignore="RtlSymmetry" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout style="@style/Row_B">
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/Row_A">
 
-            <com.google.android.material.textview.MaterialTextView
-                style="@style/RowTextView"
-                android:text="@string/goal" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/goal"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                tools:ignore="RtlSymmetry">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="20dp">
 
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/RowTextView"
+                    android:text="@string/weight" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/weight"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:padding="0dp"
+                    android:layout_weight="1"
                     android:paddingStart="10dp"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    app:icon="@drawable/dropdown_arrow"
+                    app:iconGravity="end"
+                    app:iconTint="@color/black"
+                    tools:ignore="RtlSymmetry" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout style="@style/Row_A">
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/Row_B">
 
-            <com.google.android.material.textview.MaterialTextView
-                style="@style/RowTextView"
-                android:text="@string/preferences" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/preferences"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:boxStrokeWidth="0dp"
-                app:boxStrokeWidthFocused="0dp"
-                tools:ignore="RtlSymmetry">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="20dp">
 
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/RowTextView"
+                    android:text="@string/height" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/height"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:padding="0dp"
+                    android:layout_weight="1"
                     android:paddingStart="10dp"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    app:icon="@drawable/dropdown_arrow"
+                    app:iconGravity="end"
+                    app:iconTint="@color/black"
+                    tools:ignore="RtlSymmetry" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout style="@style/Row_B">
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/Row_A">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="20dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/RowTextView"
+                    android:text="@string/activity" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/activity_level"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    tools:ignore="RtlSymmetry">
+
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:padding="0dp"
+                        android:paddingStart="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/Row_B">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="20dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/RowTextView"
+                    android:text="@string/goal" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/goal"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    tools:ignore="RtlSymmetry">
+
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:padding="0dp"
+                        android:paddingStart="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/Row_A">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView4"
                 style="@style/RowTextView"
-                android:text="@string/bmi" />
+                android:layout_width="wrap_content"
+                android:layout_weight="0"
+                android:text="@string/disabled"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/bmi"
-                style="@style/RowTextView"
-                android:paddingStart="10dp"
-                android:text="25" />
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="50dp"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/materialTextView4"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </LinearLayout>
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:chipSpacingHorizontal="10dp"
+                    app:singleLine="true"
+                    app:singleSelection="false">
 
-        <LinearLayout
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/meat"
+                        style="@style/TagChip"
+                        android:text="@string/meat" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/lactose"
+                        style="@style/TagChip"
+                        android:text="@string/lactose" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/peanuts"
+                        style="@style/TagChip"
+                        android:text="@string/peanuts" />
+
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/Row_B">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="20dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/RowTextView"
+                    android:text="@string/bmi" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/bmi"
+                    style="@style/RowTextView"
+                    android:paddingStart="10dp"
+                    android:text="25" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             style="@style/Row_A"
             android:gravity="end">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/profile_reset"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/reset" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="20dp">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/profile_reset"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reset" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/profile_save"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/save" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
-        </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/profile_save"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 </ScrollView>

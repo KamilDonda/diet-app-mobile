@@ -31,9 +31,13 @@
     <string name="height">Wzrost</string>
     <string name="activity">Aktywność fizyczna</string>
     <string name="goal">Cel</string>
-    <string name="preferences">Preferencje</string>
+    <string name="disabled">Wyklucz</string>
     <string name="bmi">BMI</string>
     <string name="setup_activity_level">Wybierz poziom aktywności</string>
+
+    <string name="meat">mięso</string>
+    <string name="lactose">laktoza</string>
+    <string name="peanuts">orzechy</string>
 
     <string name="error_empty_field">To pole nie może być puste!</string>
     <string name="error_format">Niepoprawne dane!</string>
