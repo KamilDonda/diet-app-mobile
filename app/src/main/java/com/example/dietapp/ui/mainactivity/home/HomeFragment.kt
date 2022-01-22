@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
 import com.example.dietapp.adapters.HomeMealAdapter
+import com.example.dietapp.database.models.diet.DietEntity
+import com.example.dietapp.services.FirebaseService
 import com.example.dietapp.sharedpreferences.Preferences
 import com.example.dietapp.ui.mainactivity.SharedViewModel
 import com.example.dietapp.utils.ArrayUtil.Companion.getArrayList
@@ -23,6 +25,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by sharedViewModel()
     private val sharedViewModel: SharedViewModel by sharedViewModel()
     private val sharedPreferences: Preferences by inject()
+    private val firebaseService: FirebaseService by inject()
     private lateinit var homeMealAdapter: HomeMealAdapter
 
     override fun onCreateView(
@@ -113,7 +116,30 @@ class HomeFragment : Fragment() {
         save_button.visibility = if (sharedViewModel.isEditModeOn) View.VISIBLE else View.GONE
         save_button.setOnClickListener {
             if (sharedViewModel.isEditModeOn) {
+                val ids = sharedViewModel.newMeals.getIds()
+                val b = if (ids[0] == -1) viewModel.currentDiet!!.breakfast.id else ids[0]
+                val d = if (ids[1] == -1) viewModel.currentDiet!!.dinner.id else ids[1]
+                val s = if (ids[2] == -1) viewModel.currentDiet!!.supper.id else ids[2]
+
+                val diet = DietEntity(
+                    viewModel.currentDiet!!.id,
+                    breakfast = b,
+                    dinner = d,
+                    supper = s,
+                    date = viewModel.currentDiet!!.date
+                )
+
+                val user = sharedPreferences.getProfileData()
+                val index = viewModel.dietOfWeek.value!!.indexOfFirst { it.id == diet.id }
+
+                user.diet[index] = diet
+                sharedPreferences.setProfileData(user)
+                firebaseService.updateUserDiet(user.uid, user.diet)
+                viewModel.setDietOfWeek()
+
                 sharedViewModel.changeEditMode()
+                homeMealAdapter.notifyDataSetChanged()
+
                 save_button.visibility =
                     if (sharedViewModel.isEditModeOn) View.VISIBLE else View.GONE
             }

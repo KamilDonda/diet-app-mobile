@@ -1,6 +1,5 @@
 package com.example.dietapp.ui.mainactivity
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.dietapp.database.models.diet.DietEntity
 
@@ -30,7 +29,6 @@ class SharedViewModel : ViewModel() {
             2 -> newMeals.copy(supper = id)
             else -> newMeals
         }
-        Log.v("ttt", "$newMeals")
     }
 
     private fun clear() {

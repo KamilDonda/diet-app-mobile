@@ -54,7 +54,7 @@ val appModule = module {
 
 // Repositories
     single { IngredientRepo(get()) }
-    single { MealRepo(get()) }
+    single { MealRepo(get(), get()) }
 
 // SharedPreferences
     single { Preferences(get()) }

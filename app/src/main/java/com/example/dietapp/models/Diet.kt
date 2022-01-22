@@ -1,6 +1,7 @@
 package com.example.dietapp.models
 
 data class Diet(
+    val id: Int,
     val breakfast: Meal,
     val dinner: Meal,
     val supper: Meal,

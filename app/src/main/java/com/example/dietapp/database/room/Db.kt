@@ -4,11 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.dietapp.database.models.diet.DietEntity
 import com.example.dietapp.database.models.ingredient.IngredientEntity
 import com.example.dietapp.database.models.meal.MealEntity
 import com.example.dietapp.database.models.mealingredient.MealIngredientEntity
-import com.example.dietapp.database.room.dao.DietDao
 import com.example.dietapp.database.room.dao.IngredientDao
 import com.example.dietapp.database.room.dao.MealDao
 import com.example.dietapp.database.room.dao.MealIngredientDao
@@ -18,7 +16,6 @@ import com.example.dietapp.database.room.dao.MealIngredientDao
         IngredientEntity::class,
         MealEntity::class,
         MealIngredientEntity::class,
-        DietEntity::class,
     ],
     version = 1,
     exportSchema = false
@@ -27,7 +24,6 @@ abstract class Db : RoomDatabase() {
     abstract fun ingredientDao(): IngredientDao
     abstract fun mealDao(): MealDao
     abstract fun mealIngredientDao(): MealIngredientDao
-    abstract fun dietDao(): DietDao
 
     companion object {
         var db: Db? = null
