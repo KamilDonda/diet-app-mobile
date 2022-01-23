@@ -79,10 +79,10 @@ class HomeFragment : Fragment() {
 
     private fun setupButtons() {
         day_stats.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_dayFragment)
+            navigateToStats(R.id.action_homeFragment_to_dayFragment, it)
         }
         week_stats.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_weekFragment)
+            navigateToStats(R.id.action_homeFragment_to_weekFragment, it)
         }
         generate_diet.setOnClickListener {
             val user = sharedPreferences.getProfileData()
@@ -143,6 +143,18 @@ class HomeFragment : Fragment() {
         }
 
         changeClickableButtons()
+    }
+
+    private fun navigateToStats(id: Int, view: View) {
+        if (viewModel.dietOfWeek.value.isNullOrEmpty()) {
+            Snackbar.make(
+                view,
+                "Nie można wyświetlić statystyk, ponieważ dieta nie została wygenerowana!",
+                Snackbar.LENGTH_SHORT
+            ).show()
+        } else {
+            view.findNavController().navigate(id)
+        }
     }
 
     private fun changeClickableButtons() {
