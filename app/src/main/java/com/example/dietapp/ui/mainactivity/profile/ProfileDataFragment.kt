@@ -60,10 +60,6 @@ class ProfileDataFragment : Fragment() {
 
         initData()
 
-        setupDropdownMenu(genders, gender.editText)
-        setupDropdownMenu(goals, goal.editText)
-        setupDropdownMenu(activities, activity_level.editText)
-
         setupDatePicker()
         showAlertWithTextInputLayout("Podaj wagę", weight, "kg")
         showAlertWithTextInputLayout("Podaj wzrost", height, "cm")
@@ -87,6 +83,10 @@ class ProfileDataFragment : Fragment() {
         gender.editText?.setText(genderBoolToString(viewModel.gender, requireContext()))
         goal.editText?.setText(goalIntToString(viewModel.goal, requireContext()))
         activity_level.editText?.setText(activityIntToString(viewModel.activity, requireContext()))
+
+        setupDropdownMenu(genders, gender.editText)
+        setupDropdownMenu(goals, goal.editText)
+        setupDropdownMenu(activities, activity_level.editText)
 
         age.text = AgeConverter.intToString(viewModel.age)
         weight.text = FloatConverter.floatToString(viewModel.weight, "kg")
@@ -254,9 +254,7 @@ class ProfileDataFragment : Fragment() {
     private fun initChips() {
         val chips = chip_group?.children?.toList()
         chips?.forEach {
-            if ((it as Chip).text in viewModel.preferences) {
-                it.isChecked = true
-            }
+            (it as Chip).isChecked = it.text in viewModel.preferences
         }
     }
 }

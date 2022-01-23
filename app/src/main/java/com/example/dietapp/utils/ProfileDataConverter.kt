@@ -24,7 +24,7 @@ class ProfileDataConverter {
         }
 
         fun activityIntToString(int: Int?, context: Context): String {
-            if (int == null) return "Wybierz"
+            if (int == null || int == -1) return "Wybierz"
             return activities(context)[int]
         }
 
@@ -33,7 +33,7 @@ class ProfileDataConverter {
         }
 
         fun goalIntToString(int: Int?, context: Context): String {
-            if (int == null) return "Wybierz"
+            if (int == null || int == -1) return "Wybierz"
             return goals(context)[int]
         }
 
