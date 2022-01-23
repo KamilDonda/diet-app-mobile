@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.example.dietapp.R
@@ -15,6 +16,7 @@ import com.example.dietapp.sharedpreferences.Preferences
 import com.example.dietapp.ui.mainactivity.SharedViewModel
 import com.example.dietapp.utils.ArrayUtil.Companion.getArrayList
 import com.example.dietapp.utils.DateUtil
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.android.ext.android.inject
@@ -109,8 +111,7 @@ class HomeFragment : Fragment() {
         }
 
         edit_button.setOnClickListener {
-            sharedViewModel.changeEditMode()
-            homeMealAdapter.notifyDataSetChanged()
+            changeEditMode()
         }
 
         save_button.visibility = if (sharedViewModel.isEditModeOn) View.VISIBLE else View.GONE
@@ -137,12 +138,30 @@ class HomeFragment : Fragment() {
                 firebaseService.updateUserDiet(user.uid, user.diet)
                 viewModel.setDietOfWeek()
 
-                sharedViewModel.changeEditMode()
-                homeMealAdapter.notifyDataSetChanged()
-
-                save_button.visibility =
-                    if (sharedViewModel.isEditModeOn) View.VISIBLE else View.GONE
+                changeEditMode()
             }
         }
+
+        changeClickableButtons()
+    }
+
+    private fun changeClickableButtons() {
+        listOf(day_stats, week_stats, generate_diet).forEach {
+            it.isClickable = !sharedViewModel.isEditModeOn
+        }
+    }
+
+    private fun changeEditMode() {
+        sharedViewModel.changeEditMode()
+        changeClickableButtons()
+
+        save_button.visibility = if (sharedViewModel.isEditModeOn) View.VISIBLE else View.GONE
+
+        activity?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+            ?.menu?.forEach {
+                it.isEnabled = !sharedViewModel.isEditModeOn
+            }
+
+        homeMealAdapter.notifyDataSetChanged()
     }
 }

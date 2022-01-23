@@ -39,6 +39,7 @@ class MealFragment : Fragment(), TabLayout.OnTabSelectedListener {
         change_button.setOnClickListener {
             if (sharedViewModel.isEditModeOn) {
                 sharedViewModel.updateNewMeal(viewModel.currentMeal!!.id)
+                it.findNavController().navigate(R.id.homeFragment)
             }
         }
 
