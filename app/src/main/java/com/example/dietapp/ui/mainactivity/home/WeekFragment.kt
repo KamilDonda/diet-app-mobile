@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.example.dietapp.R
 import com.example.dietapp.models.Diet
 import com.example.dietapp.utils.DateUtil
+import com.example.dietapp.utils.FloatConverter
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -41,6 +42,7 @@ class WeekFragment : Fragment() {
         x = resources.getStringArray(R.array.days)
 
         viewModel.dietOfWeek.observe(viewLifecycleOwner, {
+
             val start = DateUtil.dateToString(DateUtil.getStartOfWeek())
             val end = DateUtil.dateToString(DateUtil.getEndOfWeek())
             week_textView.text = "$start - $end"
@@ -56,6 +58,9 @@ class WeekFragment : Fragment() {
             drawLineChart(dietList)
             drawLineChartMacro(dietList)
 
+            val totalKcal = dietList.map { it.getKcal() }.sum()
+
+            title3.text = FloatConverter.floatToString(totalKcal, "kcal", "Kaloryczność:")
         })
 
         week_back_button.setOnClickListener {
