@@ -76,7 +76,6 @@ class FilterFragment(
         if (!isCheckboxEnabled) {
             filter_checkBox.isChecked = true
             filter_checkBox.isEnabled = false
-//            viewModel.setFilterOptions(f.copy(isChecked = true))
         } else {
             filter_checkBox.isChecked = f.isChecked
         }

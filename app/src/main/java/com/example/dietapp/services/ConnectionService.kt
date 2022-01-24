@@ -120,7 +120,6 @@ class ConnectionService(
                 val dietList = it.mapIndexed { index, entity ->
                     entity.copy(id = id++, date = timeInMillis + index * nextDay)
                 }
-//                dbService.db.dietDao().insertAll(dietList)
                 sharedPreferences.setProfileData(
                     sharedPreferences.getProfileData()
                         .copy(diet = dietList as ArrayList<DietEntity>)

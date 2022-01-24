@@ -184,9 +184,6 @@ class DayFragment : Fragment() {
         barChart.description.isEnabled = false
         barChart.isDragEnabled = true
         barChart.setVisibleXRangeMaximum(3f)
-//        barChart.setDoubleTapToZoomEnabled(false)
-//        barChart.setPinchZoom(false)
-//        barChart.setScaleEnabled(false)
 
         legend.isEnabled = true
         legend.orientation = Legend.LegendOrientation.HORIZONTAL

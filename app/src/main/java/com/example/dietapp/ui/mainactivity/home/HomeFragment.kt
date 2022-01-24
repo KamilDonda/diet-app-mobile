@@ -57,6 +57,9 @@ class HomeFragment : Fragment() {
 
                 viewModel.setCurrentDiet(currentDiet!!)
                 viewModel.setHomeMeals()
+
+                edit_button.visibility =
+                    if (dietList.isNullOrEmpty()) View.GONE else View.VISIBLE
             }
         })
 
@@ -98,7 +101,6 @@ class HomeFragment : Fragment() {
                 canGenerate -> {
                     viewModel.generateDiet().observe(viewLifecycleOwner, {
                         viewModel.setDietOfWeek()
-                        edit_button.visibility = View.VISIBLE
                     })
                 }
                 else -> {
@@ -111,8 +113,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-        edit_button.visibility =
-            if (viewModel.dietOfWeek.value.isNullOrEmpty()) View.GONE else View.VISIBLE
         edit_button.setOnClickListener {
             changeEditMode()
         }

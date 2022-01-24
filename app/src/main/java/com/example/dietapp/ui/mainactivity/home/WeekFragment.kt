@@ -63,14 +63,6 @@ class WeekFragment : Fragment() {
         }
     }
 
-//    override fun onNothingSelected() {
-//    }
-//
-//    override fun onValueSelected(e: Entry?, h: Highlight?) {
-//        Log.d("LineChart", e?.y.toString())
-//        Log.d("LineChart", (e as Entry).toString())
-//    }
-
     private fun calories(dietList: ArrayList<Diet>) {
         val days = ArrayList<BarEntry>()
         val barChart = idbarchart
@@ -99,18 +91,12 @@ class WeekFragment : Fragment() {
         legend.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
         legend.textSize = 12f
         legend.xEntrySpace = 22f
-//        legend.xOffset = 14f
-//        legend.yOffset = 12f
 
         xAxis.position = XAxis.XAxisPosition.BOTH_SIDED
         xAxis.setDrawGridLines(true)
         xAxis.setDrawAxisLine(true)
-        //xAxis.setCenterAxisLabels(true)
         xAxis.valueFormatter = IndexAxisValueFormatter(x)
-//        xAxis.axisMinimum = 0f
-//        xAxis.granularity = 1.12f  //Przesuwanie opisu osi X (śniadanie, obiad, kolacja)
         xAxis.textSize = 12f
-//        xAxis.axisMaximum = data.xMax + 0.6f
         xAxis.yOffset = 1.2f
 
 
@@ -169,7 +155,6 @@ class WeekFragment : Fragment() {
 
         lineChart.description.isEnabled = false
         lineChart.setDrawMarkers(true)
-        //lineChart.setOnChartValueSelectedListener(this)
         lineChart.xAxis.position = XAxis.XAxisPosition.BOTH_SIDED
         lineChart.xAxis.isGranularityEnabled = true
         lineChart.xAxis.granularity = 1.0f
@@ -256,7 +241,6 @@ class WeekFragment : Fragment() {
 
         lineChart.description.isEnabled = false
         lineChart.setDrawMarkers(true)
-        //lineChart.setOnChartValueSelectedListener(this)
         lineChart.xAxis.position = XAxis.XAxisPosition.BOTH_SIDED
         lineChart.animateY(1500)
         lineChart.xAxis.isGranularityEnabled = true

@@ -17,7 +17,7 @@ import com.example.dietapp.database.room.dao.MealIngredientDao
         MealEntity::class,
         MealIngredientEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class Db : RoomDatabase() {

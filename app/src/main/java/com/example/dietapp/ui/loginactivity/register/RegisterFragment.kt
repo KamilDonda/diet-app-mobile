@@ -34,6 +34,9 @@ class RegisterFragment : Fragment() {
 
     private fun showSnackbar(message: String, length: Int = Snackbar.LENGTH_LONG) {
         Snackbar.make(requireView(), message, length).show()
+        progressBar.visibility = View.GONE
+        register_button.isEnabled = true
+        register_google.isEnabled = true
     }
 
     override fun onCreateView(
@@ -58,6 +61,7 @@ class RegisterFragment : Fragment() {
     //Logowanie przy pomocy email i hasła
     private fun setupSignUpClick() {
         register_button.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             val email = email_input.text?.trim().toString()
             val password = new_password_input.text?.trim().toString()
             val repeatPassword = repeat_password_input.text?.trim().toString()
@@ -74,8 +78,7 @@ class RegisterFragment : Fragment() {
                                 firebaseService.createUser(user)
                                 viewModel.login(user.uid).observe(viewLifecycleOwner, {
                                     if (it) {
-                                        val intent = Intent(context, MainActivity::class.java)
-                                        this.startActivity(intent)
+                                        register(it)
                                     }
                                 })
                             }
@@ -137,8 +140,7 @@ class RegisterFragment : Fragment() {
                                 firebaseService.createUserWithGoogle(user)
                                 viewModel.login(user.uid).observe(viewLifecycleOwner, {
                                     if (it) {
-                                        val intent = Intent(context, MainActivity::class.java)
-                                        this.startActivity(intent)
+                                        register(it)
                                     }
                                 })
                             }
@@ -154,6 +156,7 @@ class RegisterFragment : Fragment() {
 
     private fun setupSignInWithGoogleClick() {
         register_google.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(
                 signInIntent,
@@ -171,5 +174,18 @@ class RegisterFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         initData()
+    }
+
+    private fun register(canRegister: Boolean) {
+        register_button.isEnabled = false
+        register_google.isEnabled = false
+
+        if (canRegister) {
+            val intent = Intent(context, MainActivity::class.java)
+            this.startActivity(intent)
+            register_button.isEnabled = true
+            register_google.isEnabled = true
+            progressBar.visibility = View.GONE
+        }
     }
 }
