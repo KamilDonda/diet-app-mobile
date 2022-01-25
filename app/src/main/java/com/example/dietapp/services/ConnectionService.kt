@@ -3,6 +3,7 @@ package com.example.dietapp.services
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.dietapp.database.models.diet.DietEntity
 import com.example.dietapp.database.models.diet.DietEntityList
 import com.example.dietapp.database.models.ingredient.IngredientEntityList
 import com.example.dietapp.database.models.meal.MealEntityList
@@ -98,7 +99,6 @@ class ConnectionService(
                 try {
                     val user = firebaseService.getUserData(uid)
                     sharedPreferences.setProfileData(user)
-                    dbService.db.dietDao().insertAll(user.diet)
                     isFinished.postValue(true)
                 } catch (e: Exception) {
                     Log.v(TAG, e.stackTraceToString())
@@ -120,7 +120,10 @@ class ConnectionService(
                 val dietList = it.mapIndexed { index, entity ->
                     entity.copy(id = id++, date = timeInMillis + index * nextDay)
                 }
-                dbService.db.dietDao().insertAll(dietList)
+                sharedPreferences.setProfileData(
+                    sharedPreferences.getProfileData()
+                        .copy(diet = dietList as ArrayList<DietEntity>)
+                )
                 firebaseService.updateUserDiet(uid, dietList)
 
                 isFinished.postValue(true)

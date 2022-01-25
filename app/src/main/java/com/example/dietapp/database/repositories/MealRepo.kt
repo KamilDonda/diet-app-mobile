@@ -4,9 +4,10 @@ import com.example.dietapp.database.models.meal.MealEntity
 import com.example.dietapp.models.Diet
 import com.example.dietapp.models.Meal
 import com.example.dietapp.services.DatabaseService
+import com.example.dietapp.sharedpreferences.Preferences
 import com.example.dietapp.utils.EntitiesToMealConverter.Companion.getMeals
 
-class MealRepo(dbService: DatabaseService) {
+class MealRepo(dbService: DatabaseService, private val sharedPreferences: Preferences) {
     private val db = dbService.db
 
     suspend fun getAll(): List<Meal> {
@@ -18,7 +19,7 @@ class MealRepo(dbService: DatabaseService) {
     }
 
     suspend fun getDietOfWeek(): ArrayList<Diet> {
-        val dietList = db.dietDao().selectAll()
+        val dietList = sharedPreferences.getProfileData().diet
         val ingredients = db.ingredientDao().selectAll()
         val meals = db.mealDao().selectAll()
         val mealIngredient = db.mealIngredientDao().selectAll()
@@ -31,7 +32,7 @@ class MealRepo(dbService: DatabaseService) {
             }
 
             val mealsOfDay = getMeals(mealEntities, ingredients, mealIngredient)
-            dietOfWeek.add(Diet(mealsOfDay[0], mealsOfDay[1], mealsOfDay[2], diet.date!!))
+            dietOfWeek.add(Diet(diet.id, mealsOfDay[0], mealsOfDay[1], mealsOfDay[2], diet.date!!))
         }
         return dietOfWeek
     }

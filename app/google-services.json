@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "443473435229-bs03i9lcs37cr2n1ibua7gdtjqkqk7ur.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dietapp",
+            "certificate_hash": "c7b7fa30a2cdfd7e8ea049c950afc13b4a9ba66b"
+          }
+        },
+        {
           "client_id": "443473435229-q098gmrtmi9gaml3u0lr8klptpa0sujj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.example.dietapp.R
 import com.example.dietapp.models.Diet
 import com.example.dietapp.utils.DateUtil
+import com.example.dietapp.utils.FloatConverter
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -41,6 +42,7 @@ class WeekFragment : Fragment() {
         x = resources.getStringArray(R.array.days)
 
         viewModel.dietOfWeek.observe(viewLifecycleOwner, {
+
             val start = DateUtil.dateToString(DateUtil.getStartOfWeek())
             val end = DateUtil.dateToString(DateUtil.getEndOfWeek())
             week_textView.text = "$start - $end"
@@ -56,20 +58,15 @@ class WeekFragment : Fragment() {
             drawLineChart(dietList)
             drawLineChartMacro(dietList)
 
+            val totalKcal = dietList.map { it.getKcal() }.sum()
+
+            title3.text = FloatConverter.floatToString(totalKcal, "kcal", "Kaloryczność:")
         })
 
         week_back_button.setOnClickListener {
             it.findNavController().navigate(R.id.action_weekFragment_to_homeFragment)
         }
     }
-
-//    override fun onNothingSelected() {
-//    }
-//
-//    override fun onValueSelected(e: Entry?, h: Highlight?) {
-//        Log.d("LineChart", e?.y.toString())
-//        Log.d("LineChart", (e as Entry).toString())
-//    }
 
     private fun calories(dietList: ArrayList<Diet>) {
         val days = ArrayList<BarEntry>()
@@ -99,18 +96,12 @@ class WeekFragment : Fragment() {
         legend.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
         legend.textSize = 12f
         legend.xEntrySpace = 22f
-//        legend.xOffset = 14f
-//        legend.yOffset = 12f
 
         xAxis.position = XAxis.XAxisPosition.BOTH_SIDED
         xAxis.setDrawGridLines(true)
         xAxis.setDrawAxisLine(true)
-        //xAxis.setCenterAxisLabels(true)
         xAxis.valueFormatter = IndexAxisValueFormatter(x)
-//        xAxis.axisMinimum = 0f
-//        xAxis.granularity = 1.12f  //Przesuwanie opisu osi X (śniadanie, obiad, kolacja)
         xAxis.textSize = 12f
-//        xAxis.axisMaximum = data.xMax + 0.6f
         xAxis.yOffset = 1.2f
 
 
@@ -169,7 +160,6 @@ class WeekFragment : Fragment() {
 
         lineChart.description.isEnabled = false
         lineChart.setDrawMarkers(true)
-        //lineChart.setOnChartValueSelectedListener(this)
         lineChart.xAxis.position = XAxis.XAxisPosition.BOTH_SIDED
         lineChart.xAxis.isGranularityEnabled = true
         lineChart.xAxis.granularity = 1.0f
@@ -256,7 +246,6 @@ class WeekFragment : Fragment() {
 
         lineChart.description.isEnabled = false
         lineChart.setDrawMarkers(true)
-        //lineChart.setOnChartValueSelectedListener(this)
         lineChart.xAxis.position = XAxis.XAxisPosition.BOTH_SIDED
         lineChart.animateY(1500)
         lineChart.xAxis.isGranularityEnabled = true
